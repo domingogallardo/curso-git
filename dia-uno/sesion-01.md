@@ -22,7 +22,7 @@
 
 <!-- .slide: class="image-right"-->
 
-<img style="margin-left:20px" src="imagenes/certificados.png" height="400px"/>
+<img border:0px style="margin-left:20px" src="imagenes/certificados.png" height="400px"/>
 
 - Ítem 10
 - Ítem 20
