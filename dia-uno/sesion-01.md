@@ -9,5 +9,7 @@
 
 ## Slide 2 ##
 
+<img src="imagenes/certificados.png" height="200px"/>
+
 - Ítem 1
 - Ítem 2
