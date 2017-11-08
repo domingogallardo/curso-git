@@ -24,5 +24,5 @@
 
 <img style="margin-left:20px" src="imagenes/certificados.png" height="400px"/>
 
-- Ítem 1
-- Ítem 2
+- Ítem 10
+- Ítem 20
