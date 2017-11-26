@@ -3,9 +3,6 @@
  *
  * By Hakim El Hattab, http://hakim.se
  */
-@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
-section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
-  color: #fff; }
 
 /*********************************************
  * GLOBAL STYLES
@@ -15,10 +12,10 @@ body {
   background-color: #fff; }
 
 .reveal {
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
-  font-size: 42px;
+  font-family: "Helvetica Neue Light", sans-serif;
+  font-size: 26px;
   font-weight: normal;
-  color: #222; }
+  color: #000;}
 
 ::selection {
   color: #fff;
@@ -44,13 +41,12 @@ body {
 .reveal h4,
 .reveal h5,
 .reveal h6 {
-  margin: 0 0 20px 0;
+  margin: 0 0 30px 0;
   color: #222;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-family: "Helvetica Neue Light", sans-serif;
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: normal;
-  text-transform: uppercase;
   text-shadow: none;
   word-wrap: break-word; }
 
@@ -58,7 +54,7 @@ body {
   font-size: 2.5em; }
 
 .reveal h2 {
-  font-size: 1.6em; }
+  font-size: 1.3em; }
 
 .reveal h3 {
   font-size: 1.3em; }
@@ -93,7 +89,7 @@ body {
 .reveal ol,
 .reveal dl,
 .reveal ul {
-  display: inline-block;
+  display: block;
   text-align: left;
   margin: 0 0 0 1em; }
 
@@ -115,6 +111,10 @@ body {
 .reveal ol ul {
   display: block;
   margin-left: 40px; }
+
+.reveal li {
+  margin-top: 6px;    
+}
 
 .reveal dt {
   font-weight: bold; }
@@ -149,18 +149,21 @@ body {
   width: 90%;
   margin: 20px auto;
   text-align: left;
-  font-size: 0.55em;
+  font-size: 20px;
   font-family: monospace;
   line-height: 1.2em;
   word-wrap: break-word;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
 
 .reveal code {
-  font-family: monospace; }
+   font-family: monospace;
+   font-size: 26px;
+}
 
 .reveal pre code {
+  font-size: 20px;
   display: block;
-  padding: 5px;
+  padding: 15px;
   overflow: auto;
   max-height: 400px;
   word-wrap: normal; }
