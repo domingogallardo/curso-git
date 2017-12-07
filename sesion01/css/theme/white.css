@@ -161,6 +161,8 @@ body {
 }
 
 .reveal pre code {
+  background: #3f3f3f;
+  color: #dcdcdc;
   font-size: 20px;
   display: block;
   padding: 15px;
