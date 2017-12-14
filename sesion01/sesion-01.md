@@ -1,22 +1,98 @@
 
 <!--
 Falta:
-
-- Incluir uso del Visual Estudio Code
-   - Uso del terminal
-   - Indicaciones básicas de git
 - Comandos
    - git rm
    - git mv
 -->
 
-# Sesión 1 #
+<img src="imagenes/taller-de-git.png" width="1000px"/>
+<br/><br/><p style="font-size:90%"><strong>@2018 Depto. de Ciencia de la Computación e I.A.</strong></p>
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
 
-## Índice ##
+## Acerca de quien os habla ##
+
+<img src="imagenes/acerca-de-mi.png" width="1200px"/>
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Mi GitHub ##
+
+<img src="imagenes/domingogallardo-github.png" width="1100px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## ¿Qué aprenderemos en este curso? ##
+<!-- .slide: class="image-right" -->
+<img border:0px style="margin-left:50px" src="imagenes/git.png" width="400px"/>
+
+- Manejo de Git desde la línea de comando
+- Soltura en el uso de comandos git
+- Saber gestionar repositorios Git en GitHub
+- Prácticas para el trabajo en equipo con Git
+- Flujos de trabajo para el desarrollo de proyectos con Git
+- Iniciación a alguna herramienta gráfica
+- Iniciación a flujo de integración continua con GitHub
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## ¿Qué necesitamos? ##
+<!-- .slide: class="image-right" -->
+<img border:0px style="margin-left:50px" src="imagenes/herramientas.png" width="500px"/>
+
+- Vamos a usar las siguientes herramientas:
+   - Git
+   - Terminal
+   - Cuenta en GitHub
+   - Editor: Microsoft Visual Studio Code
+   - Herramienta de visualización de Git: Git Kraken
+   - Navegador
+
+- En los ordenadores de la EPS tenemos todas las herramientas
+  instaladas.
+- Todas las herramientas son compatibles con cualquier sistema
+  operativo. También las puedes instalar en tu máquina Windows o Mac.
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Planificación ##
+
+- Cada día 5 horas divididas 2 sesiones de 2 h. y 15 m.
+
+- Descanso aprox. 30 m. entre cada sesión
+
+   - **Día 1**: Git para el desarrollo en solitario
+
+   - **Día 2**: Git para el trabajo en equipo
+
+   - **Día 3**: Flujos de trabajo e integración continua
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## ¿Cuál es vuestro interés en el curso?  ##
+
+<img src="imagenes/vuestro-turno.png" width="1000px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Índice sesión 1##
 
 - Introducción
 - Configuración de Git: instalación, configuración de cliente,
@@ -47,8 +123,7 @@ $ git tag
 
 
 
-## Los proyectos software se almacenan en un árbol de ficheros ##
-
+## Empezamos con lo más básico ##
 <!-- .slide: class="image-right" -->
 
 <img border:0px style="margin-left:50px" src="imagenes/directory-structure.png" width="400px"/>
@@ -843,7 +918,8 @@ To https://github.com/domingogallardo/curso-git-repo1.git
 ## Nuevo commit: márgenes en la página web##
 <!-- .slide: data-background="#cbe0fc"-->
 
-- Abre el editor Atom y añade la carpeta de proyecto `web-ejemplo`. 
+- Abre el editor Visual Studio Code y añade la carpeta de proyecto
+  `web-ejemplo`.
 - Añade en el fichero `css/layout.css` lo siguiente:
 
 ```css
@@ -966,7 +1042,7 @@ nav li {
 ## Cambiamos el index.html ##
 <!-- .slide: data-background="#cbe0fc"-->
 
-- Carga el fichero `index.html` en Atom y añade los siguientes cambios:
+- Carga el fichero `index.html` en Visual Studio Code y añade los siguientes cambios:
 
 ```diff
    <h1>Header</h1>
@@ -1128,17 +1204,41 @@ To https://github.com/domingogallardo/curso-git-repo1.git
 
 
 
-## Visualización de los cambios en Atom ##
+## Visualización de los cambios en Visual Studio Code##
 <!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+<img border:0px style="margin-left:50px" src="imagenes/visual-studio-code.png" width="900px"/>
 
 - La mayoría de IDEs se integran con Git e informan del estado de los
-  cambios de los ficheros. En Atom se puede abrir un panel que informa
-  de los cambios haciendo _Packages > GitHub > Toggle Git Tab_.
+  cambios de los ficheros. 
 
-<img border:0px src="imagenes/atom-git.png" width="800px"/>
+- Comprueba las distintas características de Visual Studio Code
+  relacionadas con Git:
+   - Zona de stage
+   - Realización de commits
+   - Push y pull
+   - Visualización de cambios en el fichero
+   - Cambio de rama
 
-- Comprueba en Atom los distintos colores de los ficheros y las
-  indicaciones qué aparecen cuando realizas cambios en ellos.
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Terminal integrado ##
+<!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+<img border:0px style="margin-left:50px" src="imagenes/visual-studio-code-terminal.png" width="900px"/>
+
+- Con la opción _Ver > Terminal integrado_ podemos abrir el terminal
+  integrado.
+- En el terminal podemos teclear todos los comandos de Git como hemos
+  visto hasta ahora.
+- El editor está pendiente de los cambios y actualiza su estado en
+  función del estado del repositorio.
+
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
@@ -1226,7 +1326,7 @@ HEAD is now at 0bf82cd... Layout principal y margen
 ```
 
 - Recarga la página en el navegador para comprobar que el espacio de
-  trabajo contiene el commit seleccionado. En Atom también deben
+  trabajo contiene el commit seleccionado. En Visual Studio Code también deben
   haberse actualizado los ficheros.
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
