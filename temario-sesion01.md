@@ -1,8 +1,5 @@
-# Día 1: Git para el desarrollo en solitario #
+# Temario #
 
-### Temario del día ###
-
-Temario:
 
 Día 1: Git para el desarrollo en solitario
    - Introducción a Git, instalación y configuración
@@ -35,7 +32,10 @@ Temario extendido:
         rebase
       - Solución de conflictos
       - Stash para guardar los cambios no commiteados
-      - Subida de ramas al repositorio remoto
+
+Sesión 3:
+
+   - Subida de ramas al repositorio remoto
 
 Ideas: 
 

@@ -1,4 +1,10 @@
 
+<!--
+- Incluir uso del Visual Estudio Code
+   - Uso del terminal
+   - Indicaciones básicas de git
+-->
+
 # Sesión 1 #
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
@@ -13,8 +19,7 @@
 - Configuración de GitHub: creación y configuración de cuenta
 - Creación de repositorios
 - Subida al repositorio remoto
-- Trabajo en una rama:
-  add, commit, diffs, tags, amend, reset, checkout a commits anteriores
+- Trabajo en una rama
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
@@ -29,10 +34,8 @@ $ git status
 $ git add
 $ git commit
 $ git diff
-$ git tag
 $ git checkout
-$ git amend
-$ git reset
+$ git tag
 ```
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
@@ -835,8 +838,8 @@ To https://github.com/domingogallardo/curso-git-repo1.git
 ## Nuevo commit: márgenes en la página web##
 <!-- .slide: data-background="#cbe0fc"-->
 
-- Abre el editor Atom y carga el fichero `css/layout.css`.
-- Añade en el `css` lo siguiente:
+- Abre el editor Atom y añade la carpeta de proyecto `web-ejemplo`. 
+- Añade en el fichero `css/layout.css` lo siguiente:
 
 ```css
 body {
