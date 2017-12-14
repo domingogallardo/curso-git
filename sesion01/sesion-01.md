@@ -1,8 +1,13 @@
 
 <!--
+Falta:
+
 - Incluir uso del Visual Estudio Code
    - Uso del terminal
    - Indicaciones básicas de git
+- Comandos
+   - git rm
+   - git mv
 -->
 
 # Sesión 1 #
