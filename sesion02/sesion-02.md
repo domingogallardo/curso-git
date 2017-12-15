@@ -1627,12 +1627,28 @@ $ git cherry-pick 3a586da
 |Comando | Explicación |
 |-------|--------------|
 | `git push --force` | Sube los commits al repositorio remoto sobreescribiendo la historia de commits  |
-| `git merge --no-ff <rama>` |  Mezcla la <rama> sobre la rama actual creando un commit de mezcla para prevenir el fast forward |
-| `git rebase <rama>` | Mueve la rama actual sobre la rama <rama> creando nuevos commits  |
+| `git merge --no-ff <rama>` |  Mezcla la rama sobre la rama actual creando un commit de mezcla para prevenir el fast forward |
+| `git rebase <rama>` | Mueve la rama actual sobre la rama indicada creando nuevos commits  |
 | `git rebase <rama> -i` | Realiza un rebase interactivo |
-| `git cherry-pick <commit>` | Re-aplica el <commit> sobre la rama actual  |
+| `git cherry-pick <commit>` | Re-aplica el commit sobre la rama actual  |
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Primer contacto con Git Kraken ##
+<!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:40px" src="imagenes/git-kraken.png" width="900px"/>
+
+- Abre Git Kraken y regístrate usando tu cuenta de GitHub
+- Abre el repositorio de trabajo
+- Realizamos un primer contacto con la aplicación:
+   - Examinamos los cambios en un commit
+   - Examinamos los cambios en un merge
+   - Examinamos el commit del que hemos hecho cherry-pick
+   - Eliminamos la rama `iss55`
 
 
 
