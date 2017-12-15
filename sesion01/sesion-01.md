@@ -1,11 +1,4 @@
 
-<!--
-Falta:
-- Comandos
-   - git rm
-   - git mv
--->
-
 <img src="imagenes/taller-de-git.png" width="1000px"/>
 <br/><br/><p style="font-size:90%"><strong>@2018 Depto. de Ciencia de la Computación e I.A.</strong></p>
 
@@ -1279,6 +1272,107 @@ $ git clean -fd
   [domingogallardo/curso-git-repo1](https://github.com/domingogallardo/curso-git-repo1).
 - En cada paso, antes de hacer el commit, carga la página en el
   navegador y comprueba que todo está correcto.
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Eliminar y renombrar ##
+
+- Hay dos posibles formas de eliminar y renombrar ficheros en un
+  repositorio:
+  - Los eliminamos y renombramos con los comandos del sistema
+    operativo y después hacemos un `git add` para incluir esos cambios
+    en el stage.
+  - Los eliminamos y renombramos con los comandos propios de git:
+     - `git rm <fichero>` para eliminar un fichero (o un patrón)
+     - `git mv <nombre-antiguo> <nuevo-nombre>` para renombrar un
+       fichero del repositorio.
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Probamos renombrar y eliminar (1) ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Añadimos un fichero `prueba.txt` al repositorio mediante un commit.
+- Modificamos su nombre usando el sistema operativo. Git no se da
+  cuenta de que es un renombrado y lo ve como que hemos borrado un
+  fichero y añadido otro:
+
+```txt
+# Añadimos prueba.txt al repositorio con un commit
+$ mv prueba.txt nueva-prueba.txt
+$ git status
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        deleted:    prueba.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        nueva-prueba.txt
+```
+
+- Cuando añadimos todos los cambios al stage, Git ya se da cuenta de que
+  habíamos renombrado el fichero:
+
+```txt
+$ git add .
+$ git status
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        renamed:    prueba.txt -> nueva-prueba.txt
+```
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Probamos renombrar y eliminar (2) ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Hacemos commit para incluir los cambios en el repositorio:
+
+```txt
+$ git commit -m "Cambiado nombre fichero"
+[master 2cbc265] Cambiado nombre fichero
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename prueba.txt => nueva-prueba.txt (100%)
+```
+
+- Por último eliminamos el fichero con el comando de Git `git rm`:
+
+```txt
+$ git rm nueva-prueba.txt
+rm 'nueva-prueba.txt'
+```
+
+- El comando ya almacena el cambio en el stage:
+
+```txt
+$ git status
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        deleted:    nueva-prueba.txt
+
+```
+
+- Y confirmamos el borrado para eliminar el fichero del espacio de
+  trabajo y del repositorio:
+  
+```txt
+$ git commit -m "Borrado fichero"
+[master ee1b1db] Borrado fichero
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 nueva-prueba.txt
+ ```
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
