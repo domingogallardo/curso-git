@@ -320,7 +320,8 @@ $ patch index.html cambios.txt
 
 ## Control de versiones al rescate ##
 
-- Un **sistema de control de versiones** (SCV) soluciona los problemas
+- Un **sistema de control de versiones** (VCS, del inglés Version
+  Control System) soluciona los problemas
   anteriores. Es un sistema que registra los **cambios** a lo largo
   del tiempo en un fichero o un conjunto de ficheros, de forma que es
   posible **recuperar** más tarde **versiones específicas**.
@@ -343,7 +344,7 @@ $ patch index.html cambios.txt
 
 
 
-## Un SCV es el elemento fundamental de prácticas de desarrollo más avanzadas  ##
+## Un VCS es el elemento fundamental de prácticas de desarrollo más avanzadas  ##
 <!-- .slide: class="image-right" -->
 
 
@@ -355,7 +356,7 @@ $ patch index.html cambios.txt
 - Cualquier sistema o metodología de **desarrollo en equipo** tiene como
   prerrequisito la utilización de un sistema de control de
   versiones.
-- Ejemplos de utilización del SVC en el desarrollo de software:
+- Ejemplos de utilización del VCS en el desarrollo de software:
    - **Distribución** de tareas entre miembros del equipo e **integración**
      posterior del código.
    - **Revisión de código**.
@@ -374,7 +375,7 @@ $ patch index.html cambios.txt
 <img border:0px style="margin-left:50px" src="imagenes/git-logo.png" width="200px"/>
 
 - Git nace para gestionar el desarrollo del kernel de Linux en 2005.
-- La comunidad de Linux, y en especial su creador Linus Torvald, lo
+- La comunidad de Linux, y en especial su creador Linus Torvalds, lo
   desarrolla en esa fecha para sustituir un software de control de
   versiones propietario que no cubría las necesidades del equipo.
 - Entre los objetivos:
