@@ -1165,6 +1165,42 @@ To https://github.com/domingogallardo/curso-git-repo1.git
 
 
 
+## Opciones de "git diff" ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Con el comando `git diff` podemos examinar los cambios introducidos
+  en la historia por distintos commits.
+
+- Por ejemplo, recordemos que la historia de commits hasta el momento
+  es.
+  
+<img src="imagenes/git-log-oneline.png" width="600px"/>
+
+- Podemos ver los cambios introducidos en el commit `Añadidos márgenes
+  al documento` haciendo lo siguiente:
+
+```txt
+$ git diff HEAD~2 HEAD~1
+diff --git a/css/layout.css b/css/layout.css
+index 0964fbe..6b2d2b1 100644
+--- a/css/layout.css
++++ b/css/layout.css
+@@ -1 +1,5 @@
+ /* Fichero CSS para completar */
++body {
++  width: 70%;
++  margin: 0 auto;
++}
+```
+
+- En el comando anterior `HEAD~1` indica el commit anterior al actual
+  (`59e0464`) y `HEAD~2` indica el anterior (`5853e04`). Sería
+  equivalente poner los números de commits.
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
 ## Algunos comandos vistos hasta ahora ##
 
 
@@ -1177,6 +1213,7 @@ To https://github.com/domingogallardo/curso-git-repo1.git
 | `git commit -m` | Añade un commit con los cambios en el stage y la descripción definida en el mensaje |
 | `git commit -am` | Añade todas las modificaciones directamente al commit, sin tener que hacer `add` |
 | `git log --oneline` | Muestra la historia resumida de los commits añadidos al repositorio |
+| `git diff` | Muestra los cambios en el espacio de trabajo o entre commits | 
 | `git push -u origin master`| Sube los commits realizados en la rama `master` al repositorio origin y conecta ambas ramas |
 | `git push` | Sube los commits realizados en la rama actual |
 
