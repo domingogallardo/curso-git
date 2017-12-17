@@ -15,7 +15,7 @@
 
 
 
-## Comandos git a aprender en esta sesión##
+## Comandos git a aprender en esta sesión ##
 
 ```txt
 $ git clone
@@ -23,6 +23,7 @@ $ git pull
 $ git fetch
 $ git amend
 $ git reset
+$ git revert
 $ git branch
 $ git checkout -b
 $ git merge
@@ -242,7 +243,7 @@ remoto2	https://github.com/domingogallardo/curso-git-repo2.git (push)
 
 
 
-## Cambios en el último commit##
+## Cambios en el último commit ##
 
 - Si todavía no hemos subido el commit al repositorio remoto tenemos
   varias opciones para cambiar el último commit.
@@ -274,6 +275,42 @@ remoto2	https://github.com/domingogallardo/curso-git-repo2.git (push)
   $ git reset --hard HEAD^
   ```
   
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Deshacer el último commit cuando se ha publicado ##
+
+- Si ya hemos publicado el commit en el repositorio remoto otras
+  personas pueden habérselo descargado, con lo que el commit ya no es
+  solo nuestro, sino que es parte de la historia pública del proyecto.
+  
+- Es posible **revertir los cambios** del commit que queremos eliminar
+  con el comando `git revert <commit>`.
+  
+- El comando introduce un commit con exactamente los cambios
+  contrarios al commit indicado.
+
+- Por ejemplo, el siguiente comando crea un commit que revierte el último commit
+
+```txt
+$ git revert HEAD
+```
+
+- Para revertir los cambios realizados por los últimos 3 commits:
+
+```txt
+$ git revert HEAD~3
+```
+
+- Para revertir (sin commitear) los cambios realizados por el quinto
+  último commit en master (incluido) hasta el tercer último commit en
+  master (incluido):
+  
+```txt
+$ git revert -n master~5..master~2
+```
+
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
@@ -371,6 +408,82 @@ e498cdc (tag: v0.1) Últimos ajustes
 
 
 
+## Probamos "git revert" ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Cambiamos otra vez el fichero `index.html` y hacemos un commit.
+
+```txt
+# Modificamos index.html
+$ git commit -am "Cambiada la cabecera del artículo"
+[master 303dcc0] Cambiada la cabecera del artículo
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+```
+
+- Comprobamos el cambio realizado:
+
+```txt
+$ git diff HEAD^
+```
+
+```diff
+<article>
+   <h2>Cabecera de artículo</h2>
+ 
+-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Donec a diam
+-     lectus. Set sit amet ipsum mauris. Maecenas congue ligula as quam viverra
+-     nec consectetur ant hendrerit. Donec et mollis dolor. Praesent et diam eget
+-     libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut
+-     porta lorem lacinia consectetur.</p>
++  <p>Esta es la cabecera del artículo.</p>
+ 
+   <h3>Subsección</h3>
+``` 
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Probamos "git revert" ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Realizamos el comando `git revert` para revertir este último commit:
+
+```txt
+$ git revert HEAD
+[master e86c6e9] Revert "Cambiada la cabecera del artículo"
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+```
+
+- Comprobamos que los cambios se han revertido:
+
+```txt
+$ git diff HEAD^
+```
+
+```diff
+   <h2>Cabecera de artículo</h2>
+ 
+-  <p>Esta es la cabecera del artículo.</p>
++  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Donec a diam
++     lectus. Set sit amet ipsum mauris. Maecenas congue ligula as quam viverra
++     nec consectetur ant hendrerit. Donec et mollis dolor. Praesent et diam eget
++     libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut
++     porta lorem lacinia consectetur.</p>
+ 
+   <h3>Subsección</h3>
+```
+
+- Comprobamos que no hay cambios en los últimos dos commits:
+
+```txt
+$ git diff HEAD~2
+```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
 ## Nuevos comandos ##
 
 |Comando | Explicación |
@@ -385,6 +498,8 @@ e498cdc (tag: v0.1) Últimos ajustes
 | `git reset --hard HEAD^`| Elimina el último commit y los cambios introducidos |
 | `git reset <commit-anterior>` | Elimina todos los commits hasta el commit indicado, manteniendo los cambios en el espacio de trabajo |
 | `git reset --hard <commit-anterior>` | Elimina todos los commits hasta el commit indicado y los cambios introducidos |
+| `git revert <commit-inicial> <commit-final>` | Crea un commit que revierte los cambios en los commits indicados |
+
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
@@ -464,7 +579,7 @@ e498cdc (tag: v0.1) Últimos ajustes
 
 
 
-##  Comando "git branch"##
+##  Comando "git branch" ##
 <!-- .slide: data-background="#cbe0fc"-->
 <!-- .slide: class="image-right" -->
 
