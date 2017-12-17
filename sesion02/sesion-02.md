@@ -232,13 +232,13 @@ remoto2	https://github.com/domingogallardo/curso-git-repo2.git (push)
 
 
 
-## Dejamos de hablar de remotos y vamos con una pregunta muy frecuente: ##
-## "Me he equivocado al hacer el último commit. ¿Es posible cambiarlo?" ##
-<!-- Tres líneas en blanco para la siguiente transparencia -->
+## Dejamos de hablar de remotos y vamos con una pregunta muy frecuente ##
 
+> **"Me he equivocado al hacer el último commit.**<br/>
+> **¿Es posible cambiarlo?"**
 
+<img src="imagenes/boca-abierta.gif" width="1100px"/>
 
-<!-- .slide: data-background-image="imagenes/boca-abierta.gif"  -->
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
@@ -534,11 +534,9 @@ d02dbfb (HEAD -> master, remoto2/master, origin/master) Nuevo título de la web
 
 
 ## Empezamos con las ramas ##
-<!-- Tres líneas en blanco para la siguiente transparencia -->
 
+<img src="imagenes/volando.gif" width="1100px"/>
 
-
-<!-- .slide: data-background-image="imagenes/volando.gif"  -->
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
@@ -1247,17 +1245,18 @@ $ git branch -d iss53
       después continuar el desarrollo independiente.
     - Al final hemos mezclado todo y no ha habido ningún problema.
 
-- Examinamos la historia de cambios. ¿Hay algo mejorable?
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Examinamos la historia de cambios. <br/> ¿Hay algo mejorable? ##
+
+<img src="imagenes/gafas.gif" width="1100px"/>
 
 <!-- Los commits aparecen ordenados sólo por fecha, no hay ninguna -->
 <!-- información de la "evolución lógica" del proyecto: cuál ha sido -->
 <!-- el hotfix, cuál ha sido el issue, etc.-->
 
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-<!-- .slide: data-background-image="imagenes/gafas.gif"  -->
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
@@ -1793,6 +1792,13 @@ $ git cherry-pick 3a586da
    - Examinamos el commit del que hemos hecho cherry-pick
    - Eliminamos la rama `iss55`
 
+<!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
-<!-- .slide: data-background-image="imagenes/happy2.gif"  -->
+
+## ¡Fin de la tarde! ##
+
+
+<img src="imagenes/happy2.gif" width="1100px"/>
+
+
