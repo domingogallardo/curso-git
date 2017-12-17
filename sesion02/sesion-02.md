@@ -484,6 +484,34 @@ $ git diff HEAD~2
 
 
 
+## Limpiamos los últimos dos commits ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Por último, como todavía no lo hemos subido al repositorio remoto,
+  podemos limpiar los últimos dos commits.
+  
+- Comprobamos la historia:
+  
+```txt
+$ git log --oneline
+e86c6e9 (HEAD -> master) Revert "Cambiada la cabecera del artículo"
+303dcc0 Cambiada la cabecera del artículo
+d02dbfb (remoto2/master, origin/master) Nuevo título de la web
+```
+
+- Y movemos la rama a actual al commit `HEAD~2` eliminando también los
+  cambios del espacio de trabajo:
+
+```txt
+$ git reset --hard HEAD~2
+$ git log --oneline
+d02dbfb (HEAD -> master, remoto2/master, origin/master) Nuevo título de la web
+```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
 ## Nuevos comandos ##
 
 |Comando | Explicación |
