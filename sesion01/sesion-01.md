@@ -288,6 +288,8 @@ $ patch index.html cambios.txt
 
 
 <!-- .slide: data-background-image="imagenes/unacceptable.gif"  -->
+
+
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
@@ -643,7 +645,10 @@ $ git commit -m "Primera versión del proyecto"
 
 
 
-<!-- .slide: data-background-image="imagenes/happy.gif"  -->
+## ¡Primer commit realizado! ##
+
+<img src="imagenes/happy.gif" width="1100px"/>
+
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
@@ -1229,7 +1234,10 @@ index 0964fbe..6b2d2b1 100644
 
 
 
-<!-- .slide: data-background-image="imagenes/gafas-adventure.gif"  -->
+## ¡Ya podemos dominar Git! ##
+
+<img src="imagenes/gafas-adventure.gif" width="1100px"/>
+
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
@@ -1636,4 +1644,8 @@ To https://github.com/domingogallardo/curso-git-repo1.git
 
 
 
-<!-- .slide: data-background-image="imagenes/happy2.gif"  -->
+## ¡Fin de la sesión! ##
+
+
+<img src="imagenes/happy2.gif" width="1100px"/>
+
