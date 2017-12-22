@@ -1202,6 +1202,17 @@ index 0964fbe..6b2d2b1 100644
   (`59e0464`) y `HEAD~2` indica el anterior (`5853e04`). Sería
   equivalente poner los números de commits.
 
+- Podemos ver los cambios introducidos en un commit concreto usando el
+  número de commit y el símbolo `^` que indica el anterior:
+
+```txt
+$ git diff 5853e04^ 5853e04
+diff --git a/imagenes/increibles.png b/imagenes/increibles.png
+new file mode 100644
+index 0000000..405faad
+Binary files /dev/null and b/imagenes/increibles.png differ
+```
+
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
