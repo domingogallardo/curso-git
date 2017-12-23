@@ -916,6 +916,13 @@ $ git push
 
 <img src="imagenes/push-origin-master.png" width="900px"/>
 
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## ¡Buen trabajo! ##
+
+<img src="imagenes/good-job.gif" width="1100px" />
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
@@ -1252,7 +1259,7 @@ $ git pull
 
 
 
-## Resumen del flujo de trabajo: ramas de _issues_ ##
+## Resumen del flujo de trabajo: ramas de _features_ ##
 
 1. El desarrollador que se hace cargo de un _issue_ abre una rama y
    la publica en el servidor remoto.
@@ -1263,6 +1270,9 @@ $ git pull
 4. Cuando la rama está terminada, se comprueba la integración en
    `master`, se integra y se publica en el repositorio remoto.
 5. Se borra la rama y se descarga `master`.
+
+> **Importante**: las ramas son de corta duración. Deberían durar
+> entre algunas horas (preferible) y un par de días como máximo.
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
@@ -1332,12 +1342,28 @@ $ git remote show origin
 - Descarga el `ejemplo2.zip`, cárgalo en el navegador y en Visual Studio
   Code y analiza el código.
 
-- Vamos a desarrollar dos nuevas _issues_ adaptando el código anterior
-  a nuestra web:
-   - `iss60` en la que sustituimos los enlaces de la derecha por las imágenes de los pájaros.
-   - `iss61` en la que movemos el logo de los increibles a la derecha
-     y cambiamos algo la tipografía.
+- Vamos a desarrollar una nueva _issue_ (`iss60`) usando el flujo de
+  trabajo de ramas de _features_. Deberéis copiar el código anterior
+  en vuestra web, sustituyendo los enlaces de la derecha por las
+  imágenes de los pájaros.
 
-- En cada `issue` participarán 2 personas.
-- Una vez terminado cada `issue` el responsable de integración lo integra en `master`.
+- Flujo de trabajo:
+   - Una persona del equipo creará la rama y la publicará en remoto.
+   - En el desarrollo de la rama deben participar las 3 personas del
+    equipo. 
+   - Habrá un responsable de integración que se encargue de integrar y
+     publicar en `master`.
+   - La persona que crea la rama también deberá probar en su máquina que
+     funciona bien la integración con `master` antes de que se realice
+     la integración final.
+   - Al final todos los miembros del equipo actualizarán la rama `master`.
+  
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## ¡Fin de la sesión! ##
+
+
+<img src="imagenes/happy2.gif" width="1100px"/>
 
