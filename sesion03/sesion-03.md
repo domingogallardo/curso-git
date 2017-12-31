@@ -1,6 +1,4 @@
-<!--
-   - Volver a explicar lo de Detached HEAD y crear una rama ahí
--->
+
 
 <img src="imagenes/taller-de-git.png" width="1000px"/>
 <br/><br/><p style="font-size:90%"><strong>@2018 Depto. de Ciencia de la Computación e I.A.</strong></p>
@@ -11,7 +9,7 @@
 
 ## Día 2: Git para el trabajo en equipo ##
 
-- Sesión 3
+- **Sesión 3**
    - Solución de conflictos en los merge
    - ¿Qué hacer cuando he metido la pata?
    - Empezamos a trabajar en equipo: ciclo de trabajo sobre master
@@ -1230,7 +1228,7 @@ $ git push
 
 ```txt
 $ git branch -d iss59
-$ git push origin -d iss59
+$ git push origin -d iss59 # Borra la rama remota
 $ git remote prune origin # Borra las referencias locales a ramasremotas
 
 ```
@@ -1324,10 +1322,13 @@ $ git remote show origin
 | `git checkout <rama>` | Crea la rama local que trackea `<origin>/<rama>` |
 | `git merge origin/<rama>` | Mezcla la rama remota en la rama local actual |
 | `git push -u origin <rama>` | Sube la rama al repositorio remoto |
+| `git push -u origin -d <rama>` | Borra la rama remota |
 | `git pull` | Se descargan los cambios de la rama actual y se integran |
 | `git branch -vva` | Muestra la información de las ramas locales y remotas |
 | `git remote -v update` | Actualiza las referencias locales de ramas remotas | 
 | `git remote show origin` | Muestra la información competa de ramas remotas y locales |
+| `git remote prune origin` | Borra en el repo local las referencias a ramas remotas borradas|
+
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
