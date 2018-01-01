@@ -1,15 +1,25 @@
 
-# Sesión 2 #
+
+<img src="imagenes/taller-de-git.png" width="1000px"/>
+<br/><br/><p style="font-size:90%"><strong>@2018 Domingo Gallardo<br/>Depto. de Ciencia de la Computación e I.A.</strong></p>
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
 
-## Índice ##
+# Día 1: Git para el desarrollo en solitario #
 
-- Trabajo con el repositorio remoto
-- Cómo cambiar la historia
-- Ramas
+- Sesión 1
+   - Introducción
+   - Configuración de Git: instalación, configuración de cliente,
+     servidor de git
+   - Configuración de GitHub: creación y configuración de cuenta
+   - Trabajo básico: add, commit, diff, checkout
+
+- **Sesión 2**
+   - Trabajo con el repositorio remoto
+   - Cómo cambiar la historia
+   - Ramas
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 

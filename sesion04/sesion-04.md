@@ -1,6 +1,6 @@
 
 <img src="imagenes/taller-de-git.png" width="1000px"/>
-<br/><br/><p style="font-size:90%"><strong>@2018 Depto. de Ciencia de la Computación e I.A.</strong></p>
+<br/><br/><p style="font-size:90%"><strong>@2018 Domingo Gallardo<br/>Depto. de Ciencia de la Computación e I.A.</strong></p>
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
