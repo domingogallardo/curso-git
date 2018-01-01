@@ -1176,22 +1176,22 @@ To https://github.com/domingogallardo/curso-git-repo1.git
 
 ## Opciones de "git diff" ##
 <!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
 
 - Con el comando `git diff` podemos examinar los cambios introducidos
   en la historia por distintos commits.
 
-- Por ejemplo, recordemos que la historia de commits hasta el momento
-  es.
-  
-<img src="imagenes/git-log-oneline.png" width="600px"/>
+<img style="margin-left:50px" src="imagenes/git-log-oneline.png" width="600px"/>
 
+- Por ejemplo, recordemos que la historia de commits hasta el momento
+  es la que se ve en la imagen de la derecha.
+  
 - Podemos ver los cambios introducidos en el commit `Añadidos márgenes
   al documento` haciendo lo siguiente:
 
 ```txt
 $ git diff HEAD~2 HEAD~1
-diff --git a/css/layout.css b/css/layout.css
-index 0964fbe..6b2d2b1 100644
+...
 --- a/css/layout.css
 +++ b/css/layout.css
 @@ -1 +1,5 @@
@@ -1204,17 +1204,12 @@ index 0964fbe..6b2d2b1 100644
 
 - En el comando anterior `HEAD~1` indica el commit anterior al actual
   (`59e0464`) y `HEAD~2` indica el anterior (`5853e04`). Sería
-  equivalente poner los números de commits.
-
-- Podemos ver los cambios introducidos en un commit concreto usando el
-  número de commit y el símbolo `^` que indica el anterior:
+  equivalente poner los números de commits. Podemos ver los cambios
+  introducidos en un commit concreto usando el número de commit y el
+  símbolo `^` que indica el anterior:
 
 ```txt
 $ git diff 5853e04^ 5853e04
-diff --git a/imagenes/increibles.png b/imagenes/increibles.png
-new file mode 100644
-index 0000000..405faad
-Binary files /dev/null and b/imagenes/increibles.png differ
 ```
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
