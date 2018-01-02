@@ -7,7 +7,7 @@
 
 
 
-# Día 1: Git para el desarrollo en solitario #
+## Día 1: Git para el desarrollo en solitario ##
 
 - Sesión 1
    - Introducción
