@@ -28,9 +28,9 @@
 ### Flujos de trabajo ###
 
 - [Atlassian - Comparing Workflows](https://www.atlassian.com/git/tutorials/comparing-workflows)
-- [GitHub Flow](http://scottchacon.com/2011/08/31/github-flow.html)
 - [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/)
-
+- [OneFlow](http://endoflineblog.com/oneflow-a-git-branching-model-and-workflow)
+- [GitHub Flow](http://scottchacon.com/2011/08/31/github-flow.html)
 
 ### Varios ###
  
