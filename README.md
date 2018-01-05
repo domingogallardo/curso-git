@@ -6,7 +6,7 @@
 - [Sesión 2](https://domingogallardo.github.io/curso-git/sesion02/index.html)
 - [Sesión 3](https://domingogallardo.github.io/curso-git/sesion03/index.html)
 - [Sesión 4](https://domingogallardo.github.io/curso-git/sesion04/index.html)
-- [Sesión 5](https://domingogallardo.github.io/curso-git/sesion04/index.html)
+- [Sesión 5](https://domingogallardo.github.io/curso-git/sesion05/index.html)
 - Sesión 6
 
 ## Software ##
