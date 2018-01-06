@@ -138,6 +138,14 @@
 
 
 
+## ¡Hora de aventuras! ##
+
+<img src="imagenes/experimentos.gif" width="1100px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
 ## Creamos repositorio para probar GitFlow ##
 <!-- .slide: data-background="#cbe0fc"-->
 
@@ -553,6 +561,14 @@ $ git remote prune origin
 
 
 
+## ¡Buen trabajo! ##
+
+<img src="imagenes/good-job.gif" width="1100px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
 ## GitFlow es solo una propuesta ##
 
 - Existen scripts que incorporan GitFlow en forma de comandos de shell
@@ -638,6 +654,14 @@ $ git remote prune origin
 ## ¿Cuál es vuestro proceso de release? ##
 
 <img src="imagenes/vuestro-turno.png" width="1000px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## ¡Integración continua! ##
+
+<img src="imagenes/pruebas.gif" width="1100px"/>
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
