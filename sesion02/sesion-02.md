@@ -45,32 +45,6 @@ $ git cherry-pick
 
 
 
-## Git Tip: Añadir la rama actual al prompt##
-
-<img src="imagenes/prompt.png" width="1100px"/>
-
-- [Enlace](https://coderwall.com/p/fasnya/add-git-branch-name-to-bash-prompt)
-  original con el consejo, aplicable a bash y a sistemas Linux/Mac.
-- El estilo del prompt se define con la variable PS1, que se puede
-  definir en el fichero `~/.bash_profile`.
-- El prompt anterior se consigue con el siguiente código en el
-  `.bash_profile`:
-  
-```txt
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-export PS1="\[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
-```
-
-- [Más ejemplos de
-  PS1](https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/).
-- Información para [cambiar el prompt en PowerShell](https://coderwall.com/p/myssfq/customize-powershell-prompt-message-to-show-current-git-branch-name).
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
 ## Repositorios remotos ##
 
 <!-- .slide: class="image-right" -->
@@ -920,6 +894,32 @@ Counting objects: 11, done.
 To https://github.com/domingogallardo/curso-git-repo1.git
    d02dbfb..fb8f62b  master -> master
 ```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Git Tip: Añadir la rama actual al prompt##
+
+<img src="imagenes/prompt.png" width="1100px"/>
+
+- [Enlace](https://coderwall.com/p/fasnya/add-git-branch-name-to-bash-prompt)
+  original con el consejo, aplicable a bash y a sistemas Linux/Mac.
+- El estilo del prompt se define con la variable PS1, que se puede
+  definir en el fichero `~/.bash_profile`.
+- El prompt anterior se consigue con el siguiente código en el
+  `.bash_profile`:
+  
+```txt
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+```
+
+- [Más ejemplos de
+  PS1](https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/).
+- Información para [cambiar el prompt en PowerShell](https://coderwall.com/p/myssfq/customize-powershell-prompt-message-to-show-current-git-branch-name).
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
