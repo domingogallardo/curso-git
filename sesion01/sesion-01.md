@@ -224,7 +224,7 @@ $ git tag
   comando para obtener los cambios es:
 
 
-```
+```txt
 $ diff index_2017_10_10.html index_actual.html > cambios.txt
 ```
 
@@ -253,7 +253,7 @@ $ diff index_2017_10_10.html index_actual.html > cambios.txt
   primera versión para que la actualice usando el comando `patch` para
   cambiar el fichero inicial y convertirlo en la segunda versión:
   
-```
+```txt
 $ patch index.html cambios.txt
 ```
 
@@ -514,7 +514,7 @@ $ git init
   (ficheros que no son código fuente: compilados, librerías, ficheros
   temporales, etc.). 
 
-```
+```txt
 .DS_Store
 ```
 
@@ -525,7 +525,7 @@ $ git init
   para distintos lenguajes de programación: [https://github.com/github/gitignore](https://github.com/github/gitignore)
 - Ejemplo para Java:
 
-```
+```txt
 # Compiled class file
 *.class
 
@@ -793,7 +793,6 @@ Date:   Thu Nov 30 19:19:36 2017 +0100
   
 ```txt
 $ git remote add origin https://github.com/domingogallardo/curso-git-repo1.git
-
 $ git push -u origin master
 
 Username for 'https://github.com': domingogallardo
@@ -1178,19 +1177,54 @@ To https://github.com/domingogallardo/curso-git-repo1.git
 <!-- .slide: data-background="#cbe0fc"-->
 <!-- .slide: class="image-right" -->
 
+<img style="margin-left:50px" src="imagenes/git-log-oneline.png" width="600px"/>
+
 - Con el comando `git diff` podemos examinar los cambios introducidos
   en la historia por distintos commits.
 
-<img style="margin-left:50px" src="imagenes/git-log-oneline.png" width="600px"/>
-
 - Por ejemplo, recordemos que la historia de commits hasta el momento
   es la que se ve en la imagen de la derecha.
+
+- Para mostrar los últimos cambios introducidos en el último commit en
+  `master` podemos hacer:
   
-- Podemos ver los cambios introducidos en el commit `Añadidos márgenes
-  al documento` haciendo lo siguiente:
+```txt
+$ git diff master~1 master
+
+...
+@@ -3,3 +3,25 @@ body {
+   width: 70%;
+   margin: 0 auto;
+ }
++
++nav {
++  height: 100px;
++  display: flex;
++}
++
++nav img {
++   flex-basis: auto;
++}
+...
+```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Opciones de "git diff" ##
+<!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:50px" src="imagenes/git-log-oneline.png" width="600px"/>
+
+- También podemos usar el puntero `HEAD` como referencia de
+  `diff`. Por ejemplo, para ver los cambios introducidos en el commit
+  `Añadidos márgenes al documento` podemos hacer lo siguiente:
 
 ```txt
 $ git diff HEAD~2 HEAD~1
+
 ...
 --- a/css/layout.css
 +++ b/css/layout.css
@@ -1592,20 +1626,20 @@ Your branch is up-to-date with 'origin/master'.
 - Podemos añadir una anotación a la etiqueta con la opción `-a` y `-m`.
 - Por ejemplo, etiquetamos el commit actual en el que nos encontramos:
 
-```
+```txt
 $ git tag -a v0.1 -m "Mi versión 0.1"
 ```
 
 - También podemos etiquetar commits pasados (esta vez no usamos `-a` y
   sólo definimos el nombre de la etiqueta)
 
-```
+```txt
 $ git tag v0.0 5853e04
 ```
 
 - El resultado en la historia de los commits:
 
-```
+```txt
 $ git log --oneline
 e498cdc (HEAD, tag: v0.1, origin/master, master) Últimos ajustes
 77a127a Añadida tipografía y colores
@@ -1625,7 +1659,7 @@ e498cdc (HEAD, tag: v0.1, origin/master, master) Últimos ajustes
 - Para subir las etiquetas al repositorio hay que usar la opción
   `--tags` al hacer un push:
 
-```
+```txt
 $ git push --tags
 Counting objects: 1, done.
 Writing objects: 100% (1/1), 173 bytes | 173.00 KiB/s, done.
