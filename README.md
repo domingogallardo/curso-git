@@ -32,6 +32,12 @@
 - [OneFlow](http://endoflineblog.com/oneflow-a-git-branching-model-and-workflow)
 - [GitHub Flow](http://scottchacon.com/2011/08/31/github-flow.html)
 
+### Chuletas de Git (Git Cheat Sheet) en PDF###
+
+- [GitHub](https://education.github.com/git-cheat-sheet-education.pdf)
+- [Atlassian](https://www.atlassian.com/dam/jcr:8132028b-024f-4b6b-953e-e68fcce0c5fa/atlassian-git-cheatsheet.pdf)
+- [GitLab](https://gitlab.com/gitlab-com/marketing/raw/master/design/print/git-cheatsheet/print-pdf/git-cheatsheet.pdf)
+  
 ### Varios ###
  
 - [Reset Demystified](https://git-scm.com/blog)
