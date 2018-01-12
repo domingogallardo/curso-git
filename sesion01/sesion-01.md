@@ -103,7 +103,7 @@
 
 
 
-## Comandos git a aprender en esta sesión##
+## Comandos git a aprender en esta sesión ##
 
 ```txt
 $ git config
@@ -917,7 +917,7 @@ To https://github.com/domingogallardo/curso-git-repo1.git
 
 
 
-## Nuevo commit: márgenes en la página web##
+## Nuevo commit: márgenes en la página web ##
 <!-- .slide: data-background="#cbe0fc"-->
 
 - Abre el editor Visual Studio Code y añade la carpeta de proyecto
@@ -1287,7 +1287,7 @@ $ git diff 5853e04^ 5853e04
 
 
 
-## Visualización de los cambios en Visual Studio Code##
+## Visualización de los cambios en Visual Studio Code ##
 <!-- .slide: data-background="#cbe0fc"-->
 <!-- .slide: class="image-right" -->
 
