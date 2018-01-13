@@ -89,8 +89,7 @@
 
 - **Sesión 1**
    - Introducción
-   - Configuración de Git: instalación, configuración de cliente,
-     servidor de git
+   - Configuración de Git
    - Configuración de GitHub: creación y configuración de cuenta
    - Trabajo básico: add, commit, diff, checkout
 
@@ -126,16 +125,14 @@ $ git tag
 <img border:0px style="margin-left:50px" src="imagenes/directory-structure.png" width="400px"/>
 
 - Un proyecto software se almacena en un conjunto de **ficheros de
-  código** en una
+  código fuente** en una
   estructura de directorios. Esta estructura se denomina a veces
   **árbol de ficheros**.
-- Dos de las características básicas de los **ficheros de código** (código
-  fuente, código HTML, CSS, ...) son:
-  - Son **ficheros de texto**, no son binarios: el contenido crudo del
-    fichero se corresponde directamente con lo que vemos en el
-    editor. Normalmente los caracteres están codificados en UTF-8 y no
-    existen apenas caracteres de control (fines de línea y tabuladores
-    a lo sumo).
+- Dos de las características básicas de los ficheros de código fuente
+  (programas, código HTML, CSS, ...) son:
+  - Son **ficheros de texto**, no son binarios. Normalmente los
+    caracteres están codificados en UTF-8 y no existen apenas
+    caracteres de control (fines de línea y tabuladores a lo sumo).
   - Son ficheros que estamos **continuamente cambiando**. Conforme se
     desarrolla un proyecto, se añade código en los ficheros, se crean
     nuevos ficheros, se borra código, se reorganizan los directorios
@@ -247,18 +244,17 @@ $ diff index_2017_10_10.html index_actual.html > cambios.txt
 
 ## Comando patch ##
 
-- El comando anterior diff guarda la diferencia entre los dos ficheros en
+- El comando anterior `diff` guarda la diferencia entre los dos ficheros en
   el fichero `cambios.txt`. 
 - Podríamos ahora enviar este fichero a un compañero que tuviera la
-  primera versión para que la actualice usando el comando `patch` para
+  primera versión para que la actualice, usando el comando `patch` para
   cambiar el fichero inicial y convertirlo en la segunda versión:
   
 ```txt
 $ patch index.html cambios.txt
 ```
 
-- Estos comandos son la base del funcionamiento de los sistemas de
-  control de versiones, y en concreto de Git.
+- Estos comandos son la base del funcionamiento de Git.
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
@@ -268,8 +264,8 @@ $ patch index.html cambios.txt
 <!-- .slide: class="image-right" -->
 
 - Una forma de realizar un control de versiones rudimentario de un
-  proyecto es manteniendo múltiples versiones del directorio del
-  proyecto.
+  proyecto es manteniendo múltiples versiones del **directorio del
+  proyecto**.
 
 <img border:0px style="margin-left:20px" src="imagenes/arbol-web-curso-git.png" width="300px"/>
 
@@ -278,14 +274,15 @@ $ patch index.html cambios.txt
   básico. El directorio principal se llama `web-curso-git` y tiene un
   fichero `index.html` y otro directorio `imagenes` con el fichero
   `increibles.png`.
-- La forma más rudimentaria de mantener distintas versiones conforme estamos
-  elaborando la web es manteniendo múltiples copias del directorio
+- La forma más rudimentaria de mantener distintas versiones conforme
+  estamos elaborando la web es manteniendo múltiples copias del
+  directorio. Cuando decidimos fijar una versión del proyecto, le
+  asignamos al directorio un nombre único y copiamos todo el
+  directorio en otro nuevo en el que seguimos trabajando con la
+  versión actual.
 
 <img border:0px style="float:none" src="imagenes/versiones-rudimentarias.png" width="1200px"/>
 
-- Cuando decidimos fijar una versión del proyecto, le asignamos al
-  directorio un nombre único y copiamos todo el directorio en otro
-  nuevo en el que seguimos trabajando con la versión actual.
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
@@ -306,12 +303,14 @@ $ patch index.html cambios.txt
    - Obliga a un trabajo manual que genera fácilmente errores y
      que sólo permite guardar las versiones más significativas. ¿Qué
      pasa si queremos guardar como versiones distintas pequeños
-     cambios en el proyecto? Por ejemplo el cambio que hemos visto en
+     cambios en el proyecto? Por ejemplo, el cambio que hemos visto en
      el que hemos añadido un contenido al `index.html`. El número de
      directorios que generaríamos sería inmanejable.
    - No proporciona una forma de probar más de una versión alternativa
      (ramas) y por tanto no permite gestionar a más de una persona
-     cambiando el código del proyecto.
+     cambiando el código del proyecto. Sí, podríamos añadir el nombre
+     de la persona al nombre del directorio y de la versión; pero
+     después ¿cómo hacemos la mezcla de dos desarrollos?
    - No hay una forma sencilla de comprobar los cambios que se han
      introducido de una versión a otra o entre dos versiones
      concretas.
@@ -338,10 +337,10 @@ $ patch index.html cambios.txt
    - **Comparar cambios** a lo largo del tiempo.
    - **Consultar** quién ha sido el último que ha modificado algo en algún
      fichero que está causando problemas.
-   - Desarrollar en **una rama** independiente del tronco principal e
-     integrarla cuando el desarrollo esté terminado.
-- Si usas un sistema de control de versiones es posible **recuperar
-  un estado anterior estable** si has roto algo en los ficheros que
+   - Abrir **una rama** independiente del tronco principal en la que
+     realizar un desarrollo que se integra después cuando esté
+     terminado y probado.
+    - **Recuperar un estado anterior estable** si has roto algo en los ficheros que
   estás tocando.
 
 <img src="imagenes/historia-versiones.png" width="1000px"/>
@@ -353,12 +352,8 @@ $ patch index.html cambios.txt
 ## Un VCS es el elemento fundamental de prácticas de desarrollo más avanzadas  ##
 <!-- .slide: class="image-right" -->
 
-
 <img border:0px style="margin-left:50px" src="imagenes/integracion-continua.png" width="500px"/>
 
-
-- Un sistema de control de versiones es la herramienta básica
-  fundamental para el desarrollo de software en equipo.
 - Cualquier sistema o metodología de **desarrollo en equipo** tiene como
   prerrequisito la utilización de un sistema de control de
   versiones.
@@ -462,10 +457,8 @@ $ git config --list
   personal sin afectar a la historia. Cuando estás contento con el
   resultado, **confirmas** (_commit_ en inglés) los cambios en el
   repositorio y añades un commit a la historia.
-- Es posible que el repositorio contenga cambios de compañeros que no
-  se hayan aplicado a tu copia de trabajo. Puedes actualizar
-  la copia de trabajo e incorporar los nuevos cambios que se han
-  realizado en el repositorio desde la última vez que lo actualizaste.
+- Puedes actualizar la copia de trabajo e incorporar los nuevos
+  cambios de compañeros que has descargado al repositorio.
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
@@ -689,10 +682,10 @@ Date:   Thu Nov 30 19:19:36 2017 +0100
 
 <img border:0px style="margin-left:50px" src="imagenes/version-control-distribuido.png" width="500px"/>
 
--  La solución usada por sistemas modernos como Git y
-  Mercurial, son los sistemas de control de versiones **distribuidos**. 
+- Los sistemas de control de versiones modernos como Git y
+  Mercurial son **distribuidos**. 
 - <!-- .element: class="fragment" --> Cada desarrollador tiene su propio repositorio y su copia de
-  trabajo. 
+  trabajo en su máquina. 
 - <!-- .element: class="fragment"--> Después de hacer un commit de tus cambios, los demás no tienen
   acceso a ellos hasta que los subes (_push_) al repositorio remoto
   central. 
@@ -720,8 +713,7 @@ Date:   Thu Nov 30 19:19:36 2017 +0100
 
 <img border:0px style="margin-left:50px" src="imagenes/version-control-central.png" width="500px"/>
 
-- Frente a la solución más modernas de sistemas de control de
-  versiones distribuidos, los sistemas de control de versiones más
+- Los sistemas de control de versiones más
   antiguos como Subversion, CVS o Perforce utilizan un enfoque 
   **centralizado**, en el que el repositorio no está en el propio
   directorio, sino que está centralizado en un ordenador externo.
@@ -730,7 +722,7 @@ Date:   Thu Nov 30 19:19:36 2017 +0100
 - Tan pronto como realizas una confirmación (utilizaremos el término
   en inglés: un _commit_) los compañeros puede actualizar sus copias y
   ver tus cambios.
-- Mucho menos flexibles que los SCV distribuidos, que ya se han
+- Mucho menos flexibles que los VCS distribuidos, que ya se han
   impuesto como el estándar a seguir.
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
@@ -821,7 +813,7 @@ Branch master set up to track remote branch master from origin.
 - Desde esta página podemos explorar el repositorio subido:
    - Listado de commits realizado
    - Contenido de cada commit (cambios)
-   - Características del repositorio (veremos alguna más adelante)
+   - Ramas
    - Contenido del proyecto
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
@@ -1112,7 +1104,7 @@ $ git log --oneline
    - La rama `origin/master` (la rama remota) está 2 commits detrás de
      la rama local.
 
-- Examina GitHub para comprobar que se han subido los mismos commits
+- Examina GitHub para comprobar los commits que se han subido.
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
@@ -1320,7 +1312,7 @@ $ git diff 5853e04^ 5853e04
 - En el terminal podemos teclear todos los comandos de Git como hemos
   visto hasta ahora.
 - El editor está pendiente de los cambios y actualiza su estado en
-  función del estado del repositorio.
+  función del estado del espacio de trabajo y del repositorio.
 
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
@@ -1358,8 +1350,12 @@ $ git clean -fd
 <img style="margin-left:50px" src="imagenes/web-ejemplo-sesion1.png" width="700px"/>
 
 - Completa una versión inicial de la web copiando los 3 commits
-  adicionales que puedes encontrar en el repositorio
+  siguientes a "Añadimos cabecera de navegación" que puedes encontrar en el repositorio
   [domingogallardo/curso-git-repo1](https://github.com/domingogallardo/curso-git-repo1).
+   - "Layout principal y marge"
+   - "Añadida tipografía y colores"
+   - "Últimos ajustes"
+- Puedes consultar los cambios pulsando 
 - En cada paso, antes de hacer el commit, carga la página en el
   navegador y comprueba que todo está correcto.
 
@@ -1392,7 +1388,6 @@ $ git clean -fd
   fichero y añadido otro:
 
 ```txt
-# Añadimos prueba.txt al repositorio con un commit
 $ mv prueba.txt nueva-prueba.txt
 $ git status
 Changes not staged for commit:
@@ -1677,6 +1672,8 @@ To https://github.com/domingogallardo/curso-git-repo1.git
 
 |Comando | Explicación |
 |-------|--------------|
+| `git checkout .` | Borra los cambios en el espacio de trabajo (mantiene nuevos ficheros añadidos) |
+| `git clean -fd` | Elimina ficheros añadidos al espacio de trabajo |
 | `git checkout <commit>` | Mueve el espacio de trabajo (HEAD) al commit identificado |
 | `git checkout master` | Mueve el espacio de trabajo a la cabeza de la rama `master` |
 | `git tag -a <id> -m "<mensaje>"` | Añade la etiqueta y el mensaje al commit actual |
