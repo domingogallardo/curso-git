@@ -193,7 +193,7 @@ $ git tag
 ## Diferencia ##
 
 - La diferencia entre la primera versión y la segunda son las líneas
-  que se han añadido en el `body`:
+  que se han añadido al `body`:
 
 ```diff
 <body>
@@ -660,7 +660,7 @@ $ git commit -m "Primera versión del proyecto"
 ## Comando "git log" ##
 <!-- .slide: data-background="#cbe0fc"-->
 
-- Si usamos el comando `git log` veremos los cambios añadidos en el repositorio.
+- Si usamos el comando `git log` veremos los cambios añadidos al repositorio.
 
 ```txt
 $ git log
@@ -1074,7 +1074,7 @@ nav li {
 
 <img src="imagenes/git-status5.png" width="900px"/>
 
-- Hay ficheros modificados y los cambios no se han añadido en el
+- Hay ficheros modificados y los cambios no se han añadido al
   stage.
 - Para incluir los cambios en el stage hay que hacer `git add` o `git
   commit -a`. Este último comando realiza directamente el commit de
