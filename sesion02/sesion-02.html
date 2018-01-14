@@ -79,8 +79,7 @@
 <p>Sesión 1</p>
 <ul>
 <li>Introducción</li>
-<li>Configuración de Git: instalación, configuración de cliente,
-servidor de git</li>
+<li>Configuración de Git</li>
 <li>Configuración de GitHub: creación y configuración de cuenta</li>
 <li>Trabajo básico: add, commit, diff, checkout</li>
 </ul>
@@ -133,12 +132,12 @@ los hayamos comprobado bien en el repo privado.</li>
 <li>Normalmente el equipo de desarrollo tiene un único repositorio
 remoto sobre el que se trabaja, pero son posibles otras
 configuraciones.</li>
-<li>Cuando queremos aportar una modificación a un proyecto open source
+<li>Cuando queremos aportar una <strong>modificación a un proyecto open source</strong>
 es habitual trabajar con dos repositorios remotos:
 <ul>
 <li>el del proyecto original (se suele llamar <code>upstream</code>) sobre el que
 no realizamos cambios directos.</li>
-<li>nuestra copia particular obtenida con un <strong>fork</strong>, que es en la
+<li>nuestra copia particular obtenida con un <em>fork</em>, que es en la
 que realizamos las modificaciones (<code>origin</code>).</li>
 </ul>
 </li>
@@ -195,7 +194,8 @@ descargado todos los commits y etiquetas:</li>
 $ git log --oneline
 </code></pre>
 <ul>
-<li>Cargamos el directorio <code>web-ejemplo2</code> en una nueva carpeta de proyecto en Atom.</li>
+<li>Cargamos el directorio <code>web-ejemplo2</code> en una nueva ventana de Visual
+Studio Code.</li>
 <li>Hacemos un nuevo commit en este nuevo repositorio y lo subimos al
 repositorio remoto.</li>
 </ul>
@@ -343,14 +343,14 @@ contrarios al commit indicado.</p>
 <pre lang="txt"><code>$ git revert HEAD
 </code></pre>
 <ul>
-<li>Para revertir los cambios realizados por los últimos 3 commits:</li>
+<li>Para revertir los cambios realizados hace 3 commits:</li>
 </ul>
 <pre lang="txt"><code>$ git revert HEAD~3
 </code></pre>
 <ul>
-<li>Para revertir (sin commitear) los cambios realizados por el quinto
+<li>Para revertir sin commitear los cambios realizados por el quinto
 último commit en master (incluido) hasta el tercer último commit en
-master (incluido):</li>
+master (incluido), usando la opción <code>-n</code>:</li>
 </ul>
 <pre lang="txt"><code>$ git revert -n master~5..master~2
 </code></pre>
@@ -408,7 +408,7 @@ e498cdc (tag: v0.1) Últimos ajustes
 <a id="user-content-probamos-git-reset---hard" class="anchor" href="#probamos-git-reset---hard" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Probamos "git reset --hard"</h2>
 
 <ul>
-<li>Volvemos a hacer el commit con el cambio que hay en el espacio de
+<li>Volvemos a hacer el commit con los cambios que hay en el espacio de
 trabajo:</li>
 </ul>
 <pre lang="txt"><code>$ git commit -am "Este commit sí que lo eliminamos"
@@ -581,11 +581,11 @@ d02dbfb (HEAD -&gt; master, remoto2/master, origin/master) Nuevo título de la w
 <a id="user-content-ramas" class="anchor" href="#ramas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ramas</h2>
 <ul>
 <li>El modelo de ramas de Git es una de sus características más
-importantes y que más lo diferencia del resto de SCVs.</li>
+importantes y que más lo diferencia del resto de VCSs.</li>
 <li>Git permite realizar ramas de forma <strong>increíblemente ligera</strong>, haciendo
 las operaciones relacionadas con ellas y permitiendo movernos de una
 rama a otra de forma casi instantánea.</li>
-<li>A diferencia de otros SVCs (como subversion), Git hace fácil y
+<li>A diferencia de otros VCSs (como subversion), Git hace fácil y
 promueve el uso flujos de trabajo en los que se <strong>abren ramas y se
 mezclan a menudo</strong>, incluso múltiples veces a lo largo del día.</li>
 <li>Si entiendes y dominas el uso de esta característica tendrás una
@@ -1218,13 +1218,6 @@ después continuar el desarrollo independiente.</li>
 </ul>
 
 <h2>
-<a id="user-content-examinamos-la-historia-de-cambios--hay-algo-mejorable" class="anchor" href="#examinamos-la-historia-de-cambios--hay-algo-mejorable" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examinamos la historia de cambios. <br> ¿Hay algo mejorable?</h2>
-<p><a href="imagenes/gafas.gif" target="_blank"><img src="imagenes/gafas.gif" width="1100px" style="max-width:100%;"></a></p>
-
-
-
-
-<h2>
 <a id="user-content-resumen-de-comandos-vistos" class="anchor" href="#resumen-de-comandos-vistos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resumen de comandos vistos</h2>
 <table>
 <thead>
@@ -1280,6 +1273,13 @@ después continuar el desarrollo independiente.</li>
 </tr>
 </tbody>
 </table>
+
+<h2>
+<a id="user-content-examinamos-la-historia-de-cambios--hay-algo-mejorable" class="anchor" href="#examinamos-la-historia-de-cambios--hay-algo-mejorable" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examinamos la historia de cambios. <br> ¿Hay algo mejorable?</h2>
+<p><a href="imagenes/gafas.gif" target="_blank"><img src="imagenes/gafas.gif" width="1100px" style="max-width:100%;"></a></p>
+
+
+
 
 <h2>
 <a id="user-content-volvemos-al-estado-inicial-para-empezar-de-nuevo" class="anchor" href="#volvemos-al-estado-inicial-para-empezar-de-nuevo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Volvemos al estado inicial para empezar de nuevo</h2>
