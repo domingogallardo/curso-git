@@ -1128,7 +1128,7 @@ index b0efbbf..b075010 100644
 
 
 
-## ¡Fin de la sesión! ##
+## ¡Fin de la tarde! ##
 
 
 <img src="imagenes/happy2.gif" width="1100px"/>

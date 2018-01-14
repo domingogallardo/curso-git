@@ -11,8 +11,7 @@
 
 - Sesión 1
    - Introducción
-   - Configuración de Git: instalación, configuración de cliente,
-     servidor de git
+   - Configuración de Git
    - Configuración de GitHub: creación y configuración de cuenta
    - Trabajo básico: add, commit, diff, checkout
 
@@ -73,11 +72,11 @@ $ git cherry-pick
 - Normalmente el equipo de desarrollo tiene un único repositorio
   remoto sobre el que se trabaja, pero son posibles otras
   configuraciones.
-- Cuando queremos aportar una modificación a un proyecto open source
+- Cuando queremos aportar una **modificación a un proyecto open source**
   es habitual trabajar con dos repositorios remotos:
   - el del proyecto original (se suele llamar `upstream`) sobre el que
   no realizamos cambios directos.
-  - nuestra copia particular obtenida con un **fork**, que es en la
+  - nuestra copia particular obtenida con un _fork_, que es en la
     que realizamos las modificaciones (`origin`).
 - Varios compañeros podemos trabajar añadiendo commits a nuestro
   repositorio.
@@ -141,7 +140,8 @@ $ cd web-ejemplo2
 $ git log --oneline
 ```
 
-- Cargamos el directorio `web-ejemplo2` en una nueva carpeta de proyecto en Atom.
+- Cargamos el directorio `web-ejemplo2` en una nueva ventana de Visual
+  Studio Code.
 - Hacemos un nuevo commit en este nuevo repositorio y lo subimos al
   repositorio remoto.
   
@@ -307,15 +307,15 @@ remoto2	https://github.com/domingogallardo/curso-git-repo2.git (push)
 $ git revert HEAD
 ```
 
-- Para revertir los cambios realizados por los últimos 3 commits:
+- Para revertir los cambios realizados hace 3 commits:
 
 ```txt
 $ git revert HEAD~3
 ```
 
-- Para revertir (sin commitear) los cambios realizados por el quinto
+- Para revertir sin commitear los cambios realizados por el quinto
   último commit en master (incluido) hasta el tercer último commit en
-  master (incluido):
+  master (incluido), usando la opción `-n`:
   
 ```txt
 $ git revert -n master~5..master~2
@@ -389,7 +389,7 @@ e498cdc (tag: v0.1) Últimos ajustes
 ## Probamos "git reset --hard" ##
 <!-- .slide: data-background="#cbe0fc"-->
 
-- Volvemos a hacer el commit con el cambio que hay en el espacio de
+- Volvemos a hacer el commit con los cambios que hay en el espacio de
   trabajo:
   
 ```txt
@@ -554,11 +554,11 @@ d02dbfb (HEAD -> master, remoto2/master, origin/master) Nuevo título de la web
 ## Ramas ##
 
 - El modelo de ramas de Git es una de sus características más
-  importantes y que más lo diferencia del resto de SCVs.
+  importantes y que más lo diferencia del resto de VCSs.
 - Git permite realizar ramas de forma **increíblemente ligera**, haciendo
   las operaciones relacionadas con ellas y permitiendo movernos de una
   rama a otra de forma casi instantánea.
-- A diferencia de otros SVCs (como subversion), Git hace fácil y
+- A diferencia de otros VCSs (como subversion), Git hace fácil y
   promueve el uso flujos de trabajo en los que se **abren ramas y se
   mezclan a menudo**, incluso múltiples veces a lo largo del día.
 - Si entiendes y dominas el uso de esta característica tendrás una
@@ -1285,18 +1285,6 @@ $ git branch -d iss53
 
 
 
-## Examinamos la historia de cambios. <br/> ¿Hay algo mejorable? ##
-
-<img src="imagenes/gafas.gif" width="1100px"/>
-
-<!-- Los commits aparecen ordenados sólo por fecha, no hay ninguna -->
-<!-- información de la "evolución lógica" del proyecto: cuál ha sido -->
-<!-- el hotfix, cuál ha sido el issue, etc.-->
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
 ## Resumen de comandos vistos ##
 
 |Comando | Explicación |
@@ -1312,6 +1300,18 @@ $ git branch -d iss53
 | `git stash list` | Muestras los cambios apilados en la pila stash |
 | `git stash pop` | Desapila los cambios del stash y los añade al espacio de trabajo |
 | `git reset --merge ORIG_HEAD` | Deshace el último merge realizado |
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Examinamos la historia de cambios. <br/> ¿Hay algo mejorable? ##
+
+<img src="imagenes/gafas.gif" width="1100px"/>
+
+<!-- Los commits aparecen ordenados sólo por fecha, no hay ninguna -->
+<!-- información de la "evolución lógica" del proyecto: cuál ha sido -->
+<!-- el hotfix, cuál ha sido el issue, etc.-->
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
