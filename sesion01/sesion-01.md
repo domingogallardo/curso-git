@@ -789,14 +789,17 @@ $ git push -u origin master
 
 Username for 'https://github.com': domingogallardo
 Password for 'https://domingogallardo@github.com': 
-Counting objects: 6, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (4/4), done.
-Writing objects: 100% (6/6), 47.11 KiB | 11.78 MiB/s, done.
-Total 6 (delta 0), reused 0 (delta 0)
+...
 To https://github.com/domingogallardo/curso-git-repo1.git
  * [new branch]      master -> master
 Branch master set up to track remote branch master from origin.
+```
+
+- Para que la contraseña se guarde en el disco local (cuidado: se
+  guarda en texto plano)
+
+```
+$ git config credential.helper store
 ```
 
 
