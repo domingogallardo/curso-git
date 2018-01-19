@@ -798,7 +798,7 @@ Branch master set up to track remote branch master from origin.
 - Para que la contraseña se guarde en el disco local (cuidado: se
   guarda en texto plano)
 
-```
+```txt
 $ git config credential.helper store
 ```
 
