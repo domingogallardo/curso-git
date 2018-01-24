@@ -50,7 +50,7 @@
 
 <img style="margin-left:40px" src="imagenes/indicacion-conflicto.png" width="400px"/>
 
-- Los conflictos en los merge son algo habitual, hay que perderles el
+- Los conflictos en los merge son algo habitual. Hay que perderles el
   miedo y aprender a resolverlos cuando sucedan.
 - Pero **no debería haber demasiados**. En un proyecto bien diseñado y
   poco acoplado debería ser posible trabajar de forma independiente en
@@ -573,9 +573,11 @@ $ git push
 
 ## Rama remota: "git merge" ##
 
-- La rama `origin/master` es una rama local como otra
-  cualquiera. Mezclamos los cambios descargados en `master` local
-  haciendo un `merge`.
+- La rama `origin/master` es una rama local como otra cualquiera. La
+  única diferencia es que es una rama de _solo lectura_. HEAD no puede
+  apuntar a ella (no podemos hacer un `checkout` y añadir commits como
+  en una rama normal). Mezclamos los cambios descargados en `master`
+  local haciendo un `merge`.
 
 <img src="imagenes/merge-remota.png" width="900px"/>
 
@@ -1211,7 +1213,7 @@ $ git checkout master
 $ git merge iss59
 ```
 
-- Y sube `master` al repositorio remoto:
+- Y sube `master` al repositorio remoto (con la rama `iss59` ya integrada):
 
 ```txt
 $ git push
@@ -1242,7 +1244,7 @@ $ git pull
 ```
 
 - Y Ana limpia su rama master, quitando las mezclas que hizo con su
-  rama `iss59`:
+  rama `iss59`, y se descarga la rama `master` limpia que hay en el servidor:
   
 ```txt
 # En la máquina de Ana
