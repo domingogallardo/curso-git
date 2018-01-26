@@ -25,7 +25,7 @@
 
 
 
-## Git Tip: Alias de comandos##
+## Git Tip: Alias de comandos ##
 
 - Un consejo para hacerte la vida más sencilla: cómo crear alias de
   comandos en Git.
