@@ -96,6 +96,41 @@
 </ul>
 
 <h2>
+<a id="user-content-git-tip-alias-de-comandos" class="anchor" href="#git-tip-alias-de-comandos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Git Tip: Alias de comandos##</h2>
+<ul>
+<li>
+<p>Un consejo para hacerte la vida más sencilla: cómo crear alias de
+comandos en Git.</p>
+</li>
+<li>
+<p>Por ejemplo:</p>
+</li>
+</ul>
+<pre lang="txt"><code>$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+</code></pre>
+<ul>
+<li>Una vez creados estos alias, podríamos invocar cualquier comando
+usando la abreviatura:</li>
+</ul>
+<pre lang="txt"><code>$ git co -b nueva-rama
+$ git ci -m "Nuevo commit"
+</code></pre>
+<ul>
+<li>También podemos crear comandos nuevos para no tener que teclear
+demasiado o para hacer más accesible el uso de git:</li>
+</ul>
+<pre lang="txt"><code>git config --global alias.unstage 'reset HEAD --'
+git config --global alias.plog 'log --oneline --graph --decorate --all'
+git config --global alias.last 'log -1 HEAD'
+</code></pre>
+<pre lang="txt"><code>$ git plog
+# Muestra todo el log con mensajes de una línea en forma de grafo y decorado
+</code></pre>
+
+<h2>
 <a id="user-content-conflictos-en-los-merge" class="anchor" href="#conflictos-en-los-merge" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conflictos en los merge</h2>
 
 <p><a href="imagenes/dos-ramas.png" target="_blank"><img src="imagenes/dos-ramas.png" width="500px" style="max-width:100%;"></a></p>
@@ -1260,7 +1295,7 @@ From https://github.com/domingogallardo/curso-git-repo1
 Code y analiza el código.</p>
 </li>
 <li>
-<p>Vamos a desarrollar una nueva <em>issue</em> (<code>iss60</code>) usando el flujo de
+<p>Vamos a desarrollar un nuevo <em>issue</em> (<code>iss60</code>) usando el flujo de
 trabajo de ramas de <em>features</em>. Deberéis copiar el código anterior
 en vuestra web, sustituyendo los enlaces de la derecha por las
 imágenes de los pájaros.</p>

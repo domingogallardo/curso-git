@@ -25,6 +25,46 @@
 
 
 
+## Git Tip: Alias de comandos##
+
+- Un consejo para hacerte la vida más sencilla: cómo crear alias de
+  comandos en Git.
+
+- Por ejemplo:
+
+```txt
+$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+```
+
+- Una vez creados estos alias, podríamos invocar cualquier comando
+  usando la abreviatura:
+  
+```txt
+$ git co -b nueva-rama
+$ git ci -m "Nuevo commit"
+```
+
+- También podemos crear comandos nuevos para no tener que teclear
+  demasiado o para hacer más accesible el uso de git:
+
+```txt
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.plog 'log --oneline --graph --decorate --all'
+git config --global alias.last 'log -1 HEAD'
+```
+
+```txt
+$ git plog
+# Muestra todo el log con mensajes de una línea en forma de grafo y decorado
+```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
 ## Conflictos en los merge  ##
 <!-- .slide: class="image-right" -->
 
@@ -1345,7 +1385,7 @@ $ git remote show origin
 - Descarga el `ejemplo2.zip`, cárgalo en el navegador y en Visual Studio
   Code y analiza el código.
 
-- Vamos a desarrollar una nueva _issue_ (`iss60`) usando el flujo de
+- Vamos a desarrollar un nuevo _issue_ (`iss60`) usando el flujo de
   trabajo de ramas de _features_. Deberéis copiar el código anterior
   en vuestra web, sustituyendo los enlaces de la derecha por las
   imágenes de los pájaros.
