@@ -78,1155 +78,347 @@
 <li>
 <p><strong>Sesión 3</strong></p>
 <ul>
+<li>Trabajo con ramas</li>
+</ul>
+</li>
+<li>
+<p>Sesión 4</p>
+<ul>
 <li>Solución de conflictos en los merge</li>
 <li>¿Qué hacer cuando he metido la pata?</li>
 <li>Empezamos a trabajar en equipo: ciclo de trabajo sobre master</li>
 <li>Trabajo con ramas de features, pruebas antes de integrar en master</li>
 </ul>
 </li>
+</ul>
+
+<h2>
+<a id="user-content-creamos-y-mezclamos-issues" class="anchor" href="#creamos-y-mezclamos-issues" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creamos y mezclamos <em>issues</em>
+</h2>
+
+<ul>
+<li>Vamos a probar un ejemplo común de flujo de trabajo con ramas y
+merge, que se usa continuamente en el mundo real.</li>
+</ul>
+<ol>
+<li>Creamos una rama en para un <em>issue</em> (característica a implementar)
+que queremos realizar en la web.</li>
+<li>Trabajamos en la rama para desarrollar el <em>issue</em>.</li>
+<li>Nos llega una incidencia de un arreglo crítico que hay que hacer en
+la web y tenemos que realizar un <em>hotfix</em>:
+<ol>
+<li>Cambiamos a la rama de producción (<code>master</code>)</li>
+<li>Creamos una rama para realizar el <em>hotfix</em>.</li>
+<li>Después de que están probados los cambios, mezclamos el <em>hotfix</em> y
+lo <em>pusheamos</em> a producción.</li>
+</ol>
+</li>
+<li>Volvemos a nuestra historia original y seguimos trabajando hasta
+que probamos y mezclamos el <em>issue</em>.</li>
+</ol>
+
+<h2>
+<a id="user-content-creamos-la-rama-con-el-issue" class="anchor" href="#creamos-la-rama-con-el-issue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creamos la rama con el <em>issue</em>
+</h2>
+
+
+<p><a href="imagenes/ejemplo-issue1.png" target="_blank"><img src="imagenes/ejemplo-issue1.png" width="400px" style="max-width:100%;"></a></p>
+<ul>
 <li>
-<p>Sesión 4</p>
-<ul>
-<li>Pull requests en GitHub</li>
-<li>Ramas short-lived y long-lived</li>
-<li>Gestión de versiones con ramas</li>
-<li>Gestión de bug-fixes y cherry-pick</li>
-</ul>
-</li>
-</ul>
-
-<h2>
-<a id="user-content-git-tip-alias-de-comandos" class="anchor" href="#git-tip-alias-de-comandos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Git Tip: Alias de comandos</h2>
-<ul>
-<li>
-<p>Un consejo para hacerte la vida más sencilla: cómo crear alias de
-comandos en Git.</p>
+<p>Representamos el estado inicial del proyecto con la figura
+anterior.</p>
 </li>
 <li>
-<p>Por ejemplo:</p>
+<p>Hemos decidido trabajar en el <em>issue</em> número 53, que escogemos del
+sistema de tracking de <em>issues</em> que nuestra empresa esté usando.</p>
+</li>
+<li>
+<p>Creamos una rama nueva en la que trabajar con el comando <code>git checkout</code> con el parámetro <code>-b</code>:</p>
 </li>
 </ul>
-<pre lang="txt"><code>$ git config --global alias.co checkout
-$ git config --global alias.br branch
-$ git config --global alias.ci commit
-$ git config --global alias.st status
+<p><a href="imagenes/ejemplo-issue2.png" target="_blank"><img src="imagenes/ejemplo-issue2.png" width="400px" style="max-width:100%;"></a></p>
+<pre lang="txt"><code>$ git checkout -b iss53
+Switched to a new branch 'iss53'
 </code></pre>
 <ul>
-<li>Una vez creados estos alias, podríamos invocar cualquier comando
-usando la abreviatura:</li>
+<li>Esto es un modo abreviado de:</li>
 </ul>
-<pre lang="txt"><code>$ git co -b nueva-rama
-$ git ci -m "Nuevo commit"
-</code></pre>
-<ul>
-<li>También podemos crear comandos nuevos para no tener que teclear
-demasiado o para hacer más accesible el uso de git:</li>
-</ul>
-<pre lang="txt"><code>git config --global alias.unstage 'reset HEAD --'
-git config --global alias.plog 'log --oneline --graph --decorate --all'
-git config --global alias.last 'log -1 HEAD'
-</code></pre>
-<pre lang="txt"><code>$ git plog
-# Muestra todo el log con mensajes de una línea en forma de grafo y decorado
+<pre lang="txt"><code>$ git branch iss53
+$ git checkout iss53
 </code></pre>
 
 <h2>
-<a id="user-content-conflictos-en-los-merge" class="anchor" href="#conflictos-en-los-merge" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conflictos en los merge</h2>
+<a id="user-content-trabajamos-en-el-issue" class="anchor" href="#trabajamos-en-el-issue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Trabajamos en el <em>issue</em>
+</h2>
 
-<p><a href="imagenes/dos-ramas.png" target="_blank"><img src="imagenes/dos-ramas.png" width="500px" style="max-width:100%;"></a></p>
 <ul>
-<li>Cuando Git va a realizar una mezcla entre dos ramas comprueba los
-cambios introducidos en ambas y nos avisa si existe algún conflicto.</li>
-<li>En la figura anterior, Git comprueba si hay conflicto entre los
-cambios introducidos en los commits <code>C2</code> y <code>C4</code> con respecto a los
-introducidos por los commits <code>C3</code> y <code>C5</code>.</li>
-<li>¿Qué es un conflicto?
-<ul>
-<li>Cambios contrapuestos en <strong>las mismas líneas</strong> de un fichero.</li>
-<li>Ficheros borrados en una rama y modificados en otras.</li>
+<li>Para desarrollar el <em>issue</em> 53 hacemos algunos cambios en el texto
+del artículo y hacemos commit:</li>
 </ul>
+<pre lang="txt"><code># Modificamos el artículo del index.html
+$ git commit -am "Completando el artículo [issue 53]"
+[iss53 191f0db] Completando el artículo [issue 53]
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+</code></pre>
+<ul>
+<li>Al hacer esto el puntero de la rama en la que estamos se mueve
+también hacia adelante:</li>
+</ul>
+<p><a href="imagenes/ejemplo-issue3.png" target="_blank"><img src="imagenes/ejemplo-issue3.png" width="600px" style="max-width:100%;"></a></p>
+
+<h2>
+<a id="user-content-cambios-sin-comitear" class="anchor" href="#cambios-sin-comitear" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cambios sin comitear</h2>
+
+<ul>
+<li>
+<p>Ahora llega la petición de realizar un arreglo rápido en la rama de
+producción: tenemos que añadir una dirección de correo en la página
+principal. No hay ningún problema en conservar el trabajo realizado en el
+<em>issue</em>, todo lo que tenemos que hacer es cambiarnos a la rama
+<code>master</code>.</p>
 </li>
-<li>No es un conflicto:
-<ul>
-<li>Cambios en distintas líneas de un mismo fichero.</li>
-</ul>
+<li>
+<p>Si en el espacio de trabajo o en el área de stage tenemos cambios
+sin comitear que entran en conflicto con la rama a la que nos
+movemos, Git no nos dejará cambiar. Vamos a probarlo.</p>
+</li>
+<li>
+<p>Estando en la rama <code>issue53</code> hacemos más cambios en el artículo, sin
+hacer commit:</p>
 </li>
 </ul>
-
-<h2>
-<a id="user-content-solución-de-los-conflictos" class="anchor" href="#soluci%C3%B3n-de-los-conflictos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Solución de los conflictos</h2>
-
-<p><a href="imagenes/indicacion-conflicto.png" target="_blank"><img src="imagenes/indicacion-conflicto.png" width="400px" style="max-width:100%;"></a></p>
-<ul>
-<li>Los conflictos en los merge son algo habitual. Hay que perderles el
-miedo y aprender a resolverlos cuando sucedan.</li>
-<li>Pero <strong>no debería haber demasiados</strong>. En un proyecto bien diseñado y
-poco acoplado debería ser posible trabajar de forma independiente en
-distintos <em>issues</em> sin que existieran conflictos.</li>
-<li>Cuando sucede un conflicto en un <code>merge</code> (o en un <code>rebase</code>) Git
-realiza lo siguiente:
-<ul>
-<li>Detiene el merge (o rebase).</li>
-<li>Registra todos los ficheros en los que existe un conflicto.</li>
-<li>Introduce en cada fichero las líneas en conflicto, indicando qué
-líneas vienen de qué rama. Nosotros debemos examinar el fichero y
-dejarlo tal y como queremos que se resuelva.</li>
-<li>Nos indica en el <code>git status</code> qué debemos hacer para marcar el
-conflicto como resuelto.</li>
-</ul>
-</li>
-<li>Los editores de código suelen detectar estos patrones introducidos
-por Git y proporcionar algún tipo de interfaz para simplificar el
-arreglo del conflicto.</li>
-</ul>
-
-<h2>
-<a id="user-content-introducimos-cambios-que-entran-en-conflicto" class="anchor" href="#introducimos-cambios-que-entran-en-conflicto" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introducimos cambios que entran en conflicto</h2>
-
-<ul>
-<li>Creamos una rama <code>iss56</code> en la que vamos a trabajar en la cabecera
-de la web. Realizamos un commit con el cambio:</li>
-</ul>
-<pre lang="txt"><code>$ git checkout -b iss56
-# Cambiamos la cabecera de la web para 
-# que aparezcan las opciones:
-# Home | Servicios | Porfolio | Equipo | Contacto
-$ git commit -am "Cambiada la cabecera"
-[iss56 dec2148] Cambiada la cabecera
- 1 file changed, 3 insertions(+), 2 deletions(-)
-</code></pre>
-<ul>
-<li>Cambiamos a la rama <code>master</code> y allí realizamos un par de
-correcciones, una de ellas en la cabecera (será la que entre en
-conflicto con la rama):</li>
-</ul>
-<pre lang="txt"><code>$ git checkout master
-</code></pre>
-<div class="highlight highlight-source-diff"><pre>    &lt;ul&gt;
-      &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
-<span class="pl-md"><span class="pl-md">-</span>     &lt;li&gt;&lt;a href="#"&gt;Nuestro equipo&lt;/a&gt;&lt;/li&gt;</span>
-<span class="pl-mi1"><span class="pl-mi1">+</span>     &lt;li&gt;&lt;a href="#"&gt;Equipo&lt;/a&gt;&lt;/li&gt;</span>
-      &lt;li&gt;&lt;a href="#"&gt;Projectos&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href="#"&gt;Contacto&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-...
-   &lt;h3&gt;Otra subsección&lt;/h3&gt;
- 
-<span class="pl-md"><span class="pl-md">-</span>  &lt;p&gt;Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum soclis&lt;/p&gt;</span>
-<span class="pl-mi1"><span class="pl-mi1">+</span>  &lt;p&gt;Primer párrafo de la subsección.&lt;/p&gt;</span></pre></div>
-
-<h2>
-<a id="user-content-commiteamos-y-mezclamos" class="anchor" href="#commiteamos-y-mezclamos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commiteamos y mezclamos</h2>
-
-
-<ul>
-<li>Hacemos commit en <code>master</code>:</li>
-</ul>
-<pre lang="txt"><code>$ git commit -am "Pequeñas correcciones"
-[master 3001dfd] Pequeñas correcciones
- 1 file changed, 2 insertions(+), 5 deletions(-)
-</code></pre>
-<ul>
-<li>Y mezclamos (aparecerán los conflictos):</li>
-</ul>
-<pre lang="txt"><code>$ git merge iss56
-Auto-merging index.html
-CONFLICT (content): Merge conflict in index.html
-Automatic merge failed; fix conflicts and then commit the result.
-</code></pre>
-<p><a href="imagenes/status-conflicto.png" target="_blank"><img src="imagenes/status-conflicto.png" width="700px" style="max-width:100%;"></a></p>
-<ul>
-<li>Si hacemos <code>git status</code> Git nos indica lo que tenemos que hacer:</li>
-</ul>
-
-<h2>
-<a id="user-content-arreglamos-el-conflicto" class="anchor" href="#arreglamos-el-conflicto" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Arreglamos el conflicto</h2>
-
-
-<p><a href="imagenes/vstudio-conflicto.png" target="_blank"><img src="imagenes/vstudio-conflicto.png" width="900px" style="max-width:100%;"></a></p>
-<ul>
-<li>Cuando abrimos el fichero en Visual Studio Code aparece resaltado el
-conflicto.</li>
-<li>El otro cambio que se ha hecho en <code>master</code> en el fichero aparece
-integrado sin problema, porque no entra en conflicto con ningún
-cambio en la rama que estamos mezclando.</li>
-<li>Examinamos las opciones que nos ofrece la interfaz y seleccionamos
-"Aceptar cambio entrante". Habrá veces en que tengamos que mezclar
-los cambios de ambas ramas (seleccionaríamos "Aceptar ambos cambios"
-y editaríamos el contenido).</li>
-<li>En el fichero queda la versión de la rama.</li>
-</ul>
-
-<h2>
-<a id="user-content-resolvemos-el-merge" class="anchor" href="#resolvemos-el-merge" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resolvemos el merge</h2>
-
-
-<ul>
-<li>Para resolver el merge lo primero es confirmar a Git que hemos
-arreglado los conflictos. Una vez resueltos todos los cambios en
-todos los ficheros en conflicto añadimos los cambios al <em>stage</em>:</li>
-</ul>
-<pre lang="txt"><code>$ git add .
+<pre lang="txt"><code># Hacemos más cambios en el artículo index.html,
+# pero no hacemos commit
 $ git status
-On branch master
-All conflicts fixed but you are still merging.
-  (use "git commit" to conclude merge)
-
-Changes to be committed:
+On branch iss53
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
 
 	modified:   index.html
 
+no changes added to commit (use "git add" and/or "git commit -a")
 </code></pre>
 <ul>
-<li>Hacemos un commit para concluir el merge:</li>
-</ul>
-<pre lang="txt"><code>$ git commit -m "Merge branch 'iss56' y resueltos conflictos"
-[master 2046b52] Merge branch 'iss56' y resueltos conflictos
-</code></pre>
-<ul>
-<li>El commit que ha grabado es un commit de merge que integra ambas ramas:</li>
-</ul>
-<p><a href="imagenes/grafo-tras-merge-conflictos.png" target="_blank"><img src="imagenes/grafo-tras-merge-conflictos.png" width="650px" style="max-width:100%;"></a></p>
-<pre lang="txt"><code>$ git log --oneline --graph
-</code></pre>
-
-<h2>
-<a id="user-content-analizamos-la-historia-en-git-kraken" class="anchor" href="#analizamos-la-historia-en-git-kraken" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Analizamos la historia en Git Kraken</h2>
-
-<p><a href="imagenes/git-kraken-tras-merge.png" target="_blank"><img src="imagenes/git-kraken-tras-merge.png" width="1100px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-ahora-tú" class="anchor" href="#ahora-t%C3%BA" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ahora tú</h2>
-
-
-<p><a href="imagenes/tu-turno.gif" target="_blank"><img src="imagenes/tu-turno.gif" width="900px" style="max-width:100%;"></a></p>
-<ul>
-<li>Ahora es <strong>tu turno</strong>:
-<ul>
-<li>Crea otra rama <code>prueba</code> y añade un commit en la rama y otro en
-<code>master</code> que tengas conflictos.</li>
-<li>Realiza un <code>merge</code> y resuelve los conflictos.</li>
-</ul>
-</li>
-<li>Y lo mismo con un <strong>rebase</strong>:
-<ul>
-<li>Crea otra rama <code>prueba2</code>, añade un par de commits en ella y algún
-otro conflictivo en <code>master</code>.</li>
-<li>Realiza un <code>rebase</code> resolviendo los conflictos. Sigue las
-indicaciones que aparecen en el <code>git status</code>.</li>
-</ul>
-</li>
-</ul>
-
-<h2>
-<a id="user-content-3-errores-comunes-después-de-mezclar-una-rama-y-cómo-arreglarlos" class="anchor" href="#3-errores-comunes-despu%C3%A9s-de-mezclar-una-rama-y-c%C3%B3mo-arreglarlos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3 errores comunes después de mezclar una rama (y cómo arreglarlos)</h2>
-
-<p><a href="imagenes/merge.png" target="_blank"><img src="imagenes/merge.png" width="650px" style="max-width:100%;"></a></p>
-<ul>
-<li>
-<p>Ya hemos visto el ciclo de trabajo de desarrollo en una rama:</p>
-<ol>
-<li>Abrir una rama a partir de master.</li>
-<li>Realizar commits en la rama.</li>
-<li>Mezclar la rama en master y volver a 1.</li>
-</ol>
-</li>
-<li>
-<p>Una vez mezclada la rama con el <em>issue</em> 56 queremos desarrollar
-un nuevo <em>issue</em> (<code>iss57</code>). <strong>Algunas cosas pueden ir mal</strong>:</p>
-<ol>
-<li>Se nos olvida crear la rama nueva, y añadimos los commits del
-<em>issue</em> 57 en <code>master</code>.</li>
-<li>Se nos olvida crear la rama nueva, y añadimos los commits del
-<em>issue</em> 57 en la rama <code>iss56</code>
-</li>
-<li>Creamos la nueva rama, pero lo hacemos en la rama <code>iss56</code> en
-lugar de en <code>master</code>, y añadimos los commits en la nueva rama.</li>
-</ol>
-</li>
-<li>
-<p>Veamos cómo resolver cada caso.</p>
-</li>
-</ul>
-
-<h2>
-<a id="user-content-error-1-añadimos-commits-del-nuevo-issue-en-master" class="anchor" href="#error-1-a%C3%B1adimos-commits-del-nuevo-issue-en-master" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Error 1: Añadimos commits del nuevo issue en master</h2>
-<ul>
-<li>Después de hacer el merge en <code>master</code>, se nos olvida crear la nueva
-rama <code>iss57</code> y añadimos los nuevos commits en <code>master</code>
-</li>
+<li>Si ahora intentamos cambiar a <code>master</code>:</li>
 </ul>
 <pre lang="txt"><code>$ git checkout master
-$ git merge iss56
-# MAL: Ahora hacemos commits del issue 57 en master sin crear la rama nueva
+error: Your local changes to the following files would be overwritten by checkout:
+	index.html
+Please commit your changes or stash them before you switch branches.
+Aborting
 </code></pre>
-<p><a href="imagenes/problema-tras-merge-1.png" target="_blank"><img src="imagenes/problema-tras-merge-1.png" width="600px" style="max-width:100%;"></a></p>
-<ul>
-<li>¿Solución?</li>
-</ul>
 
 <h2>
-<a id="user-content-solución-error-1" class="anchor" href="#soluci%C3%B3n-error-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Solución error 1</h2>
+<a id="user-content-usamos-git-stash" class="anchor" href="#usamos-git-stash" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usamos "git stash"</h2>
+
 <ul>
-<li>La solución es sencilla: creamos la rama <code>iss57</code> en el commit actual y
-hacemos retroceder <code>master</code> al commit <code>C6</code>:</li>
+<li>Con <code>git stash</code> podemos eliminar los cambios actuales del espacio de
+trabajo y apilarlos en una pila (<em>stash</em>) de la que después podremos
+desapilarlos:</li>
 </ul>
-<pre lang="txt"><code>$ git branch iss57 # Creamos la rama iss57
-$ git branch # Comprobamos que estamos en master
-* master
-iss56
-iss57
-$ git reset --hard HEAD~2 # También correcto el id del commit C6
-$ git checkout iss57 # Nos movemos a iss57 para seguir haciendo allí los nuevos commits
+<pre lang="txt"><code>$ git stash
+Saved working directory and index state WIP on iss53: 191f0db Completando el artículo [issue 53]
+$ git status
+On branch iss53
+nothing to commit, working tree clean
 </code></pre>
-<p><a href="imagenes/problema-tras-merge-1.png" target="_blank"><img src="imagenes/problema-tras-merge-1.png" width="575px" style="max-width:100%;"></a></p>
- <p><a href="imagenes/solucion-problema-tras-merge-1.png" target="_blank"><img src="imagenes/solucion-problema-tras-merge-1.png" width="600px" style="max-width:100%;"></a></p>
+<ul>
+<li>Podemos examinar el contenido de la pila:</li>
+</ul>
+<pre lang="txt"><code>$ git stash list
+stash@{0}: WIP on iss53: 191f0db Completando el artículo [issue 53]
+</code></pre>
+<ul>
+<li>El comando <code>git stash pop</code> desapila los cambios en el espacio de
+trabajo actual.</li>
+</ul>
+<pre lang="txt"><code>$ git stash pop
+On branch iss53
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+	modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (178d16c6647adc28985253d08ed95de639e6d070)
+</code></pre>
 
 <h2>
-<a id="user-content-error-2-añadimos-commits-del-nuevo-issue-en-la-rama-antigua" class="anchor" href="#error-2-a%C3%B1adimos-commits-del-nuevo-issue-en-la-rama-antigua" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Error 2: Añadimos commits del nuevo issue en la rama antigua</h2>
-<ul>
-<li>Después de hacer el merge en <code>master</code>, en lugar de crear una rama
-nueva volvemos a la rama mergeada y mezclamos allí los commits del
-<em>issue 57</em> sin haber creado la nueva rama:</li>
-</ul>
-<pre lang="txt"><code>$ git checkout master
-$ git merge iss56
-$ git checkout iss56 # MAL: deberíamos borrar la rama y crear una nueva
-# añadimos commits en iss56
-</code></pre>
-<p><a href="imagenes/problema-tras-merge-2.png" target="_blank"><img src="imagenes/problema-tras-merge-2.png" width="900px" style="max-width:100%;"></a></p>
-<ul>
-<li>¿Solución?</li>
-</ul>
+<a id="user-content-cambiamos-de-rama-y-abrimos-el-hotfix" class="anchor" href="#cambiamos-de-rama-y-abrimos-el-hotfix" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cambiamos de rama y abrimos el hotfix</h2>
 
-<h2>
-<a id="user-content-solución-error-2" class="anchor" href="#soluci%C3%B3n-error-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Solución error 2</h2>
+
 <ul>
-<li>Podemos combinar <code>reset</code> y <code>stash</code> para mover atrás <code>iss56</code> y
-llevar los commits a la otra rama:</li>
+<li>Volvemos a hacer <code>git stash</code> para apilar los cambios y cambiamos a
+<code>master</code> para realizar allí el hotfix:</li>
 </ul>
-<pre lang="txt"><code>$ git branch # Nos aseguramos de que estamos en iss56
-* iss56
-master
-$ git reset HEAD~2
-$ git status # Confirmamos que los cambios de C7 y C8 están en el espacio de trabajo
-$ git stash
+<pre lang="txt"><code>$ git stash
+Saved working directory and index state WIP on iss53: 191f0db Completando el artículo [issue 53]
 $ git checkout master
-$ git checkout -b iss57
-$ git statsh pop
-# Hacemos 'add' y 'commit' para confirmar los cambios que nos interesen (C7' y C8')
-</code></pre>
-<p><a href="imagenes/solucion-problema-tras-merge-2.png" target="_blank"><img src="imagenes/solucion-problema-tras-merge-2.png" width="1000px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-error-3-creamos-la-rama-nueva-en-la-antigua" class="anchor" href="#error-3-creamos-la-rama-nueva-en-la-antigua" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Error 3: Creamos la rama nueva en la antigua</h2>
-<ul>
-<li>Después de hacer el merge en <code>master</code>, nos movemos por error a la
-rama recién mergeada y creamos allí la rama nueva <code>iss57</code>:</li>
-</ul>
-<pre lang="txt"><code>$ git checkout master
-$ git merge iss56
-$ git checkout iss56 
-$ git checkout -b iss57 # MAL: hemos creado la rama en iss56, en lugar de en master
-# añadimos commits en iss57
-</code></pre>
-<p><a href="imagenes/problema-tras-merge-3.png" target="_blank"><img src="imagenes/problema-tras-merge-3.png" width="900px" style="max-width:100%;"></a></p>
-<ul>
-<li>¿Solución?</li>
-</ul>
-
-<h2>
-<a id="user-content-solución-error-3" class="anchor" href="#soluci%C3%B3n-error-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Solución error 3</h2>
-<ul>
-<li>Podemos hacer una solución similar a la solución 2 haciendo un <code>rebase</code>:</li>
-</ul>
-<pre lang="txt"><code>$ git branch # Nos aseguramos de que estamos en iss57
-* iss57
-iss56
-master
-$ git rebase master
-First, rewinding head to replay your work on top of it...
-Applying: Primer cambio [iss57]
-Applying: Segundo cambio [iss57]
-</code></pre>
-<p><a href="imagenes/solucion-problema-tras-merge-2.png" target="_blank"><img src="imagenes/solucion-problema-tras-merge-2.png" width="1000px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-ejercicio" class="anchor" href="#ejercicio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ejercicio</h2>
-
-<ul>
-<li>Escoge uno de los 3 errores, reprodúcelo y soluciónalo siguiendo las indicaciones.</li>
-<li>Comprueba que todo ha funcionado correctamente.</li>
-</ul>
-
-<h2>
-<a id="user-content-Último-ejercicio-con-ramas-detached-head-y-rama-desde-el-pasado" class="anchor" href="#%C3%9Altimo-ejercicio-con-ramas-detached-head-y-rama-desde-el-pasado" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Último ejercicio con ramas: detached HEAD y rama desde el pasado</h2>
-
-
-<p><a href="imagenes/arreglo-bug-pasado.png" target="_blank"><img src="imagenes/arreglo-bug-pasado.png" width="550px" style="max-width:100%;"></a></p>
-<ul>
-<li>Supongamos que queremos solucionar un bug introducido en un commit
-en el pasado. Sería interesante poder irnos a ese momento del
-desarrollo (para aislarnos de los cambios introducidos después),
-examinar el proyecto en ese momento y abrir allí una rama con un fix
-que lo corrige.</li>
-<li>Vamos a probarlo.</li>
-<li>Supongamos que nos hemos dado cuenta de que el margen de la web es
-demasiado grande y que queremos hacerlo más pequeño. Queremos probarlo y
-arreglarlo en el commit <code>59e0464</code>, que es cuando introducimos el
-cambio. Realizamos un <code>git checkout</code> para mover el HEAD a ese commit:</li>
-</ul>
-<pre lang="txt"><code>$ git checkout 59e0464
-Note: checking out '59e0464'.
-
-You are in 'detached HEAD' state. You can look around, make experimental
-changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by performing another checkout.
-
-If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -b with the checkout command again. Example:
-
-  git checkout -b &lt;new-branch-name&gt;
-
-HEAD is now at 59e0464... Añadidos márgenes al documento
-</code></pre>
-
-<h2>
-<a id="user-content-detached-head" class="anchor" href="#detached-head" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Detached HEAD</h2>
-
-
-<p><a href="imagenes/detached-head.png" target="_blank"><img src="imagenes/detached-head.png" width="750px" style="max-width:100%;"></a></p>
-<ul>
-<li>El puntero HEAD indica dónde está el espacio de trabajo. Si ahora
-abrimos el fichero <code>index.html</code> en el navegador veremos que nos
-encontramos tal y como estaba el proyecto en ese momento del
-desarrollo. Lo podemos comprobar también en los ficheros cargados en
-el Visual Studio Code, que se habrán actualizado a ese commit.</li>
-<li>El HEAD está "desconectado" porque no está apuntando a ninguna rama
-(que es su estado natural para que funcione correctamente el añadido de commits).</li>
-<li>Creamos una rama y nos movemos a ella para que HEAD apunte a ella:</li>
-</ul>
-<p><a href="imagenes/not-detached-head.png" target="_blank"><img src="imagenes/not-detached-head.png" width="750px" style="max-width:100%;"></a></p>
-<pre lang="txt"><code>$ git checkout -b fix-margenes
-</code></pre>
-
-<h2>
-<a id="user-content-añadimos-commits-y-mezclamos-la-rama" class="anchor" href="#a%C3%B1adimos-commits-y-mezclamos-la-rama" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Añadimos commits y mezclamos la rama</h2>
-
-
-<p><a href="imagenes/commit-fix-margenes.png" target="_blank"><img src="imagenes/commit-fix-margenes.png" width="600px" style="max-width:100%;"></a></p>
-<ul>
-<li>Una vez en la nueva rama arreglamos lo que nos interesa y hacemos un
-commit:</li>
-</ul>
-<pre lang="txt"><code># Modificamos el fichero css/layout.css para 
-# reducir el margen
-$ git commit -am "Reducido el margen"
-[fix-margenes bcb633e] Reducido el margen
- 1 file changed, 1 insertion(+), 1 deletion(-)
-</code></pre>
-<ul>
-<li>Comprobamos que todo está bien y mezclamos la rama en <code>master</code>:</li>
-</ul>
-<p><a href="imagenes/log-after-fix-margenes.png" target="_blank"><img src="imagenes/log-after-fix-margenes.png" width="600px" style="max-width:100%;"></a></p>
-<pre lang="txt"><code>$ git checkout master
-$ git merge fix-margenes
-Auto-merging css/layout.css
-Merge made by the 'recursive' strategy.
- css/layout.css | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-$ git branch -d fix-margenes
-</code></pre>
-<ul>
-<li>Por último subimos los últimos cambios a GitHub y comprobamos allí
-que todo se ha subido correctamente.</li>
-</ul>
-<pre lang="txt"><code>$ git push
-</code></pre>
-
-<h2>
-<a id="user-content-es-hora-de-trabajar-en-equipo" class="anchor" href="#es-hora-de-trabajar-en-equipo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>¡Es hora de trabajar en equipo!</h2>
-<p><a href="imagenes/group-dancing.gif" target="_blank"><img src="imagenes/group-dancing.gif" width="1100px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-trabajo-de-dos-personas-sobre-master" class="anchor" href="#trabajo-de-dos-personas-sobre-master" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Trabajo de dos personas sobre master</h2>
-
-<p><a href="imagenes/trabajo-dos-personas.png" target="_blank"><img src="imagenes/trabajo-dos-personas.png" width="550px" style="max-width:100%;"></a></p>
-<ul>
-<li>
-<p>Vamos a empezar por lo más sencillo: suponemos dos personas con
-permiso de lectura y escritura en el repositorio remoto trabajando
-simultáneamente sobre <code>master</code>.</p>
-</li>
-<li>
-<p>El modo de trabajo es muy similar al del trabajo sobre un
-repositorio centralizado:</p>
-<ol>
-<li>Alberto y Ana trabajan sobre la rama <code>master</code> en local haciendo
-commits.</li>
-<li>Ana termina su trabajo, piensa que los cambios están listos
-para publicarlos y hace un <code>git push</code>.</li>
-<li>Si ahora Alberto intenta publicar en el repo remoto, Git le da
-un mensaje de error indicando que primero debe descargarse los
-cambios que se han introducido.</li>
-<li>Alberto se baja los cambios (con <code>git fetch</code>) y los integra en
-su rama en local (<code>git merge</code>), solucionando los posibles conflictos.</li>
-<li>Una vez integrado los cambios en local, Alberto los sube al repo
-remoto con un <code>git push</code>.</li>
-<li>Ana integra los cambios de Alberto haciendo lo mismo que él ha
-hecho: <code>git fetch</code> y <code>git merge</code> y después <code>git push</code>.</li>
-</ol>
-</li>
-</ul>
-
-<h2>
-<a id="user-content-rama-remota-git-clone" class="anchor" href="#rama-remota-git-clone" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rama remota: "git clone"</h2>
-<ul>
-<li>El comando <code>git clone</code> se descarga el repositorio en nuestra máquina
-y crea una referencia local (<code>origin/master</code>) a la rama remota
-<code>master</code> (aunque no es totalmente correcto, llamamos a
-<code>origin/master</code> una rama remota).</li>
-</ul>
-<p><a href="imagenes/clone-remota.png" target="_blank"><img src="imagenes/clone-remota.png" width="900px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-rama-remota-git-fetch" class="anchor" href="#rama-remota-git-fetch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rama remota: "git fetch"</h2>
-<ul>
-<li>El comando <code>git fetch</code> descarga los commits nuevos de <code>master</code> en la máquina remota a la
-rama remota de nuestra máquina <code>origin/master</code>.</li>
-</ul>
-<p><a href="imagenes/fetch-remota.png" target="_blank"><img src="imagenes/fetch-remota.png" width="900px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-rama-remota-git-merge" class="anchor" href="#rama-remota-git-merge" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rama remota: "git merge"</h2>
-<ul>
-<li>La rama <code>origin/master</code> es una rama local como otra cualquiera. La
-única diferencia es que es una rama de <em>solo lectura</em>. HEAD no puede
-apuntar a ella (no podemos hacer un <code>checkout</code> y añadir commits como
-en una rama normal). Mezclamos los cambios descargados en <code>master</code>
-local haciendo un <code>merge</code>.</li>
-</ul>
-<p><a href="imagenes/merge-remota.png" target="_blank"><img src="imagenes/merge-remota.png" width="900px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-rama-remota-git-push" class="anchor" href="#rama-remota-git-push" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rama remota: "git push"</h2>
-<ul>
-<li>El comando <code>git push</code> sube los cambios a la máquina remota y
-adelanta la rama remota <code>origin/master</code>.</li>
-</ul>
-<p><a href="imagenes/push-remota.png" target="_blank"><img src="imagenes/push-remota.png" width="900px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-formamos-equipos-de-tres-personas-y-compartimos-repositorio" class="anchor" href="#formamos-equipos-de-tres-personas-y-compartimos-repositorio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Formamos equipos de tres personas y compartimos repositorio</h2>
-
-<ul>
-<li>
-<p>Vamos a practicar este flujo de trabajo. En el proceso explicaremos
-cómo funcionan los comandos <code>git fetch</code> y <code>git pull</code> y la gestión de
-Git de ramas remotas.</p>
-</li>
-<li>
-<p>Creamos equipos de tres personas. Vamos a llamarlas Ana, Carlos y Alberto.</p>
-</li>
-<li>
-<p>Uno de los tres repositorios va a hacer el papel de repositorio
-central. Por ejemplo el de Ana.</p>
-</li>
-<li>
-<p>Alberto y Carlos se descargan el repositorio de Ana:</p>
-</li>
-</ul>
-<pre lang="txt"><code># En las máquinas de Alberto y Carlos
-$ cd ..
-$ git clone URL-REPO repo-compartido
-$ cd repo-compartido
-</code></pre>
-<ul>
-<li>Ana gestiona los permisos del repositorio en GitHub para que sus dos
-compañeros también puedan escribir y publicar cambios, con la opción
-<em>Settings &gt; Collaborators</em>. Los compañeros recibirán un correo
-electrónico con un enlace en el que aceptar la invitación.</li>
-</ul>
-<p><a href="imagenes/collaborators.png" target="_blank"><img src="imagenes/collaborators.png" width="800px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-trabajo-secuencial" class="anchor" href="#trabajo-secuencial" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Trabajo secuencial</h2>
-
-<ul>
-<li>Los dos compañeros comprueban que pueden publicar cambios (esta
-primera vez lo hacemos de forma secuencial, uno detrás de otro):</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Alberto
-# Alberto modifica el fichero 'index.html'
-$ git commit -am "Modificación de Alberto"
-$ git push
-</code></pre>
-<pre lang="txt"><code># En la máquina de Carlos
-# Carlos se descarga los cambios, añade cambios y los publica
-$ git pull
-# Modifica el fichero 'index.html'
-$ git commit -am "Modificación de Carlos"
-$ git push
-</code></pre>
-<ul>
-<li>Comprobamos en GitHub que se han subido los cambios. Y Ana se descarga los cambios:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Ana
-$ git pull
-</code></pre>
-
-<h2>
-<a id="user-content-comando-git-fetch" class="anchor" href="#comando-git-fetch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comando "git fetch"</h2>
-
-<p><a href="imagenes/after-fetch.png" target="_blank"><img src="imagenes/after-fetch.png" width="400px" style="max-width:100%;"></a></p>
-<ul>
-<li>
-<p>El comando <code>git fetch</code> se conecta con el repositorio remoto
-(<code>origin</code> si no lo especificamos) y se descarga los últimos commits
-que se han subido y que no tenemos.</p>
-</li>
-<li>
-<p>Git gestiona las ramas remotas usando <strong>ramas locales que hacen de
-caché de los cambios</strong>. La rama <code>origin/master</code> cachea la rama remota <code>master</code> en el
-repositorio <code>origin</code> y es en esa rama en la que se descargan los
-cambios.</p>
-</li>
-<li>
-<p>Podemos consultar las ramas locales y las cachés con el comando</p>
-</li>
-</ul>
-<pre lang="txt"><code>$ git branch -vva
-</code></pre>
-<ul>
-<li>
-<p>El commit <code>fbff5</code> es el que se ha añadido en el repositorio remoto.</p>
-</li>
-<li>
-<p>Podemos trabajar con la rama <code>origin/master</code> como si fuera una rama
-normal. Por ejemplo, podemos consultar los cambios del último
-commit haciendo <code>git diff</code>:</p>
-</li>
-</ul>
-<pre lang="txt"><code>$ git diff HEAD origin/master
-</code></pre>
-<ul>
-<li>Para incorporar los cambios a <code>master</code> hacemos lo habitual,
-mezclamos la rama con los cambios (<code>origin/master</code>) en
-<code>master</code>. Suponiendo que estemos en <code>master</code>:</li>
-</ul>
-<pre lang="txt"><code>$ git merge origin/master
-</code></pre>
-
-<h2>
-<a id="user-content-comando-git-pull" class="anchor" href="#comando-git-pull" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comando "git pull"</h2>
-<ul>
-<li>El comando <code>git pull</code> es una forma abreviada de hacer un <code>fetch</code>
-seguido de un <code>merge</code>
-</li>
-</ul>
-<pre lang="txt"><code>$ git pull
-# git fetch
-# git merge origin/master
-</code></pre>
-<ul>
-<li>Veremos que podemos tener otras ramas remotas aparte de
-<code>master</code>. También se usarán los comandos <code>git fetch</code>, <code>git push</code> y
-<code>git pull</code> para actualizarlas.</li>
-</ul>
-
-<h2>
-<a id="user-content-probamos-el-trabajo-concurrente-y-git-fetch" class="anchor" href="#probamos-el-trabajo-concurrente-y-git-fetch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Probamos el trabajo concurrente y "git fetch"</h2>
-
-<ul>
-<li>Dos miembros del equipo realiza un commit distinto:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Ana
-$ git commit -am "Cambios simultáneos de Ana"
-</code></pre>
-<pre lang="txt"><code># En la máquina de Carlos
-$ git commit -am "Cambios simultáneos de Carlos"
-</code></pre>
-<ul>
-<li>Ana publica los cambios:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Ana
-$ git push
-</code></pre>
-<ul>
-<li>Carlos intenta publicar los cambios, pero obtiene un
-error porque la rama remota ha avanzado y sus ramas se han quedado
-atrás (tiene que integrar los cambios remotos):</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Carlos
-$ git push
-To https://github.com/domingogallardo/curso-git-repo1.git
- ! [rejected]        master -&gt; master (non-fast-forward)
-error: failed to push some refs to 'https://github.com/domingogallardo/curso-git-repo1.git'
-hint: Updates were rejected because the tip of your current branch is behind
-hint: its remote counterpart. Integrate the remote changes (e.g.
-hint: 'git pull ...') before pushing again.
-</code></pre>
-
-<h2>
-<a id="user-content-carlos-integra-los-cambios-de-ana" class="anchor" href="#carlos-integra-los-cambios-de-ana" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Carlos integra los cambios de Ana</h2>
-
-
-<p><a href="imagenes/after-fetch-commit.png" target="_blank"><img src="imagenes/after-fetch-commit.png" width="300px" style="max-width:100%;"></a></p> 
-<ul>
-<li>Carlos hace un <code>git fetch</code> para descargar los cambios de Ana a su repositorio local:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Carlos
-$ git fetch
-$ git branch -vva
-* master                 738ee82 [origin/master: ahead 1, behind 1] Cambio simultáneo de Domingo
-  remotes/origin/master  fbff52a Cambios simultáneos de Ana
-</code></pre>
-<p><a href="imagenes/after-fetch-merge.png" target="_blank"><img src="imagenes/after-fetch-merge.png" width="350px" style="max-width:100%;"></a></p> 
-<ul>
-<li>Y mezcla los cambios</li>
-</ul>
-<pre lang="txt"><code>$ git merge origin/master
-Merge made by the 'recursive' strategy.
- index.html | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-</code></pre>
-<ul>
-<li>Por último, sube la rama master</li>
-</ul>
-<p><a href="imagenes/after-fetch-push.png" target="_blank"><img src="imagenes/after-fetch-push.png" width="350px" style="max-width:100%;"></a></p>
-<pre lang="txt"><code>$ git push
-To https://github.com/domingogallardo/curso-git-repo1.git
-   fbff5..72bbc master -&gt; master
-</code></pre>
-
-<h2>
-<a id="user-content-ana-trabaja-en-una-rama" class="anchor" href="#ana-trabaja-en-una-rama" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ana trabaja en una rama</h2>
-
-<ul>
-<li>Mientras tanto, Ana ha seguido trabajando en su repositorio, creando
-una rama llamada <code>iss58</code>:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Ana
-$ git checkout -b iss58
-# Añade algunos commits
-</code></pre>
-<p><a href="imagenes/rama-antes-fetch.png" target="_blank"><img src="imagenes/rama-antes-fetch.png" width="700px" style="max-width:100%;"></a></p> 
-<ul>
-<li>Ana descarga los cambios de Carlos, pero todavía no los mezcla:</li>
-</ul>
-<pre lang="txt"><code>$ git fetch
-</code></pre>
-<p><a href="imagenes/rama-despues-fetch.png" target="_blank"><img src="imagenes/rama-despues-fetch.png" width="700px" style="max-width:100%;"></a></p> 
-
-<h2>
-<a id="user-content-ana-termina-su-rama" class="anchor" href="#ana-termina-su-rama" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ana termina su rama</h2>
-
-
-<p><a href="imagenes/git-kraken.png" target="_blank"><img src="imagenes/git-kraken.png" width="600px" style="max-width:100%;"></a></p> 
-<ul>
-<li>
-<p>Ana ya ha terminado sus cambios en la rama y tiene que integrarlos en
-<code>master</code>. También tiene que integrar los cambios remotos. Y después
-comprobar que todo funciona bien y subirlo al repositorio remoto.</p>
-</li>
-<li>
-<p>Podemos examinar el estado del repositorio en GitKraken. Puedes
-abrir Git Kraken y comprobar la historia.</p>
-</li>
-<li>
-<p>Para integrar los cambios en <code>master</code> empezamos cambiando a esa rama:</p>
-</li>
-</ul>
-<pre lang="txt"><code>$ git checkout master
 Switched to branch 'master'
-Your branch is behind 'origin/master' by 2 commits, and can be fast-forwarded.
-  (use "git pull" to update your local branch)
+Your branch is up-to-date with 'origin/master'.
+</code></pre>
+<ul>
+<li>Realizamos el hotfix, creando una rama en la que lo completamos:</li>
+</ul>
+<p><a href="imagenes/ejemplo-issue4.png" target="_blank"><img src="imagenes/ejemplo-issue4.png" width="500px" style="max-width:100%;"></a></p>
+<pre lang="txt"><code>$ git checkout -b hotfix
+Switched to a new branch 'hotfix'
+# Añadimos el correo electronico acme@gmail.com 
+# en el pie de página
+$ git commit -am "Añadida la dirección de email"
+[hotfix 330b7f8] Añadida la dirección de email
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 </code></pre>
 
 <h2>
-<a id="user-content-y-los-mezcla-con-master" class="anchor" href="#y-los-mezcla-con-master" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Y los mezcla con master</h2>
+<a id="user-content-mezclamos-el-hotfix-con-master" class="anchor" href="#mezclamos-el-hotfix-con-master" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mezclamos el hotfix con master</h2>
 
 <ul>
-<li>
-<p>Ana puede mezclar en <code>master</code> o bien <code>origin/master</code> o bien <code>iss58</code>,
-el orden no importa de cara al resultado final. Sólo cambiara la
-historia.</p>
-</li>
-<li>
-<p>Empezamos mezclando la rama <code>iss54</code>. Lo podemos hacer como siempre,
-por línea de comando:</p>
-</li>
+<li>Podemos realizar los tests y asegurarnos de que el hotfix es el que
+queremos (en nuestro caso, bastaría con cargar la página en el
+navegador) y finalmente mezclamos en la rama <code>master</code> que es la que
+se despliega en producción:</li>
 </ul>
-<pre lang="txt"><code>$ git merge iss58
-Updating 19b5a30..982b609
+<pre lang="txt"><code>$ git checkout master
+$ git merge hotfix
+Updating fb8f62b..330b7f8
 Fast-forward
- index.html | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-</code></pre>
-<ul>
-<li>O usando la interfaz de GitKraken, arrastrando la rama <code>iss58</code> sobre
-la rama <code>master</code> y seleccionando la opción <code>Fast-forward</code>.</li>
-</ul>
-
-<h2>
-<a id="user-content-se-mezcla-el-commit-remoto" class="anchor" href="#se-mezcla-el-commit-remoto" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Se mezcla el commit remoto</h2>
-
-<ul>
-<li>Una vez incorporada la rama <code>iss54</code> a <code>master</code>, Ana completa la
-integración añadiendo los cambios de Carlos, que estaban pendientes
-en la rama <code>origin/master</code>:</li>
-</ul>
-<pre lang="txt"><code>$ git merge origin/master
-Auto-merging index.html
-Merge made by the 'recursive' strategy.
  index.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 </code></pre>
 <ul>
-<li>Ahora la historia del repositorio de Ana aparece de la siguiente
-forma:</li>
+<li>El término "fast-forward" se refiere a que no se ha tenido que crear
+un commit de merge que combine las dos ramas, dado que no hay
+ninguna historia divergente entre <code>hotfix</code> y <code>master</code>. Git
+simplemente avanza el puntero de la rama <code>master</code>:</li>
 </ul>
-<p><a href="imagenes/merge-origin-master.png" target="_blank"><img src="imagenes/merge-origin-master.png" width="900px" style="max-width:100%;"></a></p>
+<p><a href="imagenes/ejemplo-issue5.png" target="_blank"><img src="imagenes/ejemplo-issue5.png" width="600px" style="max-width:100%;"></a></p>
 
 <h2>
-<a id="user-content-y-sube-el-resultado-al-repositorio-remoto" class="anchor" href="#y-sube-el-resultado-al-repositorio-remoto" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Y sube el resultado al repositorio remoto</h2>
+<a id="user-content-seguimos-trabajando-el-issue-53" class="anchor" href="#seguimos-trabajando-el-issue-53" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Seguimos trabajando el issue 53</h2>
 
-<pre lang="txt"><code>$ git push
+<ul>
+<li>Después de haber integrado el hotfix en <code>master</code> ya podemos seguir
+trabajando el <em>issue</em> 53.</li>
+<li>Sin embargo, primero borramos la rama <code>hotfix</code> porque ya no la
+necesitamos:</li>
+</ul>
+<pre lang="txt"><code>$ git branch -d hotfix
+Deleted branch hotfix (was 330b7f8).
 </code></pre>
-<p><a href="imagenes/push-origin-master.png" target="_blank"><img src="imagenes/push-origin-master.png" width="900px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-buen-trabajo" class="anchor" href="#buen-trabajo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>¡Buen trabajo!</h2>
-<p><a href="imagenes/good-job.gif" target="_blank"><img src="imagenes/good-job.gif" width="1100px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-ramas-compartidas" class="anchor" href="#ramas-compartidas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ramas compartidas</h2>
+<ul>
+<li>Comprobamos las ramas que quedan:</li>
+</ul>
+<pre lang="txt"><code>$ git branch
+  iss53
+* master
+</code></pre>
 <ul>
 <li>
-<p>Resumen del flujo de trabajo que acabamos de ver:</p>
-<ul>
-<li>La única rama remota compartida es <code>master</code>.</li>
-<li>Los compañeros desarrollan cambios (en un commit o en una rama)
-que mezclan en local sobre <code>master</code>.</li>
-<li>Por último se suben los cambios a la rama <code>master</code> remota.</li>
-</ul>
+<p>El asterisco nos indica la rama en la que nos encontramos.</p>
 </li>
 <li>
-<p>La naturaleza distribuida de Git permite muchos otros flujos de
-trabajo; veremos varios.</p>
+<p>Nos movemos a la rama <code>iss53</code>, desapilamos el trabajo en proceso y
+terminamos el desarrollo:</p>
+</li>
+</ul>
+<pre lang="txt"><code>$ git checkout iss53
+$ git stash pop
+# Terminamos el artículo y hacemos commit
+$ git commit -am "Terminado el artículo [issue 53]"
+[iss53 a5e2c39] Terminado el artículo [issue 53]
+ 1 file changed, 2 insertions(+)
+</code></pre>
+
+<h2>
+<a id="user-content-actualizamos-la-rama-hotfix" class="anchor" href="#actualizamos-la-rama-hotfix" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Actualizamos la rama hotfix</h2>
+
+<ul>
+<li>
+<p>Hay que resaltar que el trabajo que hemos realizado en el hotfix no
+está ahora incluido en la rama <code>iss53</code>. Si cargas la página en el
+navegador verás que en el pie de página no está la dirección de
+correo.</p>
 </li>
 <li>
-<p>Antes necesitamos subir y compartir nuevas ramas en el repositorio
-remoto.</p>
+<p>Puede ser necesario integrar el desarrollo en <code>master</code> para probar que
+todo funciona correctamento. Basta con mezclar la rama <code>master</code> en
+la rama actual:</p>
 </li>
 </ul>
-
-<h2>
-<a id="user-content-subir-ramas-al-repositorio-remoto" class="anchor" href="#subir-ramas-al-repositorio-remoto" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Subir ramas al repositorio remoto</h2>
-<ul>
-<li>Supongamos que hemos creado la rama <code>iss59</code> y en el repositorio
-local y que queremos subirla al repositorio remoto.</li>
-</ul>
-<p><a href="imagenes/antes-push-rama.png" target="_blank"><img src="imagenes/antes-push-rama.png" width="1100px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-comando-git-push-para-subir-ramas" class="anchor" href="#comando-git-push-para-subir-ramas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comando "git push" para subir ramas</h2>
-<ul>
-<li>El comando <code>git push</code> sube la rama al repositorio remoto:</li>
-</ul>
-<pre lang="txt"><code>$ git push -u origin iss59
-</code></pre>
-<p><a href="imagenes/despues-push-rama.png" target="_blank"><img src="imagenes/despues-push-rama.png" width="1100px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-comando-git-fetch-para-bajar-las-ramas" class="anchor" href="#comando-git-fetch-para-bajar-las-ramas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comando "git fetch" para bajar las ramas</h2>
-<ul>
-<li>El comando <code>git fetch</code> baja las ramas nuevas subidas al repositorio
-y las almacena como ramas remotas (el comando no crea las ramas locales):</li>
-</ul>
-<pre lang="txt"><code># En otra máquina
-$ git fetch
-</code></pre>
-<p><a href="imagenes/despues-fetch-rama.png" target="_blank"><img src="imagenes/despues-fetch-rama.png" width="1000px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-las-ramas-locales-se-crean-con-git-checkout" class="anchor" href="#las-ramas-locales-se-crean-con-git-checkout" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Las ramas locales se crean con "git checkout"</h2>
-<ul>
-<li>Una vez bajadas las ramas remotas se pueden crear ramas locales
-conectadas a ellas con <code>git checkout</code>:</li>
-</ul>
-<pre lang="txt"><code>$ git checkout -b iss59 origin/iss59
-# Comando equivalente: $ git checkout iss59
-</code></pre>
-<p><a href="imagenes/checkout-remota.png" target="_blank"><img src="imagenes/checkout-remota.png" width="1000px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-ana-comienza-el-desarrollo-de-una-nueva-rama" class="anchor" href="#ana-comienza-el-desarrollo-de-una-nueva-rama" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ana comienza el desarrollo de una nueva rama</h2>
-
-<ul>
-<li>Vamos a crear una nueva rama y subirla al repositorio remoto.</li>
-<li>Ana crea una nueva rama <code>iss59</code> y un par de commits en ella:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Ana
-$ git checkout -b iss59
-$ git commit -am "Primer cambio [iss59]"
-[iss59 747459f] Primer cambio [iss59]
- 1 file changed, 1 insertion(+), 3 deletions(-)
-$ git commit -am "Segundo cambio [iss59]"
-[iss59 2090ea1] Segundo cambio [iss59]
- 1 file changed, 1 insertion(+), 2 deletions(-)
+<pre lang="txt"><code>$ git branch
+* iss53
+  master
+$ git merge master
 </code></pre>
 <ul>
-<li>Comprueba las ramas locales y remotas:</li>
+<li>
+<p>Se abrirá el editor, pidiéndonos que escribamos el mensaje del
+commit de merge. Podemos salvar y dejar el mensaje por defecto.</p>
+</li>
+<li>
+<p>Una vez realizado el merge, podemos comprobar que todo funciona
+bien. En nuestro caso, la página contendrá el nuevo artículo y la
+dirección de email en el pié de página.</p>
+</li>
+<li>
+<p>Si comprobamos que algo no funciona bien, podemos deshacer
+fácilmente el último <code>merge</code>:</p>
+</li>
 </ul>
-<pre lang="txt"><code>$ git branch -vva
-* iss59                 2090ea1 Segundo cambio [iss59]
-  master                7c4205e [origin/master] Merge remote-tracking branch 'origin/master'
-  remotes/origin/HEAD   -&gt; origin/master
-  remotes/origin/master 7c4205e Merge remote-tracking branch 'origin/master'
-</code></pre>
-<ul>
-<li>La rama <code>master</code> está trackeando <code>origin/master</code> (cuando estemos en
-<code>master</code> y hagamos push o pull se baja la rama remota <code>master</code>).</li>
-</ul>
-
-<h2>
-<a id="user-content-ana-sube-la-nueva-rama" class="anchor" href="#ana-sube-la-nueva-rama" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ana sube la nueva rama</h2>
-
-<ul>
-<li>Ahora subimos la nueva rama <code>iss59</code> usando el comando <code>git push</code>. La
-opción <code>-u</code> permite publicar los nuevos cambios haciendo sólo <code>git push</code> a
-partir de ahora:</li>
-</ul>
-<pre lang="txt"><code>$ git push -u origin iss59
-...
-To https://github.com/domingogallardo/curso-git-repo1.git
- * [new branch]      iss59 -&gt; iss59
-Branch iss59 set up to track remote branch iss59 from origin.
-</code></pre>
-<ul>
-<li>Comprobamos el estado local de las ramas:</li>
-</ul>
-<pre lang="txt"><code>$ git branch -vva
-* iss59                 2090ea1 [origin/iss59] Segundo cambio [iss59]
-  master                7c4205e [origin/master] Merge remote-tracking branch 'origin/master'
-  remotes/origin/HEAD   -&gt; origin/master
-  remotes/origin/iss59  2090ea1 Segundo cambio [iss59]
-  remotes/origin/master 7c4205e Merge remote-tracking branch 'origin/master'
-</code></pre>
-<ul>
-<li>Vemos que se ha creado una rama remota <code>origin/iss59</code> y que la rama
-local <code>iss59</code> está trackeando esa rama remota.</li>
-<li>Comprobamos también que la rama <strong>se ha subido a GitHub</strong>.</li>
-</ul>
-<p><a href="imagenes/rama-github.png" target="_blank"><img src="imagenes/rama-github.png" width="900px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-carlos-se-baja-la-nueva-rama" class="anchor" href="#carlos-se-baja-la-nueva-rama" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Carlos se baja la nueva rama</h2>
-
-<ul>
-<li>Carlos se baja la nueva rama</li>
-</ul>
-<pre lang="txt"><code>$ git fetch
-...
-From https://github.com/domingogallardo/curso-git-repo1
-   a4fe1f4..7c4205e  master     -&gt; origin/master
- * [new branch]      iss59      -&gt; origin/iss59
-</code></pre>
-<ul>
-<li>Comprueba que se ha descargado la rama <code>iss59</code>:</li>
-</ul>
-<pre lang="txt"><code>$ git branch -vva
-* master                a4fe1f4 [origin/master: behind 4] Merge remote-tracking branch 'origin/master'
-  remotes/origin/HEAD   -&gt; origin/master
-  remotes/origin/iss59  2090ea1 Segundo cambio [iss59]
-  remotes/origin/master 7c4205e Merge remote-tracking branch  'origin/master'
-</code></pre>
-<ul>
-<li>Y accede a la rama local correspondiente con <code>git checkout</code>:</li>
-</ul>
-<pre lang="txt"><code>$ git checkout iss59
-Branch iss59 set up to track remote branch iss59 from origin.
-Switched to a new branch 'iss59'
+<pre lang="txt"><code>$ git reset --merge ORIG_HEAD
 </code></pre>
 
 <h2>
-<a id="user-content-carlos-y-ana-trabajan-en-la-rama" class="anchor" href="#carlos-y-ana-trabajan-en-la-rama" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Carlos y Ana trabajan en la rama</h2>
+<a id="user-content-estado-del-repositorio" class="anchor" href="#estado-del-repositorio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Estado del repositorio</h2>
 
-<ul>
-<li>Carlos y Ana trabajan en la rama desarrollando el <em>issue 59</em>, de la
-misma forma que antes lo han hecho en la rama <code>master</code>:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Ana, en la rama iss59
-$ git commit # se añaden cambios
-$ git push 
-</code></pre>
-<ul>
-<li>Simultáneamente:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Carlos, en la rama iss59
-$ git commit # se añaden otros cambios
-$ git pull # se bajan los cambios de Ana y se integran
-$ git push # se suben los cambios
-</code></pre>
+<p><a href="imagenes/ejemplo-issue6.png" target="_blank"><img src="imagenes/ejemplo-issue6.png" width="900px" style="max-width:100%;"></a></p>
 
 <h2>
-<a id="user-content-ana-termina-la-rama-e-integra-con-master" class="anchor" href="#ana-termina-la-rama-e-integra-con-master" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ana termina la rama e integra con master</h2>
+<a id="user-content-mezclamos-el-issue-en-master" class="anchor" href="#mezclamos-el-issue-en-master" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mezclamos el issue en master</h2>
 
 <ul>
-<li>Ana se descarga los cambios de Carlos y termina el desarrollo de la
-rama:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Ana, en la rama iss59
-$ git fetch
-$ git merge origin/iss59 # Mezcla los cambios de Carlos
-$ git commit # Se añade algún commit más para terminar el issue
-$ git push # Sube los cambios
-</code></pre>
-<ul>
-<li>Actualiza <code>master</code> (puede haber avanzado porque se haya integrado
-algún commit o rama) e integra la rama para comprobar que el <em>issue</em>
-funciona bien en <code>master</code>:</li>
+<li>Como todo está correcto, mezclamos el issue en la rama master:</li>
 </ul>
 <pre lang="txt"><code>$ git checkout master
-$ git pull # actualiza master y se descarga C5 añadido por algún compañero
-$ git merge iss59
+$ git merge iss53
+Updating 330b7f8..48d7900
+Fast-forward
+ index.html | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 </code></pre>
-<p><a href="imagenes/pull-master-rama-local.png" target="_blank"><img src="imagenes/pull-master-rama-local.png" width="700px" style="max-width:100%;"></a></p>
+<ul>
+<li>La imagen de la historia de Git resultante:</li>
+</ul>
+<p><a href="imagenes/ejemplo-issue7.png" target="_blank"><img src="imagenes/ejemplo-issue7.png" width="800px" style="max-width:100%;"></a></p>
 
 <h2>
-<a id="user-content-ana-realiza-pruebas-de-integración" class="anchor" href="#ana-realiza-pruebas-de-integraci%C3%B3n" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ana realiza pruebas de integración</h2>
+<a id="user-content-y-subimos-los-cambios-al-repositorio-remoto" class="anchor" href="#y-subimos-los-cambios-al-repositorio-remoto" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Y subimos los cambios al repositorio remoto</h2>
 
-<ul>
-<li>
-<p>Ana revisa la integración, lanza todos los tests, realiza algunas
-pruebas funcionales, y si todo está bien se lo comunica a Alberto,
-responsable de integración del equipo.</p>
-</li>
-<li>
-<p>Si hay algún fallo o algo que mejorar, vuelve a la rama, añade algún
-commit, vuelve a mezclar para comprobar y vuelve a subir la rama:</p>
-</li>
-</ul>
-<pre lang="txt"><code>$ git checkout iss59
-$ git commit # añadimos algún commit para mejorar la rama
-$ git checkout master
-$ git merge iss59 
-# Ana prueba que todo está bien y publica los nuevos cambios:
-$ git checkout iss59
-$ git push 
-</code></pre>
-<p><a href="imagenes/merge-rama-local-master.png" target="_blank"><img src="imagenes/merge-rama-local-master.png" width="1000px" style="max-width:100%;"></a></p>
 
-<h2>
-<a id="user-content-alberto-integra-la-rama-en-master" class="anchor" href="#alberto-integra-la-rama-en-master" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Alberto integra la rama en master</h2>
-
+<p><a href="imagenes/ejemplo-issue-historia.png" target="_blank"><img src="imagenes/ejemplo-issue-historia.png" width="400px" style="max-width:100%;"></a></p>
 <ul>
-<li>Suponemos que Alberto tiene el papel de responsable de integración
-de issues en <code>master</code>. Recibe la comunicación de Ana, se descarga su
-rama y comprueba los cambios:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Alberto
-# Se descarga la última versión de la rama
-$ git fetch
-$ git checkout iss59
-# Comprueba los cambios
-$ git diff master..iss59
-</code></pre>
-<ul>
-<li>Realiza la integración de la rama y comprueba que todo está correcto:</li>
-</ul>
-<pre lang="txt"><code>$ git checkout master
-$ git merge iss59
-</code></pre>
-<ul>
-<li>Y sube <code>master</code> al repositorio remoto (con la rama <code>iss59</code> ya integrada):</li>
+<li>Subimos <code>master</code> al repositorio remoto y borramos la rama <code>iss53</code>:</li>
 </ul>
 <pre lang="txt"><code>$ git push
+$ git branch -d iss53
 </code></pre>
+<ul>
+<li>Todo ha funcionado muy bien:
+<ul>
+<li>Hemos realizado un desarrollo independiente de la línea
+principal.</li>
+<li>Hemos podido introducir en la línea principal un cambio rápido y
+después continuar el desarrollo independiente.</li>
+<li>Al final hemos mezclado todo y no ha habido ningún problema.</li>
+</ul>
+</li>
+</ul>
 
 <h2>
-<a id="user-content-borrado-de-la-rama-y-actualizado-master" class="anchor" href="#borrado-de-la-rama-y-actualizado-master" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Borrado de la rama y actualizado master</h2>
-
-<ul>
-<li>Ana y Carlos borran la rama local y remota:</li>
-</ul>
-<pre lang="txt"><code>$ git branch -d iss59
-$ git push origin -d iss59 # Borra la rama remota
-$ git remote prune origin # Borra las referencias locales a ramasremotas
-
-</code></pre>
-<ul>
-<li>Carlos actualiza la rama master:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Carlos
-$ git checkout master
-$ git pull
-</code></pre>
-<ul>
-<li>Y Ana limpia su rama master, quitando las mezclas que hizo con su
-rama <code>iss59</code>, y se descarga la rama <code>master</code> limpia que hay en el servidor:</li>
-</ul>
-<pre lang="txt"><code># En la máquina de Ana
-$ git checkout master
-$ git reset --hard origin/master
-$ git pull
-</code></pre>
-<p><a href="imagenes/master-limpio.png" target="_blank"><img src="imagenes/master-limpio.png" width="900px" style="max-width:100%;"></a></p>
-
-<h2>
-<a id="user-content-resumen-del-flujo-de-trabajo-ramas-de-features" class="anchor" href="#resumen-del-flujo-de-trabajo-ramas-de-features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resumen del flujo de trabajo: ramas de <em>features</em>
-</h2>
-<ol>
-<li>El desarrollador que se hace cargo de un <em>issue</em> abre una rama y
-la publica en el servidor remoto.</li>
-<li>Desarrolla la rama en local y sube los commits regularmente al
-servidor remoto.</li>
-<li>Un compañero puede ayudar al desarrollo del <em>issue</em> descargándose
-la rama y añadiendo commits.</li>
-<li>Cuando la rama está terminada, se comprueba la integración en
-<code>master</code>, se integra y se publica en el repositorio remoto.</li>
-<li>Se borra la rama y se descarga <code>master</code>.</li>
-</ol>
-<blockquote>
-<p><strong>Importante</strong>: las ramas son de corta duración. Deberían durar
-entre algunas horas (preferible) y un par de días como máximo.</p>
-</blockquote>
-
-<h2>
-<a id="user-content-comandos-para-comprobar-ramas-remotas" class="anchor" href="#comandos-para-comprobar-ramas-remotas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comandos para comprobar ramas remotas</h2>
-<ul>
-<li>El comando <code>git status</code> no se conecta con las ramas remotas. Podemos
-usar el comando <code>git remote -v update</code> para que Git se conecte al
-repositorio y actualice las referencias:</li>
-</ul>
-<pre lang="txt"><code>$ git remote -v update
-From https://github.com/domingogallardo/curso-git-repo1
-   2090ea1..35438c4  master     -&gt; origin/master
- = [up to date]      iss60      -&gt; origin/iss60
-</code></pre>
-<ul>
-<li>El comando <code>git remote show origin</code> se conecta con el repositorio
-<code>origin</code> y muestra la información completa de ramas remotas y locales:</li>
-</ul>
-<pre lang="txt"><code>$ git remote show origin
-* remote origin
-  Fetch URL: https://github.com/domingogallardo/curso-git-repo1.git
-  Push  URL: https://github.com/domingogallardo/curso-git-repo1.git
-  HEAD branch: master
-  Remote branches:
-    iss60  tracked
-    master tracked
-  Local branches configured for 'git pull':
-    iss60  merges with remote iss60
-    master merges with remote master
-  Local refs configured for 'git push':
-    iss60  pushes to iss60  (up to date)
-    master pushes to master (local out of date)
-</code></pre>
-
-<h2>
-<a id="user-content-nuevos-comandos" class="anchor" href="#nuevos-comandos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Nuevos comandos</h2>
+<a id="user-content-resumen-de-comandos-vistos" class="anchor" href="#resumen-de-comandos-vistos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resumen de comandos vistos</h2>
 <table>
 <thead>
 <tr>
@@ -1236,82 +428,562 @@ From https://github.com/domingogallardo/curso-git-repo1
 </thead>
 <tbody>
 <tr>
-<td><code>git clone &lt;URL repositorio&gt;</code></td>
-<td>Se descarga el repositorio remoto</td>
-</tr>
-<tr>
-<td><code>git fetch</code></td>
-<td>Descarga los nuevos commits en las ramas <code>&lt;remoto&gt;/&lt;rama&gt;</code>
-</td>
+<td><code>git branch &lt;rama&gt;</code></td>
+<td>Crea una rama</td>
 </tr>
 <tr>
 <td><code>git checkout &lt;rama&gt;</code></td>
-<td>Crea la rama local que trackea <code>&lt;origin&gt;/&lt;rama&gt;</code>
-</td>
+<td>Nos movemos a una rama</td>
 </tr>
 <tr>
-<td><code>git merge origin/&lt;rama&gt;</code></td>
-<td>Mezcla la rama remota en la rama local actual</td>
+<td><code>git checkout -b &lt;rama&gt;</code></td>
+<td>Crea una rama y nos movemos a ella</td>
 </tr>
 <tr>
-<td><code>git push -u origin &lt;rama&gt;</code></td>
-<td>Sube la rama al repositorio remoto</td>
+<td><code>git log --oneline --graph --all</code></td>
+<td>Muestra la historia de commits de forma gráfica, incluyendo todas las ramas</td>
 </tr>
 <tr>
-<td><code>git push -u origin -d &lt;rama&gt;</code></td>
-<td>Borra la rama remota</td>
+<td><code>git branch</code></td>
+<td>Muestra todas las ramas</td>
 </tr>
 <tr>
-<td><code>git pull</code></td>
-<td>Se descargan los cambios de la rama actual y se integran</td>
+<td><code>git branch -d &lt;rama&gt;</code></td>
+<td>Elimina una rama</td>
 </tr>
 <tr>
-<td><code>git branch -vva</code></td>
-<td>Muestra la información de las ramas locales y remotas</td>
+<td><code>git merge &lt;otra-rama&gt; -m "&lt;mensaje&gt;"</code></td>
+<td>Mezcla la rama <code>otra-rama</code> en la rama actual y crea el commit de mezcla con el mensaje indicado</td>
 </tr>
 <tr>
-<td><code>git remote -v update</code></td>
-<td>Actualiza las referencias locales de ramas remotas</td>
+<td><code>git stash</code></td>
+<td>Añade los cambios en el espacio de trabajo a la pila stash</td>
 </tr>
 <tr>
-<td><code>git remote show origin</code></td>
-<td>Muestra la información competa de ramas remotas y locales</td>
+<td><code>git stash list</code></td>
+<td>Muestras los cambios apilados en la pila stash</td>
 </tr>
 <tr>
-<td><code>git remote prune origin</code></td>
-<td>Borra en el repo local las referencias a ramas remotas borradas</td>
+<td><code>git stash pop</code></td>
+<td>Desapila los cambios del stash y los añade al espacio de trabajo</td>
+</tr>
+<tr>
+<td><code>git reset --merge ORIG_HEAD</code></td>
+<td>Deshace el último merge realizado</td>
 </tr>
 </tbody>
 </table>
 
 <h2>
-<a id="user-content-probamos-el-flujo-de-trabajo" class="anchor" href="#probamos-el-flujo-de-trabajo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Probamos el flujo de trabajo</h2>
+<a id="user-content-examinamos-la-historia-de-cambios--hay-algo-mejorable" class="anchor" href="#examinamos-la-historia-de-cambios--hay-algo-mejorable" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examinamos la historia de cambios. <br> ¿Hay algo mejorable?</h2>
+<p><a href="imagenes/gafas.gif" target="_blank"><img src="imagenes/gafas.gif" width="1100px" style="max-width:100%;"></a></p>
 
 
-<p><a href="imagenes/pajaros.png" target="_blank"><img src="imagenes/pajaros.png" width="700px" style="max-width:100%;"></a></p> 
+
+
+<h2>
+<a id="user-content-volvemos-al-estado-inicial-para-empezar-de-nuevo" class="anchor" href="#volvemos-al-estado-inicial-para-empezar-de-nuevo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Volvemos al estado inicial para empezar de nuevo</h2>
+
 <ul>
 <li>
-<p>Descarga el <code>ejemplo2.zip</code>, cárgalo en el navegador y en Visual Studio
-Code y analiza el código.</p>
+<p>Vamos a probar otras otros comandos de mezcla, que también se
+utilizan muy a menudo en flujos de trabajo reales: <code>git merge --no-ff</code> y <code>git rebase</code>.</p>
 </li>
 <li>
-<p>Vamos a desarrollar un nuevo <em>issue</em> (<code>iss60</code>) usando el flujo de
-trabajo de ramas de <em>features</em>. Deberéis copiar el código anterior
-en vuestra web, sustituyendo los enlaces de la derecha por las
-imágenes de los pájaros.</p>
+<p>Empezamos volviendo al <strong>commit anterior al ejercicio anterior</strong>, el que
+tiene como descripción <code>Mezclamos la rama prueba</code>:</p>
 </li>
-<li>
-<p>Flujo de trabajo:</p>
+</ul>
+<pre lang="txt"><code>$ git reset --hard fb8f62b
+HEAD is now at fb8f62b Mezclamos la rama prueba
+</code></pre>
 <ul>
-<li>Una persona del equipo creará la rama y la publicará en remoto.</li>
-<li>En el desarrollo de la rama deben participar las 3 personas del
-equipo.</li>
-<li>Habrá un responsable de integración que se encargue de integrar y
-publicar en <code>master</code>.</li>
-<li>La persona que crea la rama también deberá probar en su máquina que
-funciona bien la integración con <code>master</code> antes de que se realice
-la integración final.</li>
-<li>Al final todos los miembros del equipo actualizarán la rama <code>master</code>.</li>
+<li>Hacemos un <code>git push --force</code> para sobreescribir la historia que hay en
+el repositorio remoto (si intentamos hacer un <code>push</code> sin <code>--force</code>
+Git no lo dejará, porque el repositorio local tiene el <code>HEAD</code> en un
+commit pasado):</li>
+</ul>
+<pre lang="txt"><code>$ git push
+To https://github.com/domingogallardo/curso-git-repo1.git
+ ! [rejected]        master -&gt; master (non-fast-forward)
+error: failed to push some refs to 'https://github.com/domingogallardo/curso-git-repo1.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+</code></pre>
+<pre lang="txt"><code>$ git push --force
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/domingogallardo/curso-git-repo1.git
+ + 48d7900...fb8f62b master -&gt; master (forced update)
+</code></pre>
+
+<h2>
+<a id="user-content-creamos-las-mismas-ramas-que-antes" class="anchor" href="#creamos-las-mismas-ramas-que-antes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creamos las mismas ramas que antes</h2>
+
+<ul>
+<li>Creamos las mismas ramas y commits que antes con el objetivo de llegar a la
+situación mostrada en la siguiente imagen:</li>
+</ul>
+<p><a href="imagenes/ejemplo-issue8.png" target="_blank"><img src="imagenes/ejemplo-issue8.png" width="800px" style="max-width:100%;"></a></p>
+
+<h2>
+<a id="user-content-el-comando-git-merge---no-ff" class="anchor" href="#el-comando-git-merge---no-ff" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>El comando "git merge --no-ff"</h2>
+<ul>
+<li>Si se hace un <em>fast forward</em> es imposible saber qué commits son los
+que corresponden a la rama y cuáles a la historia previa.</li>
+<li>El comando <code>git merge --no-ff</code> previene la realización de un <em>fast
+forward</em> creando un commit de merge artificial.</li>
+<li>Esto permite preservar la historia lógica de una rama, ya que los
+commits de la rama quedan separados de la rama principal y es
+posible examinar los cambios completos que han introducido esos
+commits.</li>
+</ul>
+<p><a href="imagenes/git-merge-vs-no-ff.png" target="_blank"><img src="imagenes/git-merge-vs-no-ff.png" width="1100px" style="max-width:100%;"></a></p>
+
+<h2>
+<a id="user-content-integramos-el-hotfix-con-merge---no-ff" class="anchor" href="#integramos-el-hotfix-con-merge---no-ff" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Integramos el hotfix con "merge --no-ff"</h2>
+
+<ul>
+<li>Mezclamos el hotfix (que tiene un único commit) en master, usando un
+<code>merge --no-ff</code>:</li>
+</ul>
+<pre lang="txt"><code>$ git checkout master
+$ git merge --no-ff hotfix
+# Se abrirá el editor: deja el mensaje de commit por defecto
+Merge made by the 'recursive' strategy.
+ index.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre>
+<ul>
+<li>El resultado es el siguiente. A la izquierda lo que muestra el
+comando <code>git log --oneline --graph --all</code> y a la derecha la
+representación gráfica. Podemos comprobar que queda claro en la historia el
+commit que hemos realizado en el hotfix:</li>
+</ul>
+<p><a href="imagenes/grafo-despues-no-ff.png" target="_blank"><img src="imagenes/grafo-despues-no-ff.png" width="600px" style="max-width:100%;"></a></p> 
+<p><a href="imagenes/img-grafo-despues-no-ff.png" target="_blank"><img src="imagenes/img-grafo-despues-no-ff.png" width="600px" style="max-width:100%;"></a></p>
+
+<h2>
+<a id="user-content-incorporamos-la-rama-iss53" class="anchor" href="#incorporamos-la-rama-iss53" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Incorporamos la rama iss53</h2>
+
+<ul>
+<li>Una vez mezclada, eliminamos la rama <code>hotfix</code>:</li>
+</ul>
+<pre lang="txt"><code>$ git branch -d hotfix
+</code></pre>
+<ul>
+<li>Y ahora vamos a mezclar la rama <code>iss53</code> con <code>master</code> ¿Cómo quedaría
+el grafo de commits si hiciéramos un <code>merge</code> de <code>iss53</code> en <code>master</code>? La historia quedaría
+también clara:</li>
+</ul>
+<p><a href="imagenes/git-merge-iss53.png" target="_blank"><img src="imagenes/git-merge-iss53.png" width="800px" style="max-width:100%;"></a></p>
+<ul>
+<li>Pero hay un comando muy útil de Git que deja una historia todavía
+más clara, a costa de cambiar la historia verdadera del proyecto
+introduciendo commits nuevos. Se trata del comando <code>git rebase</code>.</li>
+</ul>
+
+<h2>
+<a id="user-content-comando-git-rebase" class="anchor" href="#comando-git-rebase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comando "git rebase"</h2>
+<ul>
+<li>El comando git rebase realiza un "cambio de base" de una rama,
+haciéndola avanzar al top de la rama sobre la que hacemos el rebase.</li>
+</ul>
+<p><a href="imagenes/antes-despues-rebase.png" target="_blank"><img src="imagenes/antes-despues-rebase.png" width="650px" style="max-width:100%;"></a></p>
+<ul>
+<li>La imagen anterior es el resultado de los siguientes comandos:</li>
+</ul>
+<pre lang="txt"><code>$ git checkout iss53
+$ git rebase master
+</code></pre>
+<ul>
+<li>
+<p>Para realizar el rebase Git reproduce los commits <code>C3</code> y <code>C4</code> en la
+cabeza de la rama <code>master</code>, creando los commits <code>C3'</code> y
+<code>C4'</code>. Después mueve el puntero de la rama <code>iss53</code> al último commit añadido.</p>
+</li>
+<li>
+<p>El resultado es que la rama <code>iss53</code> resultante ha cambiado su commit
+base y se ha colocado a la cabeza de <code>master</code>. El contenido de los
+cambios de la rama es el mismo.</p>
+</li>
+</ul>
+
+<h2>
+<a id="user-content-aplicamos-git-rebase-al-proyecto" class="anchor" href="#aplicamos-git-rebase-al-proyecto" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Aplicamos "git rebase" al proyecto</h2>
+
+
+<p><a href="imagenes/img-grafo-despues-no-ff3.png" target="_blank"><img src="imagenes/img-grafo-despues-no-ff3.png" width="600px" style="max-width:100%;"></a></p>
+<ul>
+<li>
+<p>Recordemos el estado actual del proyecto. Tenemos la rama <code>master</code>
+en la que se ha integrado el hotfix y la rama con el <em>issue</em> 53 que
+hemos terminado de desarrollar y queremos integrar también:</p>
+</li>
+<li>
+<p>Hacemos un rebase de <code>iss53</code> sobre <code>master</code>:</p>
+</li>
+</ul>
+<pre lang="txt"><code>$ git checkout iss53
+$ git rebase master
+First, rewinding head to replay your work ...
+Applying: Primer cambio del artículo [iss53]
+Applying: Segundo cambio del artículo [iss53]
+</code></pre>
+<p><a href="imagenes/img-grafo-despues-rebase.png" target="_blank"><img src="imagenes/img-grafo-despues-rebase.png" width="800px" style="max-width:100%;"></a></p>
+<ul>
+<li>El resultado es el siguiente:</li>
+</ul>
+
+<h2>
+<a id="user-content-mezclamos-la-rama-iss53" class="anchor" href="#mezclamos-la-rama-iss53" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mezclamos la rama iss53</h2>
+
+<ul>
+<li>Y ahora hacemos un <code>merge --no-ff</code> para mezclar la rama resultante
+(después del rebase) de <code>iss53</code> en <code>master</code>, sin hacer <em>fast
+forward</em>. Una vez realizada la mezcla, borramos la rama.</li>
+</ul>
+<pre lang="txt"><code>$ git checkout master
+$ git merge --no-ff iss53
+Merge made by the 'recursive' strategy.
+ index.html | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+$ git branch -d iss53
+Deleted branch iss53 (was 8b07fdd).
+</code></pre>
+<ul>
+<li>¿Cuál sería la representación de la historia de los commits? Si
+hacemos un <code>git log --oneline --graph --all</code> veremos la
+representación de la derecha:</li>
+</ul>
+<p><a href="imagenes/img-grafo-despues-no-ff2.png" target="_blank"><img src="imagenes/img-grafo-despues-no-ff2.png" width="700px" style="max-width:100%;"></a> <a href="imagenes/grafo-despues-no-ff2.png" target="_blank"><img src="imagenes/grafo-despues-no-ff2.png" width="400px" style="max-width:100%;"></a></p>
+
+<h2>
+<a id="user-content-subimos-los-commits" class="anchor" href="#subimos-los-commits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Subimos los commits</h2>
+
+
+<p><a href="imagenes/historia-commits-rebase-no-ff.png" target="_blank"><img src="imagenes/historia-commits-rebase-no-ff.png" width="400px" style="max-width:100%;"></a></p>
+<pre lang="txt"><code>$ git push
+</code></pre>
+<ul>
+<li>
+<p>Subimos los commits al repositorio remoto.</p>
+</li>
+<li>
+<p>Examinamos los commits en el repositorio GitHub. Podemos comprobar
+que ahora sí que hay información lógica sobre la evolución histórica
+del desarrollo del proyecto: los commits de merge de ramas contienen
+acumulados todos los cambios de todos los commits que se han
+realizado en esa rama.</p>
+</li>
+<li>
+<p>Para mantener una historia lógica del repositorio es muy útil usar
+los comandos <code>git merge --no-ff</code> y <code>git rebase</code>.</p>
+</li>
+<li>
+<p>En la siguiente clase veremos que esto es también se puede conseguir
+usando <em>pull requests</em>.</p>
+</li>
+</ul>
+
+<h2>
+<a id="user-content-problemas-del-rebase" class="anchor" href="#problemas-del-rebase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Problemas del rebase</h2>
+
+<p><a href="imagenes/prohibido.png" target="_blank"><img src="imagenes/prohibido.png" width="150px" style="max-width:100%;"></a></p>
+<ul>
+<li>
+<p>Cuando se realiza un rebase se crean commits nuevos (con distintos
+números <em>hash</em>, pero el mismo contenido). Los commits nuevos tienen
+la hora y fecha de la realización del rebase. Esto <strong>cambia la
+historia</strong> del proyecto.</p>
+</li>
+<li>
+<p>La regla básica se puede resumir en una única frase:</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>No rebases commits que existan fuera de tu repositorio.</strong></p>
+</blockquote>
+<ul>
+<li>
+<p>Si sigues este consejo, todo irá bien. Si no, serás el culpable de
+muchos males y la gente te odiará.</p>
+</li>
+<li>
+<p>Si ya habías subido los commits antiguos y la gente se los ha
+descargado y ha seguido trabajando a partir de ellos, cuando subas
+la nueva historia los compañeros tendrán que re-mezclar sus commits
+y cuando hagas un pull las cosas se pondrán muy complicadas.</p>
+</li>
+<li>
+<p>Puedes encontrar en <a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing#_pre_merge_rebase_work" rel="nofollow">este
+apartado</a>
+del libro Pro Git una explicación de qué hacer en este caso.</p>
+</li>
+</ul>
+
+<h2>
+<a id="user-content-comando-git-rebase--i" class="anchor" href="#comando-git-rebase--i" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comando "git rebase -i"</h2>
+
+<p><a href="imagenes/git-rebase-i.png" target="_blank"><img src="imagenes/git-rebase-i.png" width="800px" style="max-width:100%;"></a></p>
+<ul>
+<li>
+<p>Además de ser útil para clarificar la historia del proyecto, el
+rebase también se puede usar para limpiar los commits de una rama
+antes de subirlos al servidor remoto.</p>
+</li>
+<li>
+<p>El comando <code>git rebase -i</code> (rebase interactivo) permite modificar
+los mensajes de los commits, mezclar varios commits y/o eliminar
+commits.</p>
+</li>
+<li>
+<p>En la figura de la derecha, el rebase interactivo compacta los tres
+commits de la rama <code>iss53</code> (<code>C3</code>, <code>C4</code> y <code>C5</code>) en un único commit
+(<code>C8'</code>) que incluye todos los cambios.</p>
+</li>
+</ul>
+
+<h2>
+<a id="user-content-probamos-el-rebase-interactivo" class="anchor" href="#probamos-el-rebase-interactivo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Probamos el rebase interactivo</h2>
+
+
+<p><a href="imagenes/antes-rebase-i.png" target="_blank"><img src="imagenes/antes-rebase-i.png" width="500px" style="max-width:100%;"></a></p>
+<ul>
+<li>
+<p>Crea una rama nueva llamada <code>iss54</code> y añade 3 commits en
+ella. Cambia a la rama <code>master</code> y añade 2 commits. El resultado
+debería ser el que se ve en la figura:</p>
+</li>
+<li>
+<p>Vamos ahora a hacer un rebase interactivo en el que nos quedaremos
+con un único commit en el que se incluyan todos los cambios:</p>
+</li>
+</ul>
+<pre lang="txt"><code>$ git rebase -i master
+</code></pre>
+
+<h2>
+<a id="user-content-edición-de-las-acciones-del-rebase-interactivo" class="anchor" href="#edici%C3%B3n-de-las-acciones-del-rebase-interactivo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Edición de las acciones del rebase interactivo</h2>
+
+
+<p><a href="imagenes/rebase-i-opciones.png" target="_blank"><img src="imagenes/rebase-i-opciones.png" width="800px" style="max-width:100%;"></a></p>
+<ul>
+<li>Se abrirá un editor en el que deberemos escribir las instrucciones a
+realizar por el rebase. Las instrucciones <strong>se ejecutarán de arriba a
+abajo</strong>. Por defecto aparecen las instrucciones que generarán un
+rebase normal:
+<ul>
+<li>aplicar el commit 1</li>
+<li>aplicar el commit 2</li>
+<li>aplicar el commit 3</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="user-content-opciones-del-rebase-interactivo" class="anchor" href="#opciones-del-rebase-interactivo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Opciones del rebase interactivo</h2>
+
+
+<p><a href="imagenes/rebase-i-opciones.png" target="_blank"><img src="imagenes/rebase-i-opciones.png" width="800px" style="max-width:100%;"></a></p>
+<ul>
+<li>
+<p>Sin embargo, podemos cambiar ese comportamiento por defecto,
+modificando esas instrucciones usando los propios comandos que nos
+muestra la página que estamos editando.</p>
+</li>
+<li>
+<p>Las opciones que podemos hacer con los commits que rebaseamos
+pueden:</p>
+<ul>
+<li>
+<strong>pick</strong>: usar commit tal cual</li>
+<li>
+<strong>reword</strong>: modificar el mensaje del commit por el nuevo que
+escribimos a continuación</li>
+<li>
+<strong>edit</strong>: usar el commit, pero parar para modificar el mensaje</li>
+<li>
+<strong>squash</strong>: mezcla el commit con el previo</li>
+<li>
+<strong>fixup</strong>: como "squash", pero descarta el mensaje del commit</li>
+<li>
+<strong>drop</strong>: elimina el commit</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="user-content-escribimos-las-acciones-del-rebase-interactivo" class="anchor" href="#escribimos-las-acciones-del-rebase-interactivo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Escribimos las acciones del rebase interactivo</h2>
+
+
+<ul>
+<li>Escribimos lo siguiente en el editor (queremos cambiar de nombre el primer
+commit y mezclamos en él los commits 2 y 3):</li>
+</ul>
+<p><a href="imagenes/git-rebase-reword.png" target="_blank"><img src="imagenes/git-rebase-reword.png" width="700px" style="max-width:100%;"></a></p>
+<pre lang="txt"><code>reword d95b441 Cambios iss54
+fixup 2d52f9b Cambio 2 [iss54]
+fixup 678856a Cambio 3 [iss54]
+</code></pre>
+<ul>
+<li>
+<p>Salvamos el fichero de acciones y se ejecutarán una a una.</p>
+</li>
+<li>
+<p>Al ejecutar el <code>reword</code> del primer commit se abrirá otra vez el
+editor con la información que muestra la imagen de la derecha.</p>
+</li>
+<li>
+<p>Salvamos sin cambiar nada y automáticamente se realizan los otros
+dos comandos y se termina el rebase.</p>
+</li>
+</ul>
+<pre lang="txt"><code>[detached HEAD c9b490a] Cambio 1 [iss54]
+ 1 file changed, 3 insertions(+)
+Successfully rebased and updated refs/heads/iss54.
+</code></pre>
+
+<h2>
+<a id="user-content-comprobamos-cómo-ha-quedado-el-grafo" class="anchor" href="#comprobamos-c%C3%B3mo-ha-quedado-el-grafo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comprobamos cómo ha quedado el grafo</h2>
+
+
+<p><a href="imagenes/despues-rebase-i.png" target="_blank"><img src="imagenes/despues-rebase-i.png" width="500px" style="max-width:100%;"></a></p>
+<ul>
+<li>Mostramos la historia para comprobar cómo ha quedado el grafo de
+commits:</li>
+</ul>
+<pre lang="txt"><code>$ git log --oneline --graph --all
+</code></pre>
+<ul>
+<li>Y mergeamos sobre <code>master</code> con un <code>--no-ff</code>, aceptando el mensaje
+por defecto que nos muestra el editor:</li>
+</ul>
+<pre lang="txt"><code>$ git checkout master
+$ git merge --no-ff iss54
+</code></pre>
+<p><a href="imagenes/despues-rebase-i-merge.png" target="_blank"><img src="imagenes/despues-rebase-i-merge.png" width="500px" style="max-width:100%;"></a></p>
+<ul>
+<li>
+<p>El grafo debe quedar como muestra la imagen de la derecha.</p>
+</li>
+<li>
+<p>Terminamos borrando la rama <code>iss54</code> y subiendo todo a GitHub:</p>
+</li>
+</ul>
+<pre lang="txt"><code>$ git branch -d iss54
+$ git push
+</code></pre>
+
+<h2>
+<a id="user-content-comando-git-cherry-pick" class="anchor" href="#comando-git-cherry-pick" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comando "git cherry-pick"</h2>
+
+<p><a href="imagenes/git-cherry-pick.png" target="_blank"><img src="imagenes/git-cherry-pick.png" width="600px" style="max-width:100%;"></a></p>
+<ul>
+<li>El comando <code>git cherry-pick</code> permite duplicar un commit de su rama
+original en la rama actual. La figura anterior muestra el resultado
+de:</li>
+</ul>
+<pre lang="txt"><code>$ git checkout master
+$ git cherry-pick ec7e05b
+</code></pre>
+<ul>
+<li>Supongamos que en una rama de desarrollo de un <em>issue</em> nos damos
+cuenta de un error importante y lo solucionamos en un commit. Con el
+comando <code>git cherry-pick</code> es posible aplicar ese mismo commit a
+<code>master</code> para resolver también allí el bug.</li>
+<li>Al igual que el merge y el rebase Git comprueba si es posible
+aplicar el commit en la nueva rama y genera un conflicto en el caso
+en que no lo sea.</li>
+</ul>
+
+<h2>
+<a id="user-content-ejemplo-de-git-cherry-pick" class="anchor" href="#ejemplo-de-git-cherry-pick" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ejemplo de "git cherry-pick"</h2>
+
+
+<ul>
+<li>
+<p>Vamos a probar el comando <code>git cherry-pick</code>.</p>
+</li>
+<li>
+<p>Haz una rama nueva <code>iss55</code> y crea un commit cambiando el título
+<code>&lt;h1&gt;</code> de la página (ese será el commit que copiaremos en <code>master</code>).</p>
+</li>
+<li>
+<p>Añade dos o tres commits a la rama.</p>
+</li>
+</ul>
+<pre lang="txt"><code>$ git checkout -b iss55
+# Modificamos el título &lt;h1&gt; de la página
+$ git commit -am "Modificado título [iss55]"
+# Hacemos varios cambios más y añadimos dos nuevos commits
+</code></pre>
+<p><a href="imagenes/antes-cherry-pick.png" target="_blank"><img src="imagenes/antes-cherry-pick.png" width="600px" style="max-width:100%;"></a></p>
+<ul>
+<li>
+<p>Vemos el grafo de commits antes de hacer el cherry-pick:</p>
+</li>
+<li>
+<p>Cambiamos a <code>master</code> y hacemos el cherry-pick, seleccionando el commit en el que hemos
+cambiado el título:</p>
+</li>
+</ul>
+<pre lang="txt"><code>$ git checkout master
+Switched to branch 'master'
+$ git cherry-pick 3a586da
+[master c5f32a0] Modificado título [iss55]
+ Date: Thu Dec 14 12:36:34 2017 +0100
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre>
+
+<h2>
+<a id="user-content-resumen-de-los-últimos-commandos" class="anchor" href="#resumen-de-los-%C3%BAltimos-commandos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resumen de los últimos commandos</h2>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Explicación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git push --force</code></td>
+<td>Sube los commits al repositorio remoto sobreescribiendo la historia de commits</td>
+</tr>
+<tr>
+<td><code>git merge --no-ff &lt;rama&gt;</code></td>
+<td>Mezcla la rama sobre la rama actual creando un commit de mezcla para prevenir el fast forward</td>
+</tr>
+<tr>
+<td><code>git rebase &lt;rama&gt;</code></td>
+<td>Mueve la rama actual sobre la rama indicada creando nuevos commits</td>
+</tr>
+<tr>
+<td><code>git rebase &lt;rama&gt; -i</code></td>
+<td>Realiza un rebase interactivo</td>
+</tr>
+<tr>
+<td><code>git cherry-pick &lt;commit&gt;</code></td>
+<td>Re-aplica el commit sobre la rama actual</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="user-content-primer-contacto-con-git-kraken" class="anchor" href="#primer-contacto-con-git-kraken" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Primer contacto con Git Kraken</h2>
+
+
+<p><a href="imagenes/git-kraken0.png" target="_blank"><img src="imagenes/git-kraken0.png" width="900px" style="max-width:100%;"></a></p>
+<ul>
+<li>Abre Git Kraken y regístrate usando tu cuenta de GitHub</li>
+<li>Abre el repositorio de trabajo</li>
+<li>Realizamos un primer contacto con la aplicación:
+<ul>
+<li>Examinamos los cambios en un commit</li>
+<li>Examinamos los cambios en un merge</li>
+<li>Examinamos el commit del que hemos hecho cherry-pick</li>
+<li>Eliminamos la rama <code>iss55</code>
+</li>
 </ul>
 </li>
 </ul>

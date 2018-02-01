@@ -1,4 +1,5 @@
 
+
 <img src="imagenes/taller-de-git.png" width="1000px"/>
 <br/><br/><p style="font-size:90%"><strong>@2018 Domingo Gallardo<br/>Depto. de Ciencia de la Computación e I.A.</strong></p>
 
@@ -9,1056 +10,1247 @@
 ## Día 2: Git para el trabajo en equipo ##
 
 - Sesión 3
+   - Trabajo con ramas
+
+- **Sesión 4**
    - Solución de conflictos en los merge
    - ¿Qué hacer cuando he metido la pata?
    - Empezamos a trabajar en equipo: ciclo de trabajo sobre master
    - Trabajo con ramas de features, pruebas antes de integrar en master
-   
-- **Sesión 4**
-   - Pull requests en GitHub
-   - Ramas short-lived y long-lived
-   - Gestión de versiones con ramas
-   - Gestión de bug-fixes y cherry-pick
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
 
-## Origen del pull request ##
-<!-- .slide: class="image-right" -->
+## Git Tip: Alias de comandos ##
 
-<img style="margin-left:40px" src="imagenes/flujo-pull-request.png" width="600px"/>
+- Un consejo para hacerte la vida más sencilla: cómo crear alias de
+  comandos en Git.
 
-- El término _pull request_ tiene su origen en el flujo de trabajo
-  típico del desarrollo open source (flujo de trabajo basado
-  en forks)
-   - Un repositorio oficial contiene la versión canónica del proyecto.
-   - Los colaboradores no tienen permiso de escritura en este repositorio,
-     pero quieren realizar desarrollos que solucionan bugs o
-     añaden _features_.
-   - Se copia el repositorio canónico (normalmente con un _fork_) a un
-     repositorio particular en el que se crea una rama con la
-     aportación.
-   - Se solicita al administrador del repositorio oficial la mezcla de
-     la rama de nuestro repositorio en la rama `master` del
-     repositorio oficial.
-- La solicitud de mezcla es el origen del término **pull request**:
-  petición de que el administrador haga un pull en el repositorio
-  oficial que integre nuestra rama.
-
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Pull request en GitHub ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/seleccion-vista-ramas.png" width="600px"/>
-
-- Tanto la solicitud del pull request como su aprobación en
-  integración en el repositorio oficial eran operaciones manuales
-  hasta que servicios de hosting de Git como GitHub o Bitbucket
-  incorporaron utilidades para gestionarlos.
-- En GitHub solicitar un pull request es tan sencillo como seleccionar
-  la rama que se quiere integrar y pulsar un botón.
-
-<img style="margin-left:40px" src="imagenes/creacion-pull-request.png" width="600px"/>
-
-- La aprobación del pull request es igual de sencillo: con un botón se
-  acepta y GitHub se encarga de realizar la mezcla de la rama con
-  master.
-
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Creación de un pull request en GitHub ##
-
-<img src="imagenes/pull-request.png" width="600px"/>
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Pestaña de pull requests ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/pestanya-pull-requests.png" width="900px"/>
-
-- GitHub mantiene la lista de pull requests abiertos y cerrados.
-- Es una de las páginas más importantes y que más va a visitar el equipo.
-
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Página de pull request ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/pagina-pull-request.png" width="800px"/>
-
-- Página importante en la que el administrador, el proponente (y el
-  equipo) pueden consultar los cambios que propone el pull request y
-  realizar comentarios.
-- GitHub comprueba si hay conflictos en el merge.
-- Si se **suben nuevos commits** a la rama del pull request, GitHub
-  actualiza la página con la información de los nuevos commits.
-- Es posible incluso hacer un `push --force` y sustituir todos los
-  commits por otros nuevos (por ejemplo, cuando se ha hecho un **rebase
-  de la rama local**).
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Página de aceptación del pull request ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/pagina-pull-request-admin.png" width="700px"/>
-
-- La página del pull request vista desde el punto de visto del
-  administrador.
-- Con solo pulsar un botón se acepta el pull request.
-- GitHub realiza el merge de las ramas.
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Rama master después de integrar el pull request ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/commits-after-pr.png" width="750px"/>
-
-- La rama se integra en la rama `master` del repositorio.
-
-- Actualizamos el repositorio local 
+- Por ejemplo:
 
 ```txt
-$ git checkout master
-$ git pull
+$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
 ```
 
-- Podemos ver que se ha mezclado la rama con un `merge --no-ff`. La
-imagen de la derecha muestra cómo se ven en GitKraken.
-
-<img style="margin-left:40px" src="imagenes/commits-after-pr-gitkraken.png" width="750px"/>
-
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Ejercicio: fork y pull request ##
-<!-- .slide: data-background="#cbe0fc"-->
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/fork-asistentes.png" width="750px"/>
-
-
-- Haz un fork del repositorio
-  [domingogallardo/asistentes-curso-git](https://github.com/domingogallardo/asistentes-curso-git). 
-- Clona tu repositorio en local.
-- Crea una rama con el nombre `nuevo-asistente`. Añade tu nombre
-  precedido de un guión en el fichero `README.md`
+- Una vez creados estos alias, podríamos invocar cualquier comando
+  usando la abreviatura:
   
 ```txt
-# Asistentes curso Git
-
-- Domingo Gallardo
+$ git co -b nueva-rama
+$ git ci -m "Nuevo commit"
 ```
 
-- Sube la rama a GitHub y realiza desde allí un pull request al
-  repositorio original.
-- El administrador del repositorio original acepta los pull requests.
+- También podemos crear comandos nuevos para no tener que teclear
+  demasiado o para hacer más accesible el uso de git:
+
+```txt
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.plog 'log --oneline --graph --decorate --all'
+git config --global alias.last 'log -1 HEAD'
+```
+
+```txt
+$ git plog
+# Muestra todo el log con mensajes de una línea en forma de grafo y decorado
+```
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
 
-## Actualizamos master en nuestro repositorio ##
-<!-- .slide: data-background="#cbe0fc"-->
+## Conflictos en los merge  ##
 <!-- .slide: class="image-right" -->
 
+<img style="margin-left:40px" src="imagenes/dos-ramas.png" width="500px"/>
+
+- Cuando Git va a realizar una mezcla entre dos ramas comprueba los
+  cambios introducidos en ambas y nos avisa si existe algún conflicto.
+- En la figura anterior, Git comprueba si hay conflicto entre los
+  cambios introducidos en los commits `C2` y `C4` con respecto a los
+  introducidos por los commits `C3` y `C5`.
+- ¿Qué es un conflicto?
+   - Cambios contrapuestos en **las mismas líneas** de un fichero.
+   - Ficheros borrados en una rama y modificados en otras.
+- No es un conflicto:
+   - Cambios en distintas líneas de un mismo fichero.
 
-- Para actualizar `master` en nuestro repositorio privado lo más sencillo es
-  crear otro remoto en el repo local. Lo llamamos `upstream`:
-  
-```txt
-$ git remote add upstream https://github.com/domingogallardo/asistentes-curso-git.git
-$ git remote -v
-origin	https://github.com/domingogallardo2/asistentes-curso-git.git (fetch)
-origin	https://github.com/domingogallardo2/asistentes-curso-git.git (push)
-upstream	https://github.com/domingogallardo/asistentes-curso-git.git (fetch)
-upstream	https://github.com/domingogallardo/asistentes-curso-git.git (push)
-```
-
-<img style="margin-left:40px" src="imagenes/fetch-upstream.png" width="400px"/>
-
-- Y actualizamos `master` bajándolo de `upstream`:
-
-```txt
-$ git fetch upstream
-From https://github.com/domingogallardo/asistentes-curso-git
- * [new branch]      master     -> upstream/master
-$ git checkout master
-$ git merge upstream/master
-```
-
-- Por último subimos `master` a nuestro repositorio remoto privado
-  para mantenerlo actualizado con el repositorio original:
-  
-```txt
-$ git push origin master # bastaría con `git push`
-```
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## ¡Prueba superada! ##
-
-<img src="imagenes/zapatos.gif" width="900px"/>
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Pull request ##
-
-- El funcionamiento del pull request en los proyectos open source tuvo
-  tanto éxito que GitHub y el resto de servicios lo adaptaron al
-  trabajo en un único repositorio.
-- Es posible hacer un pull request en GitHub de cualquier rama subida
-  al repositorio sobre cualquier otra rama (lo normal es hacerlo sobre
-  `master`).
-- Desde la pestaña `branch` que muestra las ramas subidas al repositorio,
-  se puede crear un pull request con cualquiera de ellas.
-
-<img src="imagenes/ramas-github.png" width="1000px"/>
-
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Flujo de trabajo de ramas de features ##
-
-- Los pull requests son un complemento perfecto para el flujo de
-  trabajo de ramas de features:
-
-<img src="imagenes/feature-workflow.png" width="1300px"/>
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Ejemplo: CartoDB  ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/open-prs-carto-db.png" width="400px"/>
-
-- CartoDB es un producto open source español de cartografía y
-  visualización que utiliza Git y GitHub de forma intensiva en su desarrollo.
-- El repositorio abierto en GitHub de
-  [CartoDB](https://github.com/CartoDB/cartodb) es un ejemplo de
-  producto que utiliza el desarrollo basado en ramas de features.
-- Por ejemplo, en un momento dado tienen abiertos 32 pull requests en
-  espera de aprobación.
-- Se han cerrado 5.630 e integrado pull requests a lo largo de toda su
-  vida.
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Comentarios y revisión del pull request ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/revision-pr-carto-db.png" width="500px"/>
-
-- En el pull request el equipo pueden realizar comentarios sobre la
-  nueva feature que se está desarrollando, incluyendo propuestas de
-  código que habría que cambiar o añadir.
-- Se puede realizar comentarios en líneas concretas del código.
-- Cuando creamos el pull request podemos asignar un revisor que puede
-  solicitar cambios concretos y que puede aprobarlo.
-- A la derecha podemos ver un ejemplo concreto de revisión de un pull
-  request en CartoDB y abajo de revisión de código.
-
-<img style="margin-left:40px" src="imagenes/revision-codigo-carto-db.png" width="600px"/>
-
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Ejercicio: pull request ##
-<!-- .slide: data-background="#cbe0fc"-->
-
-- En el proyecto en el que está trabajando el equipo uno de los
-  miembros crea una rama `cambio-pie-pagina`
-  
-```txt
-$ git checkout -b cambio-pie-pagina
-$ git push -u origin cambio-pie-pagina
-```
-
-- En la rama cambiamos el pie de página incluyendo el nombre de todos
-  los miembros del equipo.
-
-```diff
-   <footer>
-     <p>©Copyright 2050 by acme@gmail.com. All rights reversed.</p>
-+    <ul>
-+      <li>Juan González</li>
-+      <li>Rosa Sánchez</li>
-+      <li>Rodrigo Zamora</li>
-+    </ul>
-   </footer>
-```
-
-- Y publicamos los cambios:
-
-```txt
-$ git commit -am "Añadido equipo en pie de página"
-$ git push
-```
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Creamos pull request y lo revisamos ##
-<!-- .slide: data-background="#cbe0fc"-->
-
-<img src="imagenes/creamos-pull-request.png" width="900px"/>
-
-- En GitHub creamos el pull request. 
-- Añadimos como revisor a un miembro del equipo.
-- El revisor integra la rama con master en local y carga la página en
-  un navegador para comprobar que todo está bien.
-  
-```txt
-# En la máquina del revisor
-$ git fetch
-$ git checkout master
-$ git diff master origin/cambio-pie-pagina
-$ git merge origin/cambio-pie-pagina
-```
-
-- El revisor comprueba que el tamaño de la fuente no es correcto.
-  
-  
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Revisión del pull request ##
-<!-- .slide: data-background="#cbe0fc"-->
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/conversacion-pull-request.png" width="700px"/>
-
-- El revisor solicita un cambio en el pull request.
-- Probamos distintas formas de realizar revisiones y de contestar.
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Se suben los cambios solicitados al pull request ##
-<!-- .slide: data-background="#cbe0fc"-->
-<!-- .slide: class="image-right" -->
-
-
-- El autor de la rama realiza los cambios en el fichero CSS:
-  
-```diff
-footer p {
-  font-size: 10px;
-}
-
-+ footer li {
-+   font-size: 10px;
-+ }
-```
-
-<img style="margin-left:40px" src="imagenes/subido-cambio-pull-request.png" width="500px"/>
-
-- y los sube:
-
-```txt
-$ git commit -m "Añadido fuente pequeño para elemento 
-`li` en pie de página"
-On branch cambio-pie-pagina
-Your branch is ahead of 'origin/cambio-pie-pagina' 
-by 1 commit.
-  (use "git push" to publish your local commits)
-$ git push
-To https://github.com/domingogallardo/curso-git-repo1.git
-   c5cb6c5..09349b9  cambio-pie-pagina -> cambio-pie-pagina
-```
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Nueva revisión ##
-<!-- .slide: data-background="#cbe0fc"-->
-
-- El revisor vuelve a descargarse la rama y a mezclarla en local con
-  `master`:
-  
-```txt
-# En la máquina del revisor
-$ git checkout master # nos aseguramos de que estamos en master
-$ git reset --hard origin/master # descartamos el merge anterior
-$ git pull # nos descargamos posibles cambios de master y los nuevos
-           # commits de la rama
-$ git merge origin/cambio-pie-pagina
-Updating 9ee94de..09349b9
-Fast-forward
- css/layout.css | 4 ++++
- index.html     | 5 +++++
- 2 files changed, 9 insertions(+)
-```
-
-- Y comprueba en el navegador que ahora el tamaño de los nombres en el
-  pie de página sí que es el correcto.
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Aprobación del pull request y actualización de master ##
-<!-- .slide: data-background="#cbe0fc"-->
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/confirmar-pull-request.png" width="450px"/> 
-
-- Podemos mezclar de el pull request tres formas:
-   - Haciendo un `--no-ff` (opción por defecto)
-   - Comprimiendo todos los commits en un único commit que se añade a
-     `master`
-   - Haciendo un `rebase`
-- Dejamos la primera opción seleccionada, el revisor acepta el pull
-  request y pulsa la opción de borrar la rama remota.
-
-<img style="margin-left:40px" src="imagenes/aceptado-pull-request-delete-branch.png" width="500px"/> 
-
-- GitHub actualiza `master` y podemos borrar la rama remota.
-
-- Todo el equipo actualiza la rama `master` para bajarse la nueva
-  versión:
-  
-```txt
-$ git checkout master
-
-# En la máquina del revisior
-$ git reset --hard origin/master # para borrar el merge local
-
-# En las máquinas de todos
-$ git pull
-
-# En las máquinas de los que han trabajado en la rama
-$ git branch -d cambio-pie-pagina
-$ git remote prune origin
-Pruning origin
-URL: https://github.com/domingogallardo/curso-git-repo1.git
- * [pruned] origin/cambio-pie-pagina
-```
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## ¡¡¡Bravo!!! ##
-
-<img src="imagenes/pinguino.gif" width="900px"/>
-
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Conflictos en el pull request ##
-<!-- .slide: data-background="#cbe0fc"-->
-<!-- .slide: class="image-right" -->
-
-- ¿Qué pasa si GitHub no puede mezclar el pull request porque hay
-  conflictos con `master`? Vamos a probarlo y a ver la solución.
-  
-- Abrimos una rama desde `master`:
-
-```txt
-$ git checkout -b completamos-nombres master
-```
-
-- Modificamos en esa rama los autores en el fichero `index.html`,
-  añadiendo el segundo apellido a todos.
-
-
-<img style="margin-left:40px" src="imagenes/conflictos-pull-request.png" width="600px"/> 
-
-```txt
-# Modificamos index.html
-$ git commit -am "Añadido segundo apellido"
-```
-
-- Subimos la rama a GitHub y abrimos un pull request:
-
-```txt
-$ git push -u origin completamos-nombres
-```
-
-- Nos vamos a `master`, eliminamos uno de los autores y subimos el cambio:
-
-```txt
-$ git checkout master
-# Eliminamos uno de los autores
-$ git commit -am "Eliminado Juan González"
-$ git push
-```
-
-- Veremos que el pull request se actualiza porque GitHub detecta los
-  conflictos.
-  
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
 
 ## Solución de los conflictos ##
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:40px" src="imagenes/indicacion-conflicto.png" width="400px"/>
+
+- Los conflictos en los merge son algo habitual. Hay que perderles el
+  miedo y aprender a resolverlos cuando sucedan.
+- Pero **no debería haber demasiados**. En un proyecto bien diseñado y
+  poco acoplado debería ser posible trabajar de forma independiente en
+  distintos _issues_ sin que existieran conflictos.
+- Cuando sucede un conflicto en un `merge` (o en un `rebase`) Git
+  realiza lo siguiente:
+  - Detiene el merge (o rebase).
+  - Registra todos los ficheros en los que existe un conflicto.
+  - Introduce en cada fichero las líneas en conflicto, indicando qué
+    líneas vienen de qué rama. Nosotros debemos examinar el fichero y
+    dejarlo tal y como queremos que se resuelva.
+  - Nos indica en el `git status` qué debemos hacer para marcar el
+    conflicto como resuelto.
+- Los editores de código suelen detectar estos patrones introducidos
+  por Git y proporcionar algún tipo de interfaz para simplificar el
+  arreglo del conflicto.
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Introducimos cambios que entran en conflicto ##
 <!-- .slide: data-background="#cbe0fc"-->
 
-- Podemos solucionar los conflictos en el editor on-line que
-  proporciona GitHub, o hacerlo en local. Vamos a escoger la segunda
-  opción.
-- Una forma de hacerlo es actualizar `master`, mezclarlo con la rama,
-  solucionar los conflictos en esa mezcla y actualizar el pull
-  request:
+- Creamos una rama `iss56` en la que vamos a trabajar en la cabecera
+  de la web. Realizamos un commit con el cambio:
+
+```txt
+$ git checkout -b iss56
+# Cambiamos la cabecera de la web para 
+# que aparezcan las opciones:
+# Home | Servicios | Porfolio | Equipo | Contacto
+$ git commit -am "Cambiada la cabecera"
+[iss56 dec2148] Cambiada la cabecera
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+```
+
+- Cambiamos a la rama `master` y allí realizamos un par de
+  correcciones, una de ellas en la cabecera (será la que entre en
+  conflicto con la rama):
   
 ```txt
 $ git checkout master
-$ git pull
-$ git checkout completamos-nombres
-# Arreglamos el conflicto: por ejemplo, eliminamos Juan González 
-# y nos quedamos con los otros dos nombres completos
-$ git commit -am "Solucionados conflictos"
-$ git push
 ```
 
-- Vemos cómo en GitHub ya no aparece el error y que podemos aceptar el
-  pull request allí.
+```diff
+    <ul>
+      <li><a href="#">Home</a></li>
+-     <li><a href="#">Nuestro equipo</a></li>
++     <li><a href="#">Equipo</a></li>
+      <li><a href="#">Projectos</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+...
+   <h3>Otra subsección</h3>
+ 
+-  <p>Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum soclis</p>
++  <p>Primer párrafo de la subsección.</p>
+```
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
 
-## Ejercicio: integración de pull requests ##
+## Commiteamos y mezclamos  ##
 <!-- .slide: data-background="#cbe0fc"-->
 <!-- .slide: class="image-right" -->
 
-<img style="margin-left:40px" src="imagenes/pajaros.png" width="600px"/> 
-
-- Vamos a desarrollar una nueva issue (`cambio-apariencia`) usando el flujo de
-  trabajo de ramas de features con pull request.
-- Usad el ejemplo de la web de pájaros de la sesión anterior. Tenéis
-  que cambiar la apariencia (color, fuente, etc.) de la web que
-  estamos desarrollando para que se parezca a esa.
-
-- Flujo de trabajo:
-
- 1. Una persona del equipo creará la rama `cambio-apariencia` y la publicará en remoto.
- 2. En el desarrollo de la rama deben participar 2 personas del equipo.
- 3. Habrá un responsable de integración que se encargue de revisar el
-   `pull request` y solicitar algún cambio.
- 4. La persona que revisa el pull request deberá probar en su máquina que
-   funciona bien la integración con master antes de aceptarlo.
- 5. Una vez aceptado el pull request e integrado en la rama `master`
-   remota todos los miembros del equipo actualizarán su rama master local.
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## ¡Estoy emocionado! ##
-
-<img src="imagenes/arcoiris.gif" width="900px"/>
-
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-
-## Protección de master ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/proteccion-master.png" width="800px"/>
-
-- Es posible proteger `master` para obligar a que todos los cambios en
-  la rama se realicen a través de pull requests y que hayan sido
-  aprobados por al menos un revisor.
-- Se puede obligar a que GitHub compruebe que el servicio de
-  integración continua ha marcado con un cierto estado la rama (lo
-  veremos más adelante).
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Avance de master ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/avance-master.png" width="600px"/>
-
-- Cuando se utiliza el flujo de ramas de features, `master` va
-  avanzando por las integraciones de pull requests.
-- ¿Qué pasa con las ramas en desarrollo si avanza `master`?
-- En principio no hay problema, pero cuanto más se separe `master` más
-  probabilidades hay de que hayan problemas en la integración.
-- Si hay una separación muy grande entre `master` y la rama que
-  estamos desarrollando, es conveniente que se integren los cambios de
-  master en la rama, para comprobar que se está desarrollando de forma
-  correcta o para incluir dependencias que necesitamos.
-- Dos posibles formas de avanzar la rama:
-   1. Haciendo un rebase de la rama sobre `master`.
-   2. Creando una nueva rama y añadiendo en ella los cambios de la rama
-     original usando `git merge --squash`.
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Avance de rama con "rebase" ##
-
-- Ya hemos visto cómo funciona `git rebase`:
+- Hacemos commit en `master`:
 
 ```txt
-$ git checkout featureA
+$ git commit -am "Pequeñas correcciones"
+[master 3001dfd] Pequeñas correcciones
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+```
+
+- Y mezclamos (aparecerán los conflictos):
+
+```txt
+$ git merge iss56
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+<img style="margin-left:40px" src="imagenes/status-conflicto.png" width="700px"/>
+
+- Si hacemos `git status` Git nos indica lo que tenemos que hacer:
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Arreglamos el conflicto ##
+<!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:40px" src="imagenes/vstudio-conflicto.png" width="900px"/>
+
+- Cuando abrimos el fichero en Visual Studio Code aparece resaltado el
+  conflicto.
+- El otro cambio que se ha hecho en `master` en el fichero aparece
+  integrado sin problema, porque no entra en conflicto con ningún
+  cambio en la rama que estamos mezclando.
+- Examinamos las opciones que nos ofrece la interfaz y seleccionamos
+  "Aceptar cambio entrante". Habrá veces en que tengamos que mezclar
+  los cambios de ambas ramas (seleccionaríamos "Aceptar ambos cambios"
+  y editaríamos el contenido).
+- En el fichero queda la versión de la rama. 
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Resolvemos el merge ##
+<!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+- Para resolver el merge lo primero es confirmar a Git que hemos
+  arreglado los conflictos. Una vez resueltos todos los cambios en
+  todos los ficheros en conflicto añadimos los cambios al _stage_:
+  
+```txt
+$ git add .
+$ git status
+On branch master
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+
+	modified:   index.html
+
+```
+
+- Hacemos un commit para concluir el merge:
+
+```txt
+$ git commit -m "Merge branch 'iss56' y resueltos conflictos"
+[master 2046b52] Merge branch 'iss56' y resueltos conflictos
+```
+
+- El commit que ha grabado es un commit de merge que integra ambas ramas:
+
+<img style="margin-left:40px" src="imagenes/grafo-tras-merge-conflictos.png" width="650px"/>
+
+```txt
+$ git log --oneline --graph
+```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Analizamos la historia en Git Kraken ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+<img src="imagenes/git-kraken-tras-merge.png" width="1100px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Ahora tú ##
+<!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:40px" src="imagenes/tu-turno.gif" width="900px"/>
+
+- Ahora es **tu turno**:
+   -  Crea otra rama `prueba` y añade un commit en la rama y otro en
+      `master` que tengas conflictos.
+   - Realiza un `merge` y resuelve los conflictos.
+- Y lo mismo con un **rebase**:
+   - Crea otra rama `prueba2`, añade un par de commits en ella y algún
+     otro conflictivo en `master`. 
+   - Realiza un `rebase` resolviendo los conflictos. Sigue las
+     indicaciones que aparecen en el `git status`.
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## 3 errores comunes después de mezclar una rama (y cómo arreglarlos) ##
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:40px" src="imagenes/merge.png" width="650px"/>
+
+- Ya hemos visto el ciclo de trabajo de desarrollo en una rama:
+  1. Abrir una rama a partir de master.
+  2. Realizar commits en la rama.
+  3. Mezclar la rama en master y volver a 1.
+
+- Una vez mezclada la rama con el _issue_ 56 queremos desarrollar
+  un nuevo _issue_ (`iss57`). **Algunas cosas pueden ir mal**:
+  1. Se nos olvida crear la rama nueva, y añadimos los commits del
+     _issue_ 57 en `master`.
+  2. Se nos olvida crear la rama nueva, y añadimos los commits del
+     _issue_ 57 en la rama `iss56`
+  3. Creamos la nueva rama, pero lo hacemos en la rama `iss56` en
+     lugar de en `master`, y añadimos los commits en la nueva rama.
+
+
+- Veamos cómo resolver cada caso.
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Error 1: Añadimos commits del nuevo issue en master ##
+
+- Después de hacer el merge en `master`, se nos olvida crear la nueva
+  rama `iss57` y añadimos los nuevos commits en `master`
+
+```txt
+$ git checkout master
+$ git merge iss56
+# MAL: Ahora hacemos commits del issue 57 en master sin crear la rama nueva
+```
+
+<img src="imagenes/problema-tras-merge-1.png" width="600px"/>
+
+- ¿Solución?
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Solución error 1 ##
+
+- La solución es sencilla: creamos la rama `iss57` en el commit actual y
+  hacemos retroceder `master` al commit `C6`:
+  
+```txt
+$ git branch iss57 # Creamos la rama iss57
+$ git branch # Comprobamos que estamos en master
+* master
+iss56
+iss57
+$ git reset --hard HEAD~2 # También correcto el id del commit C6
+$ git checkout iss57 # Nos movemos a iss57 para seguir haciendo allí los nuevos commits
+```
+
+<img src="imagenes/problema-tras-merge-1.png" width="575px"/>
+ <img style="margin-left:20px" src="imagenes/solucion-problema-tras-merge-1.png" width="600px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Error 2: Añadimos commits del nuevo issue en la rama antigua ##
+
+- Después de hacer el merge en `master`, en lugar de crear una rama
+  nueva volvemos a la rama mergeada y mezclamos allí los commits del
+  _issue 57_ sin haber creado la nueva rama:
+
+```txt
+$ git checkout master
+$ git merge iss56
+$ git checkout iss56 # MAL: deberíamos borrar la rama y crear una nueva
+# añadimos commits en iss56
+```
+
+<img src="imagenes/problema-tras-merge-2.png" width="900px"/>
+
+- ¿Solución?
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Solución error 2 ##
+
+- Podemos combinar `reset` y `stash` para mover atrás `iss56` y
+  llevar los commits a la otra rama:
+  
+```txt
+$ git branch # Nos aseguramos de que estamos en iss56
+* iss56
+master
+$ git reset HEAD~2
+$ git status # Confirmamos que los cambios de C7 y C8 están en el espacio de trabajo
+$ git stash
+$ git checkout master
+$ git checkout -b iss57
+$ git statsh pop
+# Hacemos 'add' y 'commit' para confirmar los cambios que nos interesen (C7' y C8')
+```
+
+<img src="imagenes/solucion-problema-tras-merge-2.png" width="1000px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Error 3: Creamos la rama nueva en la antigua ##
+
+- Después de hacer el merge en `master`, nos movemos por error a la
+  rama recién mergeada y creamos allí la rama nueva `iss57`:
+
+```txt
+$ git checkout master
+$ git merge iss56
+$ git checkout iss56 
+$ git checkout -b iss57 # MAL: hemos creado la rama en iss56, en lugar de en master
+# añadimos commits en iss57
+```
+
+<img src="imagenes/problema-tras-merge-3.png" width="900px"/>
+
+- ¿Solución?
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Solución error 3 ##
+
+- Podemos hacer una solución similar a la solución 2 haciendo un `rebase`:
+  
+```txt
+$ git branch # Nos aseguramos de que estamos en iss57
+* iss57
+iss56
+master
 $ git rebase master
+First, rewinding head to replay your work on top of it...
+Applying: Primer cambio [iss57]
+Applying: Segundo cambio [iss57]
 ```
 
-<img src="imagenes/rebase-tras-avance-master.png" width="700px"/>
-
-- Para actualizar el pull request abierto en GitHub hay que hacer:
-
-```txt
-$ git push --force
-```
-
-- Inconveniente: los commits se vuelven a aplicar uno a uno sobre
-  `master` y si hay conflictos se deben resolver también en cada uno
-  de los commits.
+<img src="imagenes/solucion-problema-tras-merge-2.png" width="1000px"/>
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
 
-## Avance de rama con "merge --squash" ##
+## Ejercicio ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Escoge uno de los 3 errores, reprodúcelo y soluciónalo siguiendo las indicaciones.
+- Comprueba que todo ha funcionado correctamente.
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Último ejercicio con ramas: detached HEAD y rama desde el pasado ##
+<!-- .slide: data-background="#cbe0fc"-->
 <!-- .slide: class="image-right" -->
 
-<img style="margin-left:40px" src="imagenes/merge-squash.png" width="600px"/>
+<img style="margin-left:40px" src="imagenes/arreglo-bug-pasado.png" width="550px"/>
 
-- El comando `git merge --squash` recoge todos los cambios de los
-  commits de una rama y los añade al _stage_ en la rama actual:
+- Supongamos que queremos solucionar un bug introducido en un commit
+  en el pasado. Sería interesante poder irnos a ese momento del
+  desarrollo (para aislarnos de los cambios introducidos después),
+  examinar el proyecto en ese momento y abrir allí una rama con un fix
+  que lo corrige.
+- Vamos a probarlo.
+- Supongamos que nos hemos dado cuenta de que el margen de la web es
+  demasiado grande y que queremos hacerlo más pequeño. Queremos probarlo y
+  arreglarlo en el commit `59e0464`, que es cuando introducimos el
+  cambio. Realizamos un `git checkout` para mover el HEAD a ese commit:
+
+```txt
+$ git checkout 59e0464
+Note: checking out '59e0464'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at 59e0464... Añadidos márgenes al documento
+```
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Detached HEAD ##
+<!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:40px" src="imagenes/detached-head.png" width="750px"/>
+
+- El puntero HEAD indica dónde está el espacio de trabajo. Si ahora
+  abrimos el fichero `index.html` en el navegador veremos que nos
+  encontramos tal y como estaba el proyecto en ese momento del
+  desarrollo. Lo podemos comprobar también en los ficheros cargados en
+  el Visual Studio Code, que se habrán actualizado a ese commit.
+- El HEAD está "desconectado" porque no está apuntando a ninguna rama
+  (que es su estado natural para que funcione correctamente el añadido de commits).
+- Creamos una rama y nos movemos a ella para que HEAD apunte a ella:
+
+<img style="margin-left:40px" src="imagenes/not-detached-head.png" width="750px"/>
+
+
+```txt
+$ git checkout -b fix-margenes
+```
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Añadimos commits y mezclamos la rama ##
+<!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:40px" src="imagenes/commit-fix-margenes.png" width="600px"/>
+
+- Una vez en la nueva rama arreglamos lo que nos interesa y hacemos un
+  commit:
+  
+```txt
+# Modificamos el fichero css/layout.css para 
+# reducir el margen
+$ git commit -am "Reducido el margen"
+[fix-margenes bcb633e] Reducido el margen
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+- Comprobamos que todo está bien y mezclamos la rama en `master`:
+
+<img style="margin-left:40px" src="imagenes/log-after-fix-margenes.png" width="600px"/>
 
 ```txt
 $ git checkout master
-$ git checkout -b featureBv2
-$ git merge --squash featureB
-$ git commit -m "Primeros cambios featureB"
+$ git merge fix-margenes
+Auto-merging css/layout.css
+Merge made by the 'recursive' strategy.
+ css/layout.css | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git branch -d fix-margenes
 ```
 
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Actualización del pull request ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/close-pull-request.png" width="600px"/>
-
-- Publicamos la nueva rama:
+- Por último subimos los últimos cambios a GitHub y comprobamos allí
+  que todo se ha subido correctamente.
 
 ```txt
-$ git push -u origin featureBv2
-```
-
-- Y en GitHub cerramos sin mezclar el de la rama antigua y abrimos un nuevo pull request.
-
-- También es posible **cambiar el contenido completo del pull request
-  anterior** sin cerrarlo, publicando el contenido de la nueva rama
-  local en la antigua rama remota:
-
-```txt
-$ git push -u origin featureBv2:featureB --force
-```
-
-- En ambos casos borramos la rama antigua (tendremos que forzar el
-  borrado con `-D` porque no la hemos mezclado):
-  
-```txt
-$ git branch -D featureB
-```
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Ejercicio: avance de ramas ##
-<!-- .slide: data-background="#cbe0fc"-->
-
-- Debéis crear dos ramas, abrir dos pull request, avanzar master con
-  algún commit y probar las dos estrategias anteriores para avanzar
-  las ramas.
-
-<img src="imagenes/avance-master.png" width="500px"/> <img src="imagenes/merge-squash.png" width="700px"/>
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Ramas sobre ramas ##
-
-<img src="imagenes/dos-versiones-feature.png" width="700px" />
-
-- La flexibilidad de Git con las ramas nos permite hacer cosas como
-  la que se muestra en la figura anterior, en la que se prueban simultáneamente
-  dos versiones de una misma feature.
-- Podríamos abrir dos pull requests y probarlos por separado.
-- Si integramos la versión 2 en `master` se incorporarían los commits
-  `C3`, `C4`, `C9` y `C10`.
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Ramas de largo recorrido ##
-
-- Todas las ramas que hemos visto hasta ahora son ramas de corto
-  recorrido (_short-lived_ en inglés).
-- Con Git podemos tener otro tipo de ramas: ramas que están siempre
-  abiertas, que usamos para distintas fases de nuestro ciclo de
-  desarrollo y que podemos mezclar regularmente. Las llamamos ramas de
-  largo recorrido (_long-lived_ o _long-running_ en inglés).
-- Por ejemplo, podemos dejar la rama `master` para el código que es
-  totalmente estable y que está (o estará en breve) en producción, en
-  algún release.
-- Podríamos tener una rama llamada `develop` o `next` que usemos para
-  testear la estabilidad. El código que incluimos en esta rama pasa
-  por una serie de tests de integración y tests funcionales que lo
-  dejan listo para integrar en la rama `master`.
-- Las ramas de features salen y se integran en `develop`.
-- Veremos una versión más elaborada de este flujo de trabajo cuando
-  hablemos del flujo de trabajo **git-flow**.
-
-<img src="imagenes/rama-develop.png" width="800px"/>
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Ramas de versiones ##
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/ramas-swift.png" width="500px"/>
-
-- Otro uso de las ramas de largo recorrido es almacenar versiones
-  del producto que queremos mantener vivas, añadiendo _bug-fixes_ o
-  funcionalidades específicas de la versión.
-- Aquí el desarrollo se hace en la rama `master`; allí abrimos ramas
-  de features y mantenemos la siguiente versión no lanzada.
-- Cuando lanzamos una nueva versión (mayor o menor, siguiendo la
-  terminología del [versionado semántico](https://semver.org)) creamos
-  una rama nueva y cambiamos la versión de la rama `master` a la
-  próxima. Por ejemplo, las versiones 3.1 y 3.2 irían en ramas distintas.
-
-<img style="margin-left:40px" src="imagenes/ramas-playframework.png" width="500px"/>
-
-- Las versiones _patch_ que solucionan bugs (3.1.1 o 3.1.2) se
-  identifican con _tags_ en la rama de la versión menor.
-- Muchos productos open source que mantienen distintas versiones públicas
-  utilizan esta estrategia.
-- [Swift](https://github.com/apple/swift) mantiene ramas
-  independientes para las versiones 4.0 y 4.1.
-- [Play Framework](https://github.com/playframework/playframework)
-  tiene la misma estrategia, una rama para cada versión. En las ramas `2.5.x` y
-  `2.6.x` publica las versiones 2.5.1, 2.5.2, ... y 2.6.1,
-  2.6.2, ...
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Proceso de lanzar una rama de versión  ##
-
-<img src="imagenes/rama-limpieza.png" width="700px"/>
-
-- Antes de abrir una rama de versión se puede crear una rama de
-  limpieza (_polishing branch_) en la que estabilizar el código,
-  revisarlo con más detalle y hacer unos últimos arreglos de bugs.
-- Los cambios se integran después también en `master` y se abre a
-  partir de ahí la rama con el número de la versión. La rama de
-  limpieza se puede borrar.
-- Los fixes en la rama de versión se integran también en `master`
-  mezclando la rama de versión en `master` o haciendo un `cherry-pick`.
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## ¡Vamos con el último ejercicio! ##
-
-<img src="imagenes/nintendo-happy.gif" width="900px"/>
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Preparación de una rama de versión ##
-<!-- .slide: data-background="#cbe0fc"-->
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/master-protected.png" width="400px"/>
-
-- Empezamos bloqueando la rama de master, para obligar a que los
-  pull requests sean revisados antes de integrarlos.
-- Creamos la rama `1.1.x-polish` y la subimos a GitHub
-
-```txt
-$ git checkout -b 1.1.x-polish master
-$ git push -u origin 1.1.x-polish
-```
-
-<img style="margin-left:40px" src="imagenes/pull-request-nueva-version.png" width="500px"/>
-
-- Hacemos un par de commits, simulando que arreglamos algunos bugs:
-
-```txt
-# Modificamos algo en index.html
-$ git commit -am "Arreglado bug"
-# Otras modificacione
-$ git commit -am "Arreglado otro bug"
 $ git push
 ```
 
-- Creamos y aceptamos un pull request para integrar los
-  cambios de la preparación de la versión `1.1.x` en
-  `master`. 
-  
-- Y actualizamos `master` en local:
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## ¡Es hora de trabajar en equipo! ##
+
+<img src="imagenes/group-dancing.gif" width="1100px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Trabajo de dos personas sobre master ##
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:40px" src="imagenes/trabajo-dos-personas.png" width="550px"/>
+
+- Vamos a empezar por lo más sencillo: suponemos dos personas con
+  permiso de lectura y escritura en el repositorio remoto trabajando
+  simultáneamente sobre `master`.
+
+- El modo de trabajo es muy similar al del trabajo sobre un
+  repositorio centralizado:
+
+   1. Alberto y Ana trabajan sobre la rama `master` en local haciendo
+      commits.
+   2. Ana termina su trabajo, piensa que los cambios están listos
+      para publicarlos y hace un `git push`.
+   3. Si ahora Alberto intenta publicar en el repo remoto, Git le da
+      un mensaje de error indicando que primero debe descargarse los
+      cambios que se han introducido.
+   4. Alberto se baja los cambios (con `git fetch`) y los integra en
+      su rama en local (`git merge`), solucionando los posibles conflictos.
+   5. Una vez integrado los cambios en local, Alberto los sube al repo
+      remoto con un `git push`.
+   6. Ana integra los cambios de Alberto haciendo lo mismo que él ha
+      hecho: `git fetch` y `git merge` y después `git push`.
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Rama remota: "git clone" ##
+
+- El comando `git clone` se descarga el repositorio en nuestra máquina
+  y crea una referencia local (`origin/master`) a la rama remota
+  `master` (aunque no es totalmente correcto, llamamos a
+  `origin/master` una rama remota).
+
+<img src="imagenes/clone-remota.png" width="900px"/>
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Rama remota: "git fetch" ##
+
+- El comando `git fetch` descarga los commits nuevos de `master` en la máquina remota a la
+  rama remota de nuestra máquina `origin/master`.
+
+<img src="imagenes/fetch-remota.png" width="900px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Rama remota: "git merge" ##
+
+- La rama `origin/master` es una rama local como otra cualquiera. La
+  única diferencia es que es una rama de _solo lectura_. HEAD no puede
+  apuntar a ella (no podemos hacer un `checkout` y añadir commits como
+  en una rama normal). Mezclamos los cambios descargados en `master`
+  local haciendo un `merge`.
+
+<img src="imagenes/merge-remota.png" width="900px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Rama remota: "git push" ##
+
+- El comando `git push` sube los cambios a la máquina remota y
+  adelanta la rama remota `origin/master`.
+
+<img src="imagenes/push-remota.png" width="900px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Formamos equipos de tres personas y compartimos repositorio ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Vamos a practicar este flujo de trabajo. En el proceso explicaremos
+  cómo funcionan los comandos `git fetch` y `git pull` y la gestión de
+  Git de ramas remotas.
+
+- Creamos equipos de tres personas. Vamos a llamarlas Ana, Carlos y Alberto.
+- Uno de los tres repositorios va a hacer el papel de repositorio
+  central. Por ejemplo el de Ana.
+- Alberto y Carlos se descargan el repositorio de Ana:
 
 ```txt
-$ git checkout master
+# En las máquinas de Alberto y Carlos
+$ cd ..
+$ git clone URL-REPO repo-compartido
+$ cd repo-compartido
+```
+
+- Ana gestiona los permisos del repositorio en GitHub para que sus dos
+  compañeros también puedan escribir y publicar cambios, con la opción
+  _Settings > Collaborators_. Los compañeros recibirán un correo
+  electrónico con un enlace en el que aceptar la invitación.
+
+<img src="imagenes/collaborators.png" width="800px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Trabajo secuencial ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Los dos compañeros comprueban que pueden publicar cambios (esta
+  primera vez lo hacemos de forma secuencial, uno detrás de otro):
+
+```txt
+# En la máquina de Alberto
+# Alberto modifica el fichero 'index.html'
+$ git commit -am "Modificación de Alberto"
+$ git push
+```
+
+```txt
+# En la máquina de Carlos
+# Carlos se descarga los cambios, añade cambios y los publica
+$ git pull
+# Modifica el fichero 'index.html'
+$ git commit -am "Modificación de Carlos"
+$ git push
+```
+
+- Comprobamos en GitHub que se han subido los cambios. Y Ana se descarga los cambios:
+
+```txt
+# En la máquina de Ana
 $ git pull
 ```
 
-
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
 
-## Creación de la rama de versión ##
-<!-- .slide: data-background="#cbe0fc"-->
+## Comando "git fetch" ##
 <!-- .slide: class="image-right" -->
 
-- Creamos la rama de versión `1.1.x`, a partir de la rama `1.1.x-polish`, la
-  subimos a GitHub y borramos la rama `1.1.x-polish`:
+<img style="margin-left:40px" src="imagenes/after-fetch.png" width="400px"/>
+
+- El comando `git fetch` se conecta con el repositorio remoto
+  (`origin` si no lo especificamos) y se descarga los últimos commits
+  que se han subido y que no tenemos.
+- Git gestiona las ramas remotas usando **ramas locales que hacen de
+  caché de los cambios**. La rama `origin/master` cachea la rama remota `master` en el
+  repositorio `origin` y es en esa rama en la que se descargan los
+  cambios.
+
+- Podemos consultar las ramas locales y las cachés con el comando
 
 ```txt
-$ git checkout -b 1.1.x 1.1.x-polish
-$ git push -u origin 1.1.x
-$ git branch -d 1.1.x-polish
-$ git remote prune origin
+$ git branch -vva
 ```
 
-<img style="margin-left:40px" src="imagenes/ramas-bloqueadas.png" width="600px"/>
+- El commit `fbff5` es el que se ha añadido en el repositorio remoto.
 
-- Bloqueamos también la rama `1.1.x` para obligar a aprobar los pull requests.
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Creación de la versión 1.1.0 ##
-<!-- .slide: data-background="#cbe0fc"-->
-<!-- .slide: class="image-right" -->
-
-- Estando en la rama `1.1.x` añadimos el número de versión `1.1.0` en
-  el pie de página de `index.html`:
-
-```diff
-<footer>
-<p>©Copyright 2050 by acme@gmail.com. All rights reversed.</p>
-+ <p>Version 1.1.0</p>
-   <ul>
-     <li>Rosa Sánchez Murillo</li>
-```
-
-- Y creamos el commit con el cambio de versión:
-
-```txt
-$ git commit -am "Cambiado número de versión a 1.1.0"
-```
-
-- Creamos la etiqueta `1.1.0` en el commit y lo subimos todo a GitHub:
-
-<img style="margin-left:40px" src="imagenes/nuevo-release.png" width="400px"/>
-
-```txt
-$ git tag 1.1.0
-$ git push
-$ git push origin 1.1.0
-```
-
-- Al subir la etiqueta, GitHub crea automáticamente un _release_ que
-  puede descargarse.
-
-- Este commit no queremos integrarlo en `master`, porque allí vamos a
-  cambiar el número de versión para indicar que en esa rama se va a
-  se está desarrollando la versión `1.2.0`.
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Número de versión en master ##
-<!-- .slide: data-background="#cbe0fc"-->
-
-- En `master` hacemos un único commit en el que actualizamos el número
-  de versión a `1.2.0-SNAPSHOT`. La palabra `SNAPSHOT` indica que la
-  versión está en desarrollo y que todavía no ha sido lanzada.
-
-```txt
-$ git checkout master
-# Añadimos en 'index.html' el número de versión
-```
-
-```diff
-<footer>
-<p>©Copyright 2050 by acme@gmail.com. All rights reversed.</p>
-+ <p>Version 1.2.0-SNAPSHOT</p>
-   <ul>
-     <li>Rosa Sánchez Murillo</li>
-```
-
-- Hacemos el commit y lo subimos a GitHub (no hace falta hacer un pull request):
-
-```txt
-$ git commit -am "Cambiado número de versión a 1.2.0-SNAPSHOT"
-$ git push
-```
-
-- El grafo de commits debería ser el siguiente:
-
-<img src="imagenes/graph-after-release.png" width="700px"/>
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Avance de la rama de versión ##
-<!-- .slide: data-background="#cbe0fc"-->
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/nuevo-pull-request.png" width="600px"/>
-
-- Abrimos una rama de feature en la rama `1.1.x` para solucionar una
-  incidencia:
-
-```txt
-$ git checkout -b arreglo-subseccion 1.1.x
-$ git push -u origin arreglo-subseccion
-```
-
-- Hacemos dos cambios:
-
-```txt
-$ git commit -am "Arreglado un párrafo"
-$ git commit -am "Arreglado otro párrafo"
-$ git push
-```
-
-- Creamos el pull request. Pero **¡cuidado!, debemos crearlo en la rama
-  `1.1.x`**.
-  
-
-<!-- Tres líneas en blanco para la siguiente transparencia -->
-
-
-
-## Integración del pull request##
-<!-- .slide: data-background="#cbe0fc"-->
-<!-- .slide: class="image-right" -->
-
-<img style="margin-left:40px" src="imagenes/squash-and-merge.png" width="500px"/>
-
-- Aprobamos el pull request y lo mezclamos en la rama `1.1.x` **usando la estrategia
-  'squash-and-merge' que comprime todos los cambios en un único commit**.
-
-- Podemos editar el título y la descripción del único commit. Dejamos
-  el número del pull request entre paréntesis, porque GitHub lo va a
-  identificar como un enlace al pull request en el listado de commits.
-
-- Comprobamos en el listado de commits de la rama que todos los
-cambios se han comprimido en un único commit.
-
-<img style="margin-left:40px" src="imagenes/titulo-nuevo-commit.png" width="500px"/>
-
-- Terminamos actualizando la rama `1.1.x` y borrando la rama de
-  feature:
-
+- Podemos trabajar con la rama `origin/master` como si fuera una rama
+  normal. Por ejemplo, podemos consultar los cambios del último
+  commit haciendo `git diff`:
   
 ```txt
-$ git checkout 1.1.x
+$ git diff HEAD origin/master
+```
+
+- Para incorporar los cambios a `master` hacemos lo habitual,
+  mezclamos la rama con los cambios (`origin/master`) en
+  `master`. Suponiendo que estemos en `master`:
+
+```txt
+$ git merge origin/master
+```
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Comando "git pull" ##
+
+- El comando `git pull` es una forma abreviada de hacer un `fetch`
+  seguido de un `merge`
+  
+```txt
 $ git pull
-$ git branch -d arreglo-subseccion
-$ git remote prune origin
+# git fetch
+# git merge origin/master
 ```
 
-<img style="margin-left:40px" src="imagenes/commits-rama-version.png" width="400px"/>
+- Veremos que podemos tener otras ramas remotas aparte de
+  `master`. También se usarán los comandos `git fetch`, `git push` y
+  `git pull` para actualizarlas.
+
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
 
-## Backport a master ##
+## Probamos el trabajo concurrente y "git fetch" ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Dos miembros del equipo realiza un commit distinto:
+
+```txt
+# En la máquina de Ana
+$ git commit -am "Cambios simultáneos de Ana"
+```
+
+```txt
+# En la máquina de Carlos
+$ git commit -am "Cambios simultáneos de Carlos"
+```
+
+- Ana publica los cambios:
+
+```txt
+# En la máquina de Ana
+$ git push
+```
+
+- Carlos intenta publicar los cambios, pero obtiene un
+  error porque la rama remota ha avanzado y sus ramas se han quedado
+  atrás (tiene que integrar los cambios remotos):
+  
+```txt
+# En la máquina de Carlos
+$ git push
+To https://github.com/domingogallardo/curso-git-repo1.git
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to 'https://github.com/domingogallardo/curso-git-repo1.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Carlos integra los cambios de Ana ##
 <!-- .slide: data-background="#cbe0fc"-->
 <!-- .slide: class="image-right" -->
 
-- Por último realizamos un _backport_ del commit de la rama `1.1.x` a
-  la rama `master`. Se denomina _backport_ a la aplicación de un
-  commit de una rama de versión a otra versión anterior. Lo haremos
-  con el comando `git cherry-pick`.
+<img style="margin-left:40px" src="imagenes/after-fetch-commit.png" width="300px"/> 
 
-<img style="margin-left:40px" src="imagenes/log-antes-cherry-pick.png" width="700px"/>
+- Carlos hace un `git fetch` para descargar los cambios de Ana a su repositorio local:
 
-- Comprobamos el log para identificar el número del commit:
 
 ```txt
-$ git log --oneline --graph --all
+# En la máquina de Carlos
+$ git fetch
+$ git branch -vva
+* master                 738ee82 [origin/master: ahead 1, behind 1] Cambio simultáneo de Domingo
+  remotes/origin/master  fbff52a Cambios simultáneos de Ana
 ```
 
-- Nos vamos a master, actualizamos (por si alguien ha subido algún
-  cambio más) y hacemos el _cherry-pick_:
-  
+<img style="margin-left:40px" src="imagenes/after-fetch-merge.png" width="350px"/> 
+
+- Y mezcla los cambios
+
 ```txt
-$ git checkout master
-$ git pull
-$ git cherry-pick 6086d06
-[master 8992357] Arreglo subseccion (#10)
- Author: Domingo Gallardo López <domingo.gallardo@ua.es>
- Date: Sun Dec 31 12:33:18 2017 +0100
+$ git merge origin/master
+Merge made by the 'recursive' strategy.
+ index.html | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 ```
 
-- Por último, subimos el commit al repositorio remoto:
+- Por último, sube la rama master
+
+<img style="margin-left:40px" src="imagenes/after-fetch-push.png" width="350px"/>
+
+```txt
+$ git push
+To https://github.com/domingogallardo/curso-git-repo1.git
+   fbff5..72bbc master -> master
+```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Ana trabaja en una rama ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Mientras tanto, Ana ha seguido trabajando en su repositorio, creando
+  una rama llamada `iss58`:
+  
+```txt
+# En la máquina de Ana
+$ git checkout -b iss58
+# Añade algunos commits
+```
+
+<img src="imagenes/rama-antes-fetch.png" width="700px"/> 
+
+- Ana descarga los cambios de Carlos, pero todavía no los mezcla:
+
+```txt
+$ git fetch
+```
+
+<img src="imagenes/rama-despues-fetch.png" width="700px"/> 
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Ana termina su rama ##
+<!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:40px" src="imagenes/git-kraken.png" width="600px"/> 
+
+- Ana ya ha terminado sus cambios en la rama y tiene que integrarlos en
+  `master`. También tiene que integrar los cambios remotos. Y después
+  comprobar que todo funciona bien y subirlo al repositorio remoto.
+
+- Podemos examinar el estado del repositorio en GitKraken. Puedes
+  abrir Git Kraken y comprobar la historia. 
+
+- Para integrar los cambios en `master` empezamos cambiando a esa rama:
+
+```txt
+$ git checkout master
+Switched to branch 'master'
+Your branch is behind 'origin/master' by 2 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Y los mezcla con master ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Ana puede mezclar en `master` o bien `origin/master` o bien `iss58`,
+  el orden no importa de cara al resultado final. Sólo cambiara la
+  historia.
+
+- Empezamos mezclando la rama `iss54`. Lo podemos hacer como siempre,
+  por línea de comando:
+
+```txt
+$ git merge iss58
+Updating 19b5a30..982b609
+Fast-forward
+ index.html | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+```
+
+- O usando la interfaz de GitKraken, arrastrando la rama `iss58` sobre
+  la rama `master` y seleccionando la opción `Fast-forward`.
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Se mezcla el commit remoto ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Una vez incorporada la rama `iss54` a `master`, Ana completa la
+  integración añadiendo los cambios de Carlos, que estaban pendientes
+  en la rama `origin/master`:
+  
+```txt
+$ git merge origin/master
+Auto-merging index.html
+Merge made by the 'recursive' strategy.
+ index.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+- Ahora la historia del repositorio de Ana aparece de la siguiente
+  forma:
+
+<img src="imagenes/merge-origin-master.png" width="900px"/>
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Y sube el resultado al repositorio remoto ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+```txt
+$ git push
+```
+
+<img src="imagenes/push-origin-master.png" width="900px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## ¡Buen trabajo! ##
+
+<img src="imagenes/good-job.gif" width="1100px" />
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Ramas compartidas ##
+
+- Resumen del flujo de trabajo que acabamos de ver:
+  - La única rama remota compartida es `master`.
+  - Los compañeros desarrollan cambios (en un commit o en una rama)
+    que mezclan en local sobre `master`.
+  - Por último se suben los cambios a la rama `master` remota.
+
+- La naturaleza distribuida de Git permite muchos otros flujos de
+  trabajo; veremos varios.
+
+- Antes necesitamos subir y compartir nuevas ramas en el repositorio
+  remoto.
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Subir ramas al repositorio remoto ##
+
+- Supongamos que hemos creado la rama `iss59` y en el repositorio
+ local y que queremos subirla al repositorio remoto.
+
+<img src="imagenes/antes-push-rama.png" width="1100px"/>
+
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Comando "git push" para subir ramas ##
+
+- El comando `git push` sube la rama al repositorio remoto:
+
+```txt
+$ git push -u origin iss59
+```
+
+<img src="imagenes/despues-push-rama.png" width="1100px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Comando "git fetch" para bajar las ramas ##
+
+- El comando `git fetch` baja las ramas nuevas subidas al repositorio
+  y las almacena como ramas remotas (el comando no crea las ramas locales):
+
+```txt
+# En otra máquina
+$ git fetch
+```
+
+<img src="imagenes/despues-fetch-rama.png" width="1000px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Las ramas locales se crean con "git checkout" ##
+
+- Una vez bajadas las ramas remotas se pueden crear ramas locales
+  conectadas a ellas con `git checkout`:
+
+```txt
+$ git checkout -b iss59 origin/iss59
+# Comando equivalente: $ git checkout iss59
+```
+
+<img src="imagenes/checkout-remota.png" width="1000px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Ana comienza el desarrollo de una nueva rama ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Vamos a crear una nueva rama y subirla al repositorio remoto.
+- Ana crea una nueva rama `iss59` y un par de commits en ella:
+
+```txt
+# En la máquina de Ana
+$ git checkout -b iss59
+$ git commit -am "Primer cambio [iss59]"
+[iss59 747459f] Primer cambio [iss59]
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+$ git commit -am "Segundo cambio [iss59]"
+[iss59 2090ea1] Segundo cambio [iss59]
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+```
+
+- Comprueba las ramas locales y remotas:
+
+```txt
+$ git branch -vva
+* iss59                 2090ea1 Segundo cambio [iss59]
+  master                7c4205e [origin/master] Merge remote-tracking branch 'origin/master'
+  remotes/origin/HEAD   -> origin/master
+  remotes/origin/master 7c4205e Merge remote-tracking branch 'origin/master'
+```
+
+- La rama `master` está trackeando `origin/master` (cuando estemos en
+  `master` y hagamos push o pull se baja la rama remota `master`).
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Ana sube la nueva rama ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Ahora subimos la nueva rama `iss59` usando el comando `git push`. La
+  opción `-u` permite publicar los nuevos cambios haciendo sólo `git push` a
+  partir de ahora:
+
+```txt
+$ git push -u origin iss59
+...
+To https://github.com/domingogallardo/curso-git-repo1.git
+ * [new branch]      iss59 -> iss59
+Branch iss59 set up to track remote branch iss59 from origin.
+```
+
+- Comprobamos el estado local de las ramas:
+
+```txt
+$ git branch -vva
+* iss59                 2090ea1 [origin/iss59] Segundo cambio [iss59]
+  master                7c4205e [origin/master] Merge remote-tracking branch 'origin/master'
+  remotes/origin/HEAD   -> origin/master
+  remotes/origin/iss59  2090ea1 Segundo cambio [iss59]
+  remotes/origin/master 7c4205e Merge remote-tracking branch 'origin/master'
+```
+
+- Vemos que se ha creado una rama remota `origin/iss59` y que la rama
+  local `iss59` está trackeando esa rama remota.
+- Comprobamos también que la rama **se ha subido a GitHub**.
+
+<img src="imagenes/rama-github.png" width="900px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Carlos se baja la nueva rama ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Carlos se baja la nueva rama 
+
+```txt
+$ git fetch
+...
+From https://github.com/domingogallardo/curso-git-repo1
+   a4fe1f4..7c4205e  master     -> origin/master
+ * [new branch]      iss59      -> origin/iss59
+```
+
+- Comprueba que se ha descargado la rama `iss59`:
+
+```txt
+$ git branch -vva
+* master                a4fe1f4 [origin/master: behind 4] Merge remote-tracking branch 'origin/master'
+  remotes/origin/HEAD   -> origin/master
+  remotes/origin/iss59  2090ea1 Segundo cambio [iss59]
+  remotes/origin/master 7c4205e Merge remote-tracking branch  'origin/master'
+```
+
+- Y accede a la rama local correspondiente con `git checkout`:
+
+```txt
+$ git checkout iss59
+Branch iss59 set up to track remote branch iss59 from origin.
+Switched to a new branch 'iss59'
+```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Carlos y Ana trabajan en la rama ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Carlos y Ana trabajan en la rama desarrollando el _issue 59_, de la
+  misma forma que antes lo han hecho en la rama `master`:
+
+```txt
+# En la máquina de Ana, en la rama iss59
+$ git commit # se añaden cambios
+$ git push 
+```
+
+- Simultáneamente:
+
+```txt
+# En la máquina de Carlos, en la rama iss59
+$ git commit # se añaden otros cambios
+$ git pull # se bajan los cambios de Ana y se integran
+$ git push # se suben los cambios
+```
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Ana termina la rama e integra con master ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Ana se descarga los cambios de Carlos y termina el desarrollo de la
+  rama:
+  
+```txt
+# En la máquina de Ana, en la rama iss59
+$ git fetch
+$ git merge origin/iss59 # Mezcla los cambios de Carlos
+$ git commit # Se añade algún commit más para terminar el issue
+$ git push # Sube los cambios
+```
+
+- Actualiza `master` (puede haber avanzado porque se haya integrado
+  algún commit o rama) e integra la rama para comprobar que el _issue_
+  funciona bien en `master`:
+
+```txt
+$ git checkout master
+$ git pull # actualiza master y se descarga C5 añadido por algún compañero
+$ git merge iss59
+```
+
+<img src="imagenes/pull-master-rama-local.png" width="700px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Ana realiza pruebas de integración ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Ana revisa la integración, lanza todos los tests, realiza algunas
+  pruebas funcionales, y si todo está bien se lo comunica a Alberto,
+  responsable de integración del equipo.
+
+- Si hay algún fallo o algo que mejorar, vuelve a la rama, añade algún
+  commit, vuelve a mezclar para comprobar y vuelve a subir la rama:
+  
+```txt
+$ git checkout iss59
+$ git commit # añadimos algún commit para mejorar la rama
+$ git checkout master
+$ git merge iss59 
+# Ana prueba que todo está bien y publica los nuevos cambios:
+$ git checkout iss59
+$ git push 
+```
+
+<img src="imagenes/merge-rama-local-master.png" width="1000px"/>
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Alberto integra la rama en master ##
+<!-- .slide: data-background="#cbe0fc"-->
+
+- Suponemos que Alberto tiene el papel de responsable de integración
+  de issues en `master`. Recibe la comunicación de Ana, se descarga su
+  rama y comprueba los cambios:
+  
+```txt
+# En la máquina de Alberto
+# Se descarga la última versión de la rama
+$ git fetch
+$ git checkout iss59
+# Comprueba los cambios
+$ git diff master..iss59
+```
+
+- Realiza la integración de la rama y comprueba que todo está correcto:
+
+```txt
+$ git checkout master
+$ git merge iss59
+```
+
+- Y sube `master` al repositorio remoto (con la rama `iss59` ya integrada):
 
 ```txt
 $ git push
@@ -1068,46 +1260,92 @@ $ git push
 
 
 
-## Comprobamos el backport a master##
+## Borrado de la rama y actualizado master ##
 <!-- .slide: data-background="#cbe0fc"-->
 
-- Comprobamos el grafo de commits con el comando `git log`, con
-  GitKraken y en GitHub.
+- Ana y Carlos borran la rama local y remota:
 
 ```txt
-$ git log --oneline --graph --all
+$ git branch -d iss59
+$ git push origin -d iss59 # Borra la rama remota
+$ git remote prune origin # Borra las referencias locales a ramasremotas
+
 ```
 
-<img src="imagenes/log-despues-cherry-pick.png" width="600px"/> <img src="imagenes/gitkraken-despues-cherry-pick.png" width="600px"/>
+- Carlos actualiza la rama master:
 
+```txt
+# En la máquina de Carlos
+$ git checkout master
+$ git pull
+```
 
-<img src="imagenes/github-despues-cherry-pick.png" width="600px"/> <img src="imagenes/github-despues-cherry-pick-2.png" width="600px"/> 
+- Y Ana limpia su rama master, quitando las mezclas que hizo con su
+  rama `iss59`, y se descarga la rama `master` limpia que hay en el servidor:
+  
+```txt
+# En la máquina de Ana
+$ git checkout master
+$ git reset --hard origin/master
+$ git pull
+```
+
+<img src="imagenes/master-limpio.png" width="900px"/>
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
 
-## Diferencias entre master y 1.1.x ##
-<!-- .slide: data-background="#cbe0fc"-->
+## Resumen del flujo de trabajo: ramas de _features_ ##
 
-- Para comprobar las diferencias introducidas en `master` que no están
-  la rama `1.1.x`:
-  
+1. El desarrollador que se hace cargo de un _issue_ abre una rama y
+   la publica en el servidor remoto.
+2. Desarrolla la rama en local y sube los commits regularmente al
+   servidor remoto.
+3. Un compañero puede ayudar al desarrollo del _issue_ descargándose
+   la rama y añadiendo commits.
+4. Cuando la rama está terminada, se comprueba la integración en
+   `master`, se integra y se publica en el repositorio remoto.
+5. Se borra la rama y se descarga `master`.
+
+> **Importante**: las ramas son de corta duración. Deberían durar
+> entre algunas horas (preferible) y un par de días como máximo.
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Comandos para comprobar ramas remotas ##
+
+- El comando `git status` no se conecta con las ramas remotas. Podemos
+  usar el comando `git remote -v update` para que Git se conecte al
+  repositorio y actualice las referencias:
+
 ```txt
-$ git diff 1.1.x master
-diff --git a/index.html b/index.html
-index b0efbbf..b075010 100644
---- a/index.html
-+++ b/index.html
-@@ -66,7 +66,7 @@
- 
-    <footer>
-    <p>©Copyright 2050 by acme@gmail.com. All rights reversed.</p>
--   <p>Versión 1.1.0</p>
-+   <p>Versión 1.2.0-SNAPSHOT</p>
-       <ul>
-         <li>Rosa Sánchez Murillo</li>
-         <li>Rodrigo Zamora Lain</li>
+$ git remote -v update
+From https://github.com/domingogallardo/curso-git-repo1
+   2090ea1..35438c4  master     -> origin/master
+ = [up to date]      iss60      -> origin/iss60
+ ```
+
+- El comando `git remote show origin` se conecta con el repositorio
+  `origin` y muestra la información completa de ramas remotas y locales:
+
+```txt
+$ git remote show origin
+* remote origin
+  Fetch URL: https://github.com/domingogallardo/curso-git-repo1.git
+  Push  URL: https://github.com/domingogallardo/curso-git-repo1.git
+  HEAD branch: master
+  Remote branches:
+    iss60  tracked
+    master tracked
+  Local branches configured for 'git pull':
+    iss60  merges with remote iss60
+    master merges with remote master
+  Local refs configured for 'git push':
+    iss60  pushes to iss60  (up to date)
+    master pushes to master (local out of date)
 ```
 
 <!-- Tres líneas en blanco para la siguiente transparencia -->
@@ -1118,12 +1356,48 @@ index b0efbbf..b075010 100644
 
 |Comando | Explicación |
 |-------|--------------|
-| `git branch -D <rama>` | Fuerza el borrado de una rama |
-| `git reset --hard origin/master` | Descarta los commits no subidos a `master` |
-| `git checkout -b <rama> master` | Crea una rama local a partir de `master` |
-| `git merge --squash <rama>` | Añade al stage de la rama actual todos los commits de otra rama |
-| `git push origin <rama>:<otra-rama>`| Sube la rama local `<rama>` a la remota `<otra-rama>` |
+| `git clone <URL repositorio>` | Se descarga el repositorio remoto |
+| `git fetch` | Descarga los nuevos commits en las ramas `<remoto>/<rama>` |
+| `git checkout <rama>` | Crea la rama local que trackea `<origin>/<rama>` |
+| `git merge origin/<rama>` | Mezcla la rama remota en la rama local actual |
+| `git push -u origin <rama>` | Sube la rama al repositorio remoto |
+| `git push -u origin -d <rama>` | Borra la rama remota |
+| `git pull` | Se descargan los cambios de la rama actual y se integran |
+| `git branch -vva` | Muestra la información de las ramas locales y remotas |
+| `git remote -v update` | Actualiza las referencias locales de ramas remotas | 
+| `git remote show origin` | Muestra la información competa de ramas remotas y locales |
+| `git remote prune origin` | Borra en el repo local las referencias a ramas remotas borradas|
 
+
+<!-- Tres líneas en blanco para la siguiente transparencia -->
+
+
+
+## Probamos el flujo de trabajo  ##
+<!-- .slide: data-background="#cbe0fc"-->
+<!-- .slide: class="image-right" -->
+
+<img style="margin-left:40px" src="imagenes/pajaros0.png" width="700px"/> 
+
+- Descarga el fichero `web-ejemplo2.zip` de Moodle. Descomprímelo,
+  cárgalo en el navegador y en Visual Studio Code y analiza el código.
+
+- Vamos a desarrollar un nuevo _issue_ (`iss60`) usando el flujo de
+  trabajo de ramas de _features_. Deberéis copiar el código anterior
+  en vuestra web, sustituyendo los enlaces de la derecha por las
+  imágenes de los pájaros.
+
+- Flujo de trabajo:
+   - Una persona del equipo creará la rama y la publicará en remoto.
+   - En el desarrollo de la rama deben participar las 3 personas del
+    equipo. 
+   - Habrá un responsable de integración que se encargue de integrar y
+     publicar en `master`.
+   - La persona que crea la rama también deberá probar en su máquina que
+     funciona bien la integración con `master` antes de que se realice
+     la integración final.
+   - Al final todos los miembros del equipo actualizarán la rama `master`.
+  
 <!-- Tres líneas en blanco para la siguiente transparencia -->
 
 
