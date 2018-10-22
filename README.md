@@ -4,10 +4,10 @@
 
 - [Sesión 1](https://domingogallardo.github.io/curso-git/sesion01/index.html)
 - [Sesión 2](https://domingogallardo.github.io/curso-git/sesion02/index.html)
-- Sesión 3
-- Sesión 4
-- Sesión 5
-- Sesión 6
+- [Sesión 3](https://domingogallardo.github.io/curso-git/sesion03/index.html)
+- [Sesión 4](https://domingogallardo.github.io/curso-git/sesion04/index.html)
+- [Sesión 5](https://domingogallardo.github.io/curso-git/sesion05/index.html)
+- [Sesión 6](https://domingogallardo.github.io/curso-git/sesion06/index.html)
 
 ## Software ##
 
